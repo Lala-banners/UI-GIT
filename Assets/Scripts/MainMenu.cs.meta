@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7f588d1f4b570084fbbb76dac4accdb0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - qualityDropdown: {instanceID: 0}
+  - fullscreenToggle: {instanceID: 0}
+  - IWantToDisableThis: {instanceID: 0}
+  - resolution: {instanceID: 0}
+  - mixer: {fileID: 24100000, guid: 54da41e50bc912a4cac7b9bbf38625ab, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
