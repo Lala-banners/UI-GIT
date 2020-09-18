@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// Code relating to player
+/// </summary>
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public PlayerStats playerStats;
+
     //mouse input
     ////rotate the camera up and down
     ////rotate the character left and right
@@ -18,21 +24,21 @@ public class PlayerController : MonoBehaviour
     private float xRotation = 0f;
     Camera camera;
 
-    //player stats
-    public int level = 1;
-    public float health = 55;
- 
-
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         camera = Camera.main;
        // Cursor.lockState = CursorLockMode.Locked;
     }
-    void Update()
+    private void onGUI()
     {
-        MouseLook();
-        Move();
+        //Display current health
+        //display current mana
+        //display current stamina
+
+
+      //  MouseLook();
+       // Move();
     }
     private void MouseLook()
     {
@@ -54,6 +60,14 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move((velocity + move) * speed * Time.deltaTime);
     }
+}
+
+/*
+ //Functions Save and Load 
+
+    player stats
+    public int level = 1;
+    public float health = 55;
 
     public void Save()
     {
@@ -74,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position = pos;
     }
-}
+*/
 
 
 

@@ -15,13 +15,13 @@ public class PlayerData
     //Constructor is a method referencing the class inside the method
     public PlayerData(PlayerController player)
     {
-        level = player.level;
+        /*level = player.level;
         health = player.health;
 
         position = new float[3]; //Only have 3 numbers (Vector3)
         position[0] = player.transform.position.x;
         position[1] = player.transform.position.y;
-        position[2] = player.transform.position.z;
+        position[2] = player.transform.position.z; */
 
 
     }
