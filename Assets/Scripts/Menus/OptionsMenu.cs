@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class OptionsMenu : MonoBehaviour
 {
     public Resolution[] resolutions;
     public Dropdown resolution;
+    
 
     public void Start()
     {
@@ -41,7 +43,11 @@ public class OptionsMenu : MonoBehaviour
         Screen.SetResolution(res.width, res.height, false);
     }
 
+   
+
     
+
+
 
 
 

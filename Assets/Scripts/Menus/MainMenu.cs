@@ -9,9 +9,11 @@ public class MainMenu : MonoBehaviour
     public string LoadScene = "GameScene";
     public Dropdown qualityDropdown;
     public Toggle fullscreenToggle;
-    public AudioMixer mixer;
+    public Toggle muteToggle;
+    public AudioMixer masterAudio;
     public Slider musicSlider;
     public Slider SFXSlider;
+    
     
     #endregion
     
@@ -68,17 +70,20 @@ public class MainMenu : MonoBehaviour
     {
         Screen.fullScreen = fullscreen;
     }
+    //This changes the quality 
     public void ChangeQuality(int index)
     {
         QualitySettings.SetQualityLevel(index);
     }
-    public void SetMusicVolume(float value)
+    //This changes volume in options
+    public void SetMusicVolume(float MusicVol)
     {
-        mixer.SetFloat("MusicVol", value);
+        masterAudio.SetFloat("MusicVol", MusicVol);
     }
-    public void SetSFXVolume(float value)
+    //This changes sound effects volume 
+    public void SetSFXVolume(float SFXVol)
     {
-        mixer.SetFloat("SFXVol", value);
+        masterAudio.SetFloat("SFXVol", SFXVol);
     }
     #endregion
   
@@ -98,12 +103,12 @@ public class MainMenu : MonoBehaviour
         
         //save audio sliders
         float musicVol;
-        if (mixer.GetFloat("MusicVol", out musicVol))
+        if (masterAudio.GetFloat("MusicVol", out musicVol))
         {
             PlayerPrefs.SetFloat("MusicVol", musicVol);
         }
         float SFXVol;
-        if (mixer.GetFloat("SFXVol", out SFXVol))
+        if (masterAudio.GetFloat("SFXVol", out SFXVol))
         {
             PlayerPrefs.SetFloat("SFXVol", SFXVol);
         }
@@ -140,13 +145,29 @@ public class MainMenu : MonoBehaviour
         {
             float musicVol = PlayerPrefs.GetFloat("MusicVol");
             musicSlider.value = musicVol;
-            mixer.SetFloat("MusicVol", musicVol);
+            masterAudio.SetFloat("MusicVol", musicVol);
         }
         if (PlayerPrefs.HasKey("SFXVol"))
         {
             float SFXVol = PlayerPrefs.GetFloat("SFXVol");
             SFXSlider.value = SFXVol;
-            mixer.SetFloat("SFXVol", SFXVol);
+            masterAudio.SetFloat("SFXVol", SFXVol);
+        }
+    }
+
+    //Function to mute volume when toggle is active
+    public void ToggleMute(bool isMuted) 
+    {
+        //string reference isMuted connects to the AudioMixer master group Volume and isMuted parameters in Unity
+        if (isMuted)
+        {
+            //-80 is the minimum volume
+            masterAudio.SetFloat("isMutedVolume", -80);
+        }
+        else
+        {
+            //20 is the maximum volume
+            masterAudio.SetFloat("isMutedVolume", 20);
         }
     }
 }

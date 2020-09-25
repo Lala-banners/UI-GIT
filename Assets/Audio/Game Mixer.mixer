@@ -83,6 +83,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: f7e0243052802c040931d7edb20ef4a0
+    name: isMutedVolume
   - guid: 1f6d2612655c7fc478f0f5584ba03266
     name: MusicVol
   - guid: 44d3a74aecdb19e458722621ed169504

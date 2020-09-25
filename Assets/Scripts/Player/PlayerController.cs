@@ -26,6 +26,24 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main;
        // Cursor.lockState = CursorLockMode.Locked;
     }
+
+    private void Update() //(float testHealth)
+    {
+        //playerStats.CurrentHealth = testHealth;
+    }
+
+    //Function for dealing damage to the player
+    public void DealDamage(float damage)
+    {
+        playerStats.CurrentHealth -= damage;
+    }
+
+    //Function for healing
+    public void Heal(float health)
+    {
+        playerStats.CurrentHealth += health;
+    }
+
     private void OnGUI()
     {
         //Display current health
