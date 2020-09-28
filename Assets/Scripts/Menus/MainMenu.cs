@@ -13,8 +13,6 @@ public class MainMenu : MonoBehaviour
     public AudioMixer masterAudio;
     public Slider musicSlider;
     public Slider SFXSlider;
-    
-    
     #endregion
     
     public void Start()
