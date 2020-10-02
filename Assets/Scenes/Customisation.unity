@@ -4176,7 +4176,7 @@ RectTransform:
   - {fileID: 2071295832}
   - {fileID: 1538046580}
   m_Father: {fileID: 1649207681}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4456,6 +4456,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679843298}
   m_CullTransparentMesh: 0
+--- !u!137 &684250242 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1288291915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &694312349
 GameObject:
   m_ObjectHideFlags: 0
@@ -7663,7 +7669,7 @@ RectTransform:
   - {fileID: 266746126}
   - {fileID: 1624009458}
   m_Father: {fileID: 1649207681}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8513,10 +8519,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 239378781582670930, guid: bfe91d98ae4258b4da47843ea4d0383c,
+      objectReference: {fileID: 2100000, guid: c87bf90782f9b834793e5026f716025e, type: 2}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
         type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 98aa555e9216d264584ffdf1db0f81d8, type: 2}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 70b3f3fb13ba71442a6e2410c99aa50c, type: 2}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 12200f85e656f6345a5b0a6cbec59cf4, type: 2}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 193ab99738fe26949bb4cc9e2add8d70, type: 2}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 104426476e9d6a84ba910bb8bbc57781, type: 2}
+    - target: {fileID: 4381454792350094727, guid: bfe91d98ae4258b4da47843ea4d0383c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 104426476e9d6a84ba910bb8bbc57781, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe91d98ae4258b4da47843ea4d0383c, type: 3}
 --- !u!1 &1294520720
@@ -8935,6 +8975,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebb4400a25cdfa49b67bc4d5beb7503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHeight: 40
+  TextureLocation: Character/
+  characterRenderer: {fileID: 684250242}
 --- !u!1 &1310246094
 GameObject:
   m_ObjectHideFlags: 0
@@ -10490,8 +10533,8 @@ RectTransform:
   m_Children:
   - {fileID: 1507754572}
   - {fileID: 1927834367}
-  - {fileID: 605925811}
   - {fileID: 1175077126}
+  - {fileID: 605925811}
   - {fileID: 425927771}
   - {fileID: 208397527}
   - {fileID: 1304415980}
