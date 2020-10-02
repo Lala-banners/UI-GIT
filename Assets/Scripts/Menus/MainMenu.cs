@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     public AudioMixer masterAudio;
     public Slider musicSlider;
     public Slider SFXSlider;
+    
     #endregion
     
     void Start()
@@ -169,6 +170,9 @@ public class MainMenu : MonoBehaviour
             masterAudio.SetFloat("isMutedVolume", 20);
         }
     }
+
+    
+
 }
 
     #endregion

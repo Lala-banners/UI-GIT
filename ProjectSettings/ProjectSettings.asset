@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: GUI 2
-  defaultCursor: {fileID: 2800000, guid: 3b3ba49c0897f6f4bb54b4bde3195c5b, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 77c041a5d01357348855c323a214a41e, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
