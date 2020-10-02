@@ -6,7 +6,6 @@ public class PressAnyKey : MonoBehaviour
 {
     public GameObject pressAnyKeyPanel,menuPanel;
 
-    // 
     void Start()
     {
         menuPanel.SetActive(false);

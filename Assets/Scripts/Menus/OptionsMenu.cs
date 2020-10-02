@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using TMPro;
 
 public class OptionsMenu : MonoBehaviour
 {
     public Resolution[] resolutions;
-    public Dropdown resolution;
-    
+    public TMP_Dropdown resolution;
+
 
     public void Start()
     {

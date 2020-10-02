@@ -12,8 +12,6 @@ public class PauseHandler : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject keybinds;
 
-
-
     void Paused()
     {
         isPaused = true;

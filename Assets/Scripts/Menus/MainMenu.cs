@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using TMPro;
 public class MainMenu : MonoBehaviour
 {
     #region Public variables
     public string LoadScene = "GameScene";
-    public Dropdown qualityDropdown;
+    public TMP_Dropdown qualityDropdown;
     public Toggle fullscreenToggle;
     public Toggle muteToggle;
     public AudioMixer masterAudio;
@@ -15,7 +16,7 @@ public class MainMenu : MonoBehaviour
     public Slider SFXSlider;
     #endregion
     
-    public void Start()
+    void Start()
     {
         LoadPlayerPrefs();
 

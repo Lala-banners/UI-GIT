@@ -26,7 +26,6 @@ public class SaveSystem : MonoBehaviour
         //writes the data to the file (also converts data to text)
         formatter.Serialize(stream, data);
 
-
         stream.Close();
 
     }
