@@ -10,7 +10,7 @@ public class Customisation : MonoBehaviour
     [SerializeField]
     private string TextureLocation = "Character/";
 
-    public enum CustomiseParts { Skin, Eyes, Hair, Mouth, Clothes, Armour };
+    public enum CustomiseParts { Skin, Hair, Mouth, Eyes, Clothes, Armour };
    
 
     //[Enum.GetNames(typeof(CustomiseParts)).Length]; this part gives us the number of customiseable parts = 6
@@ -36,10 +36,10 @@ public class Customisation : MonoBehaviour
 
     private void Start()
     {
+        int partCount = 0;
         foreach (string part in Enum.GetNames(typeof(CustomiseParts)))
         {
-            
-            int partCount = 0;
+         
             Texture2D tempTexture;
             int textureCount = 0;
 
@@ -118,6 +118,7 @@ public class Customisation : MonoBehaviour
         {
             currentTexture = 0;
         }
+        currentPartsTextureIndex[partIndex] = currentTexture;
 
         //These are the materials that the texture will be changed
         Material[] mats = characterRenderer.materials;
@@ -132,8 +133,7 @@ public class Customisation : MonoBehaviour
 
         currentHeight = 40;
 
-        
-        string[] names = { "Skin", "Eyes", "Hair", "Mouth", "Clothes", "Armour" };
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
 
         for (int i = 0; i < names.Length; i++)
         {
