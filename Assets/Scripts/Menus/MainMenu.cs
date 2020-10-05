@@ -14,9 +14,8 @@ public class MainMenu : MonoBehaviour
     public AudioMixer masterAudio;
     public Slider musicSlider;
     public Slider SFXSlider;
-    
     #endregion
-    
+
     void Start()
     {
         LoadPlayerPrefs();
@@ -64,8 +63,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    #region Change settings 
-    //This changes the screen from fullscreen to windowed
+    #region Change settings (This changes the screen from fullscreen to windowed)
     public void SetFullScreen(bool fullscreen)
     {
         Screen.fullScreen = fullscreen;
@@ -170,9 +168,6 @@ public class MainMenu : MonoBehaviour
             masterAudio.SetFloat("isMutedVolume", 20);
         }
     }
-
-    
-
 }
 
     #endregion

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Code relating to the player
@@ -25,11 +22,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         camera = Camera.main;
        // Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void Update() //(float testHealth)
-    {
-        //playerStats.CurrentHealth = testHealth;
     }
 
     //Function for dealing damage to the player

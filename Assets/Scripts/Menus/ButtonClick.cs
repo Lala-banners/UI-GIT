@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ButtonClick : MonoBehaviour
 {
@@ -8,7 +6,6 @@ public class ButtonClick : MonoBehaviour
 
     public void playSoundEffect()
     {
-
         woofButtonClick.Play();
         Debug.Log("Woof!");
     }

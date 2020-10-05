@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PressAnyKey : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class PressAnyKey : MonoBehaviour
         menuPanel.SetActive(false);
     }
 
-    // 
+    //Function to call press any key panel
     void Update()
     {
         if (Input.anyKey)

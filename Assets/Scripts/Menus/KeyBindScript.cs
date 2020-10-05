@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,7 +69,6 @@ public class KeyBindScript : MonoBehaviour
         {
             if (e.isKey)
             {
-                //HINT FOR PRESS ANY KEY TO CONTINUE
                 Debug.Log(e.keyCode.ToString());
                 newKey = e.keyCode.ToString();
             }
