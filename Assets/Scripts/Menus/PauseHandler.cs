@@ -6,12 +6,14 @@ public class PauseHandler : MonoBehaviour
     public GameObject pauseMenu; 
     public GameObject optionsMenu;
     public GameObject keybinds;
+    public GameObject HUD;
 
     void Paused()
     {
         isPaused = true;
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
+        HUD.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
