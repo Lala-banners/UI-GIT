@@ -1,5 +1,4 @@
-﻿
-//can be used in Unity
+﻿//can be used in Unity
 [System.Serializable]
 
 public class PlayerData

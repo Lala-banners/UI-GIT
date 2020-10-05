@@ -1,16 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class QuarterHearts : MonoBehaviour
 {
+    
     [SerializeField] private Image[] heartSlots;
     [SerializeField] private Sprite[] hearts;
 
     private float currentHealth;
     private float maximumHealth;
     private float healthPerSection;
+
+    public void Start()
+    {
+        UpdateHearts();
+    }
+
 
     #region Update Hearts
     public void UpdateHearts(float curHealth, float maxHealth)
