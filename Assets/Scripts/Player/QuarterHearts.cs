@@ -13,7 +13,7 @@ public class QuarterHearts : MonoBehaviour
 
     public void Start()
     {
-        UpdateHearts();
+        //UpdateHearts();
     }
 
 
