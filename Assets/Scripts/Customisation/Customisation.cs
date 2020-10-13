@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using System;
 
+
 public class Customisation : MonoBehaviour
 {
+    public static Customisation instance = null;
+
     #region VARIABLES
     public int currentHeight;
     [SerializeField]
     private string TextureLocation = "Character/";
-
+    public string LoadScene = "GameScene";
     public enum CustomiseParts { Skin, Hair, Mouth, Eyes, Clothes, Armour };
-   
 
     //[Enum.GetNames(typeof(CustomiseParts)).Length]; this part gives us the number of customiseable parts = 6
     //an array of List<texture2d>
@@ -20,6 +23,11 @@ public class Customisation : MonoBehaviour
     #endregion
 
     #region FUNCTIONS
+    public void SceneChanger(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+
     //Renderer for character mesh so we can reference material list within script for changing visuals
     public Renderer characterRenderer;
 
@@ -32,6 +40,20 @@ public class Customisation : MonoBehaviour
     //partsTexture[1][1] = Eyes_0
     //partsTexture[2][0] = Hair_1
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -49,7 +71,7 @@ public class Customisation : MonoBehaviour
                 //Load Textures so they can be set
                 tempTexture = (Texture2D) Resources.Load(TextureLocation + part + "_" + textureCount);
                 
-
+                //If temp texture exists
                 if (tempTexture != null)
                 {
                     //Add this texture to a collection
@@ -61,12 +83,7 @@ public class Customisation : MonoBehaviour
         }  
     }
 
-    /*void SetTexture(CustomiseParts parts)
-    {
-
-
-    }*/
-
+ 
     //Function to set a texture 
     void SetTexture(string type, int direction)
     {
@@ -125,9 +142,23 @@ public class Customisation : MonoBehaviour
         characterRenderer.materials = mats;
     }
 
+    /// <summary>
+    /// Apply the selected customization stats to the passed renderer
+    /// </summary>
+    /// <param name="renderer">the renderer being customised</param>
+    public void ApplyCustomisation(Renderer renderer)
+    {
+        // do the customisation like in SetTextures
+        
+    }
+
     //Updates specifically when GUI elements are called
     private void OnGUI()
     {
+        // Determine if we are actually customising
+            
+            // if not return;
+
         GUI.Box(new Rect(10, 10, 110, 210), "Visuals");
 
         currentHeight = 40;

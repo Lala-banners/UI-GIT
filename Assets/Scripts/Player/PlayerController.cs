@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         camera = Camera.main;
        // Cursor.lockState = CursorLockMode.Locked;
+
+        //Customisation.instance.ApplyCustomisation(someRenderer)
     }
 
     //Function for dealing damage to the player

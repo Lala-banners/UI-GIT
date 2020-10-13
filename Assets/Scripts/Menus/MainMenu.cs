@@ -20,10 +20,10 @@ public class MainMenu : MonoBehaviour
     {
         LoadPlayerPrefs();
 
-        Debug.Log("Starting Game Main Menu");
+        #region Fullscreen Prefs
         if (!PlayerPrefs.HasKey("fullscreen"))
         {
-            PlayerPrefs.SetInt("fullscreen", 0);
+            PlayerPrefs.SetInt("fullscreen", 0); //PlayerPrefs cant save bools, so give int (0) false, (1) true
             Screen.fullScreen = false;
         }
         else
@@ -37,9 +37,12 @@ public class MainMenu : MonoBehaviour
                 Screen.fullScreen = true;
             }
         }
+        #endregion
+
+        #region Quality Prefs
         if (!PlayerPrefs.HasKey("quality"))
         {
-            PlayerPrefs.SetInt("quality", 5);//dont have magic numbers
+            PlayerPrefs.SetInt("quality", 5); //This is a magic number
             QualitySettings.SetQualityLevel(5);
         }
         else
@@ -47,8 +50,10 @@ public class MainMenu : MonoBehaviour
             QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("quality"));
         }
         PlayerPrefs.Save();
+        #endregion
     }
 
+    #region Game Functions
     public void QuitGame()
     {
         Debug.Log("Quitting Game");
@@ -62,8 +67,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
+    #endregion
 
-    #region Change settings (This changes the screen from fullscreen to windowed)
+    #region Change Settings
     public void SetFullScreen(bool fullscreen)
     {
         Screen.fullScreen = fullscreen;
@@ -83,8 +89,24 @@ public class MainMenu : MonoBehaviour
     {
         masterAudio.SetFloat("SFXVol", SFXVol);
     }
+
+    //Function to mute volume when toggle is active
+    public void ToggleMute(bool isMuted)
+    {
+        //string reference isMuted connects to the AudioMixer master group Volume and isMuted parameters in Unity
+        if (isMuted)
+        {
+            //-80 is the minimum volume
+            masterAudio.SetFloat("isMutedVolume", -80);
+        }
+        else
+        {
+            //20 is the maximum volume
+            masterAudio.SetFloat("isMutedVolume", 20);
+        }
+    }
     #endregion
-  
+
     #region Save and load player prefs
     public void SavePlayerPrefs()
     {
@@ -112,8 +134,10 @@ public class MainMenu : MonoBehaviour
         }
 
         PlayerPrefs.Save();
-
     }
+    #endregion
+
+    #region Load Prefs
     public void LoadPlayerPrefs()
     {
         //Load Quality
@@ -152,25 +176,11 @@ public class MainMenu : MonoBehaviour
             masterAudio.SetFloat("SFXVol", SFXVol);
         }
     }
+    #endregion
 
-    //Function to mute volume when toggle is active
-    public void ToggleMute(bool isMuted) 
-    {
-        //string reference isMuted connects to the AudioMixer master group Volume and isMuted parameters in Unity
-        if (isMuted)
-        {
-            //-80 is the minimum volume
-            masterAudio.SetFloat("isMutedVolume", -80);
-        }
-        else
-        {
-            //20 is the maximum volume
-            masterAudio.SetFloat("isMutedVolume", 20);
-        }
-    }
 }
 
-    #endregion
+    
 
 
 
