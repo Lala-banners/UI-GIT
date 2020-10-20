@@ -1,6 +1,22 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
+public struct BaseStats
+{
+    public string baseStatName;
+    public int defaultStat; //stat from class
+    public int levelUpStat;
+    public int additionalStat; //addition stat 
+    public int finalStat
+    {
+        get
+        {
+            return defaultStat + additionalStat;
+        }
+    }
+}
+
+[System.Serializable]
 public class PlayerStats
 {
     [Header("Player Movement")]
@@ -9,7 +25,7 @@ public class PlayerStats
     [SerializeField] public float sprintSpeed = 12;
     [SerializeField] public float movementSpeed;
     [SerializeField] public float jumpHeight = 1.0f;
-                     
+
     [Header("Current Stats")]
     [SerializeField] public int level;
     [SerializeField] public float currentHealth = 100;
@@ -18,6 +34,33 @@ public class PlayerStats
     [SerializeField] public float maxMana = 100;
     [SerializeField] public float currentStamina = 100;
     [SerializeField] public float maxStamina = 100;
+    [SerializeField] public float regenHealth;
+
+    [Header("Base Stats")]
+    public BaseStats[] baseStats;
+    public int baseStatPoints = 10;
+
+    //If able to change stats then return true
+    public bool SetStats(int statIndex, int amount)
+    {
+        baseStats[statIndex].additionalStat += amount;
+
+        //increasing
+        if (amount > 0 && baseStatPoints - amount < 0) //we cant add points if there are none left
+        {
+            return false;
+        }
+        else if (amount < 0 && baseStats[statIndex].additionalStat + amount < 0) //additionalStat must be 0 or posititve int
+        {
+            return false;
+        }
+
+        //change the stats
+        baseStats[statIndex].additionalStat += amount;
+        baseStatPoints -= amount;
+
+        return true;
+    }
 
     //getter setter
     //Can update the Quarter Hearts with get and set 
@@ -31,6 +74,8 @@ public class PlayerStats
 
         set
         {
+            _currentHealth = Mathf.Clamp(value, 0, maxHealth);
+
             //everytime variable changes give it the value
             if (healthHearts != null)
             {
@@ -38,7 +83,21 @@ public class PlayerStats
             }
         }
     }
-    public QuarterHearts healthHearts; 
+    public QuarterHearts healthHearts;
 
+    //Function for dealing damage to the player
+    public void DealDamage(float damage)
+    {
+        CurrentHealth -= damage;
+    }
+
+    //Function for healing
+    public void Heal(float health)
+    {
+        CurrentHealth += health;
+    }
 
 }
+
+
+

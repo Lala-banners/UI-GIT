@@ -3,10 +3,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System;
 
+[System.Serializable]
 
 public class Customisation : MonoBehaviour
 {
+    [SerializeField] public PlayerController player;
     public static Customisation instance = null;
+    //the defaults for each profession
+    [SerializeField] PlayerProfession[] playerProfessions;
 
     #region VARIABLES
     public int currentHeight;
@@ -14,32 +18,55 @@ public class Customisation : MonoBehaviour
     private string TextureLocation = "Character/";
     public string LoadScene = "GameScene";
     public enum CustomiseParts { Skin, Hair, Mouth, Eyes, Clothes, Armour };
+    public Vector2 scrollPosition = Vector2.zero;
 
     //[Enum.GetNames(typeof(CustomiseParts)).Length]; this part gives us the number of customiseable parts = 6
     //an array of List<texture2d>
     //= 6 Lists
     public List<Texture2D>[] partsTexture = new List<Texture2D>[Enum.GetNames(typeof(CustomiseParts)).Length];
     private int[] currentPartsTextureIndex = new int [Enum.GetNames(typeof(CustomiseParts)).Length];
+
+    //Renderer for character mesh so we can reference material list within script for changing visuals
+    public Renderer characterRenderer;
     #endregion
 
     #region FUNCTIONS
+    private void Start()
+    {
+        int partCount = 0;
+        foreach (string part in Enum.GetNames(typeof(CustomiseParts)))
+        {
+
+            Texture2D tempTexture;
+            int textureCount = 0;
+
+            partsTexture[partCount] = new List<Texture2D>();
+
+            do
+            {
+                //Load Textures so they can be set
+                tempTexture = (Texture2D)Resources.Load(TextureLocation + part + "_" + textureCount);
+
+                //If temp texture exists
+                if (tempTexture != null)
+                {
+                    //Add this texture to a collection
+                    partsTexture[partCount].Add(tempTexture);
+                }
+                textureCount++;
+            } while (tempTexture != null);
+            partCount++;
+        }
+
+    }
     public void SceneChanger(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
     }
 
-    //Renderer for character mesh so we can reference material list within script for changing visuals
-    public Renderer characterRenderer;
-
-    //First number - which body part
-    //Second number - which version of body part
-    //partsTexture[0][0] = Skin_0
-    //partsTexture[0][1] = Skin_1
-    //partsTexture[0][2] = Skin_2
-    //partsTexture[0][3] = Skin_3
-    //partsTexture[1][1] = Eyes_0
-    //partsTexture[2][0] = Hair_1
-
+    /// <summary>
+    /// James help to make warrior babe in game environment
+    /// </summary>
     private void Awake()
     {
         if(instance == null)
@@ -54,36 +81,7 @@ public class Customisation : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-
-    private void Start()
-    {
-        int partCount = 0;
-        foreach (string part in Enum.GetNames(typeof(CustomiseParts)))
-        {
-         
-            Texture2D tempTexture;
-            int textureCount = 0;
-
-            partsTexture[partCount] = new List<Texture2D>();
-            
-            do
-            {
-                //Load Textures so they can be set
-                tempTexture = (Texture2D) Resources.Load(TextureLocation + part + "_" + textureCount);
-                
-                //If temp texture exists
-                if (tempTexture != null)
-                {
-                    //Add this texture to a collection
-                    partsTexture[partCount].Add(tempTexture);
-                }
-                textureCount++;
-            } while (tempTexture != null);
-            partCount++;
-        }  
-    }
-
- 
+    
     //Function to set a texture 
     void SetTexture(string type, int direction)
     {
@@ -155,32 +153,94 @@ public class Customisation : MonoBehaviour
     //Updates specifically when GUI elements are called
     private void OnGUI()
     {
+        StatsOnGUI();
+        CustomiseOnGUI();
+        ProfessionsOnGUI();
+    }
+
+    public void ProfessionsOnGUI()
+    {
+        float currentHeight = 0;
+
+        GUI.Box(new Rect(Screen.width - 170, 230, 155, 60), "Profession");
+
+        scrollPosition = GUI.BeginScrollView(new Rect(Screen.width - 170, 250, 155, 50), scrollPosition, 
+                                             new Rect(0,0,100,30 * playerProfessions.Length));
+
+        int i = 0;
+        foreach (PlayerProfession profession in playerProfessions)
+        {
+            if (GUI.Button(new Rect(20, currentHeight + i * 30, 100, 20), profession.ProfessionName))
+            {
+                player.Profession = profession;
+            }
+            i++;
+        }
+
+        GUI.EndScrollView();
+
+        GUI.Box(new Rect(Screen.width - 170, Screen.height - 90, 155, 80), "Display");
+        GUI.Label(new Rect(Screen.width - 140, Screen.height - 100 + 30, 100, 20), player.Profession.ProfessionName);
+        GUI.Label(new Rect(Screen.width - 140, Screen.height - 100 + 30, 100, 20), player.Profession.AbilityName);
+        GUI.Label(new Rect(Screen.width - 140, Screen.height - 100 + 30, 100, 20), player.Profession.AbilityDescription);
+    }
+
+    //IMGUI prototype - comment out onGUI methods and replace with real GUI elements
+    private void StatsOnGUI()
+    {
+        float currentHeight = 40;
+        GUI.Box(new Rect(Screen.width - 140, 10, 130, 210), "Stats");
+
+        for (int i = 0; i < player.playerStats.baseStats.Length; i++)
+        {
+            BaseStats stat = player.playerStats.baseStats[i];
+
+            if (GUI.Button(new Rect(Screen.width - 135, currentHeight + i * 30, 20, 20), "-"))
+            {
+                player.playerStats.SetStats(i, -1);
+            }
+
+            GUI.Label(new Rect(Screen.width - 110, currentHeight + i * 30, 70, 20),
+                stat.baseStatName + ": " + stat.finalStat);
+
+            if (GUI.Button(new Rect(Screen.width - 40, currentHeight + i * 30, 20, 20), "+"))
+            {
+                player.playerStats.SetStats(i, -1);
+            }
+            i++;
+        }        
+    }
+
+    
+    private void CustomiseOnGUI()
+    {
         // Determine if we are actually customising
-            
-            // if not return;
 
+        // if not return;
+
+        float currentHeight = 40;
         GUI.Box(new Rect(10, 10, 110, 210), "Visuals");
-
-        currentHeight = 40;
-
-        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
-
-        for (int i = 0; i < names.Length; i++)
+        //string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        int i = 0;
+        foreach (CustomiseParts names in Enum.GetValues(typeof(CustomiseParts)))
         {
             if (GUI.Button(new Rect(20, currentHeight + i * 30, 20, 20), "<"))
             {
                 //Setting direction to right
-                SetTexture(names[i], -1);
+                SetTexture(names.ToString(), -1);
             }
 
-            GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names[i]);
+            GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names.ToString());
 
-            if (GUI.Button(new Rect(80, currentHeight + i * 30, 20, 20), ">"))
+            if (GUI.Button(new Rect(90, currentHeight + i * 30, 20, 20), ">"))
             {
                 //Setting direction to left
-                SetTexture(names[i], 1);
+                SetTexture(names.ToString(), 1);
             }
+
+            i++;
         }
+        
     }
     #endregion
 

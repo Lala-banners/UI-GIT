@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-
+[System.Serializable]
 /// <summary>
 /// Code relating to the player
 /// </summary>
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public PlayerStats playerStats;
-
+    #region Variables
     public CharacterController controller;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -15,8 +14,28 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 100f;
     private float xRotation = 0f;
     Camera camera;
-    
+    private bool disableRegen = true;
+    private float disableRegenTime;
+    public float RegenCooldown = 5f;
+    #endregion
 
+    #region References to other scripts 
+    public PlayerStats playerStats;
+    public Customisation customisation;
+    public PlayerProfession profession;
+    public BaseStats[] defaultStat;
+    public PlayerProfession Profession
+    {
+        get
+        {
+            return profession;
+        }
+            set
+        {
+            ChangeProfession(value);
+        }
+    }
+    #endregion
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -26,10 +45,54 @@ public class PlayerController : MonoBehaviour
         //Customisation.instance.ApplyCustomisation(someRenderer)
     }
 
+    public void ChangeProfession(PlayerProfession cProfession)
+    {
+        profession = cProfession;
+        SetUpProfession();
+    }
+
+    public void SetUpProfession()
+    {
+        for (int i = 0; i < playerStats.baseStats.Length; i++)
+        {
+            if (profession.defaultStats.Length < i) //check if i exists in profession
+            {
+                playerStats.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (!disableRegen)
+        {
+            playerStats.CurrentHealth += playerStats.regenHealth * Time.deltaTime;
+        }
+        else
+        {
+            if (Time.time > disableRegenTime + RegenCooldown) //after 5 seconds start regeneration 
+            {
+                disableRegen = false;
+            }
+        }
+    }
+
+    public void LevelUp()
+    {
+        playerStats.baseStatPoints += 3;
+
+        for (int i = 0; i < playerStats.baseStats.Length; i++)
+        {
+            playerStats.baseStats[i].additionalStat += 1;
+        }
+    }    
+
     //Function for dealing damage to the player
     public void DealDamage(float damage)
     {
         playerStats.CurrentHealth -= damage;
+        disableRegen = true;
+        disableRegenTime = Time.time;
     }
 
     //Function for healing
@@ -40,13 +103,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnGUI()
     {
+        if(GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
+        {
+            LevelUp();
+        }
+
+        if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
+        {
+            DealDamage(25f);
+        }
+
         //Display current health
         //display current mana
         //display current stamina
 
-    //  MouseLook();
-    // Move();
-}
+        //  MouseLook();
+        // Move();
+    }
     private void MouseLook()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
