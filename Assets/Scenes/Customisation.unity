@@ -5674,71 +5674,14 @@ MonoBehaviour:
   player: {fileID: 824731353}
   playerProfessions:
   - ProfessionName: Paladin
-    playerStats:
-      speed: 0
-      crouchSpeed: 0
-      sprintSpeed: 0
-      movementSpeed: 0
-      jumpHeight: 0
-      level: 0
-      currentHealth: 0
-      maxHealth: 0
-      currentMana: 0
-      maxMana: 0
-      currentStamina: 0
-      maxStamina: 0
-      regenHealth: 0
-      baseStats: []
-      baseStatPoints: 0
-      _currentHealth: 0
-      healthHearts: {fileID: 0}
-    player: {fileID: 0}
     AbilityName: 
     AbilityDescription: 
     defaultStats: []
   - ProfessionName: Warrior
-    playerStats:
-      speed: 0
-      crouchSpeed: 0
-      sprintSpeed: 0
-      movementSpeed: 0
-      jumpHeight: 0
-      level: 0
-      currentHealth: 0
-      maxHealth: 0
-      currentMana: 0
-      maxMana: 0
-      currentStamina: 0
-      maxStamina: 0
-      regenHealth: 0
-      baseStats: []
-      baseStatPoints: 0
-      _currentHealth: 0
-      healthHearts: {fileID: 0}
-    player: {fileID: 0}
     AbilityName: 
     AbilityDescription: 
     defaultStats: []
   - ProfessionName: Barbarian
-    playerStats:
-      speed: 0
-      crouchSpeed: 0
-      sprintSpeed: 0
-      movementSpeed: 0
-      jumpHeight: 0
-      level: 0
-      currentHealth: 0
-      maxHealth: 0
-      currentMana: 0
-      maxMana: 0
-      currentStamina: 0
-      maxStamina: 0
-      regenHealth: 0
-      baseStats: []
-      baseStatPoints: 0
-      _currentHealth: 0
-      healthHearts: {fileID: 0}
-    player: {fileID: 0}
     AbilityName: Rage
     AbilityDescription: Increase ATK
     defaultStats:
@@ -5754,10 +5697,83 @@ MonoBehaviour:
       defaultStat: 0
       levelUpStat: 0
       additionalStat: 0
+  - ProfessionName: Warlock
+    AbilityName: Magic
+    AbilityDescription: Increase Mana
+    defaultStats:
+    - baseStatName: Strength
+      defaultStat: 10
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Dexterity
+      defaultStat: 4
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Wisdom
+      defaultStat: 5
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Intelligence
+      defaultStat: 5
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Charisma
+      defaultStat: 6
+      levelUpStat: 0
+      additionalStat: 0
+  - ProfessionName: Druid
+    AbilityName: Faith
+    AbilityDescription: Increase Stamina
+    defaultStats:
+    - baseStatName: Strength
+      defaultStat: 7
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Dexterity
+      defaultStat: 4
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Wisdom
+      defaultStat: 10
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Intelligence
+      defaultStat: 8
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Charisma
+      defaultStat: 1
+      levelUpStat: 0
+      additionalStat: 0
+  - ProfessionName: Knight
+    AbilityName: Valor
+    AbilityDescription: Increase ATK
+    defaultStats:
+    - baseStatName: Strength
+      defaultStat: 10
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Dexterity
+      defaultStat: 8
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Wisdom
+      defaultStat: 2
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Intelligence
+      defaultStat: 5
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Charisma
+      defaultStat: 5
+      levelUpStat: 0
+      additionalStat: 0
   currentHeight: 0
   TextureLocation: Character/
-  LoadScene: GameScene
+  LoadScene: 2
   scrollPosition: {x: 0, y: 0}
+  currentPartsTextureIndex: 000000000000000000000000000000000000000000000000
   characterRenderer: {fileID: 684250242}
 --- !u!1 &975340555
 GameObject:
@@ -12698,8 +12714,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 0.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12988,6 +13004,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
+        type: 3}
+      propertyPath: customisationTextureIndex.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
+        type: 3}
+      propertyPath: customisation
+      value: 
+      objectReference: {fileID: 889636843}
+    - target: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
+        type: 3}
+      propertyPath: stat.regenHealth
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b43d1bf62b0226419cdd07481f04172, type: 3}

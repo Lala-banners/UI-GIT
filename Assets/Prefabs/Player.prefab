@@ -62,22 +62,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f7a17becf53ac469c2b12506f0c204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats:
+  controller: {fileID: 1465626378751294122}
+  speed: 12
+  gravity: -9.81
+  mouseSensitivity: 100
+  RegenCooldown: 5
+  customisationTextureIndex: 00000000000000000000000000000000040000000000000000000000
+  stat:
     speed: 6
     crouchSpeed: 3
     sprintSpeed: 12
     movementSpeed: 0
     jumpHeight: 1
     level: 0
-    currentHealth: 100
-    maxHealth: 100
     currentMana: 100
     maxMana: 100
     currentStamina: 100
     maxStamina: 100
+    regenHealth: 0
+    baseStats: []
+    baseStatPoints: 10
+  playerStats:
+    currentHealth: 100
+    maxHealth: 100
     _currentHealth: 100
     healthHearts: {fileID: 0}
-  controller: {fileID: 1465626378751294122}
-  speed: 12
-  gravity: -9.81
-  mouseSensitivity: 100
+  customisation: {fileID: 0}
+  profession:
+    ProfessionName: Profession
+    playerStats:
+      currentHealth: 100
+      maxHealth: 100
+      _currentHealth: 100
+      healthHearts: {fileID: 0}
+    player: {fileID: 0}
+    AbilityName: Ability Name
+    AbilityDescription: Does an action
+    defaultStats: []
+  defaultStat: []

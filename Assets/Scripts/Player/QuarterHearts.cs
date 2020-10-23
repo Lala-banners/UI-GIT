@@ -13,7 +13,7 @@ public class QuarterHearts : MonoBehaviour
 
     public void Start()
     {
-        //UpdateHearts();
+        //UpdateHearts(0, maxHealth);
     }
 
 
@@ -27,7 +27,7 @@ public class QuarterHearts : MonoBehaviour
     }
     #endregion
 
-    private void OnGUI() //Previously private void Update()
+    private void OnGUI() 
     {
         int heartSlotIndex = 0;
 

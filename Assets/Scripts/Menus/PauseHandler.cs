@@ -25,6 +25,7 @@ public class PauseHandler : MonoBehaviour
         pauseMenu.SetActive(false);
         keybinds.SetActive(false);
         optionsMenu.SetActive(false);
+        HUD.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

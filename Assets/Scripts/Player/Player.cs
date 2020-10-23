@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
-[System.Serializable]
+using UnityEngine.SceneManagement;
+using System;
+
+
 /// <summary>
 /// Code relating to the player
 /// </summary>
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+//[System.Serializable]
+public class Player : MonoBehaviour
 {
     #region Variables
     public CharacterController controller;
@@ -14,15 +18,29 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 100f;
     private float xRotation = 0f;
     Camera camera;
-    private bool disableRegen = true;
+
+    private bool disableRegen = false;
     private float disableRegenTime;
     public float RegenCooldown = 5f;
+
+    
+    public float disableStaminaRegenTime;
+    public float staminaRegenCooldown = 1f;
+    public float StaminaDegen = 30f;
+
+
+    /// <summary>
+    /// To save the player customisation to load into game scene (2).
+    /// </summary>
+    public int[] customisationTextureIndex;
+
     #endregion
 
-    #region References to other scripts 
-    public PlayerStats playerStats;
-    public Customisation customisation;
-    public PlayerProfession profession;
+    #region References to other scripts
+    public PlayerStats.Stats stat; //Stats class inside PlayerStats
+    public PlayerStats playerStats; //PlayerStats reference
+    //public Customisation customisation;
+    [SerializeField]public PlayerProfession profession;
     public BaseStats[] defaultStat;
     public PlayerProfession Profession
     {
@@ -36,6 +54,23 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
+    #region FUNctions
+    public void Awake()
+    {
+        //If not Customisation scene then load player data
+        if (SceneManager.GetActiveScene().name != "Customisation")
+        {
+            //load player data
+            PlayerData loadedPlayer = PlayerBinarySave.LoadPlayerData();
+            if (loadedPlayer != null)
+            {
+                stat = loadedPlayer.playerStats;
+                profession = loadedPlayer.profession;
+                customisationTextureIndex = loadedPlayer.customisationTextureIndex;
+            }
+        }
+    }
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -53,37 +88,52 @@ public class PlayerController : MonoBehaviour
 
     public void SetUpProfession()
     {
-        for (int i = 0; i < playerStats.baseStats.Length; i++)
+        for (int i = 0; i < stat.baseStats.Length; i++)
         {
             if (profession.defaultStats.Length < i) //check if i exists in profession
             {
-                playerStats.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
+                stat.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
             }
         }
     }
 
     private void Update()
     {
+        #region Health Regen
         if (!disableRegen)
         {
-            playerStats.CurrentHealth += playerStats.regenHealth * Time.deltaTime;
+            playerStats.CurrentHealth += stat.regenHealth * Time.deltaTime;
         }
         else
         {
-            if (Time.time > disableRegenTime + RegenCooldown) //after 5 seconds start regeneration 
+            if (Time.time > disableRegenTime + staminaRegenCooldown) //after 5 seconds start regeneration 
             {
                 disableRegen = false;
             }
         }
+        #endregion
+        #region Stamina Regen
+        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
+        {
+            if(stat.currentStamina < stat.maxStamina)
+            {
+                stat.currentStamina += stat.regenStamina * Time.deltaTime;
+            }
+            else
+            {
+                stat.currentStamina = stat.maxStamina;
+            }
+        }
+        #endregion
     }
 
     public void LevelUp()
     {
-        playerStats.baseStatPoints += 3;
+        stat.baseStatPoints += 3;
 
-        for (int i = 0; i < playerStats.baseStats.Length; i++)
+        for (int i = 0; i < stat.baseStats.Length; i++)
         {
-            playerStats.baseStats[i].additionalStat += 1;
+            stat.baseStats[i].additionalStat += 1;
         }
     }    
 
@@ -140,6 +190,7 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move((velocity + move) * speed * Time.deltaTime);
     }
+    #endregion
 }
 /* Commented out Save() and Load()
  //Functions Save and Load 

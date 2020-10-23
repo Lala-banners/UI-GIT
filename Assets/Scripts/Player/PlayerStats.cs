@@ -19,45 +19,53 @@ public struct BaseStats
 [System.Serializable]
 public class PlayerStats
 {
-    [Header("Player Movement")]
-    [SerializeField] public float speed = 6f;
-    [SerializeField] public float crouchSpeed = 3;
-    [SerializeField] public float sprintSpeed = 12;
-    [SerializeField] public float movementSpeed;
-    [SerializeField] public float jumpHeight = 1.0f;
+    [System.Serializable]
+    public class Stats
+    {
+        [Header("Player Movement")]
+        [SerializeField] public float speed = 6f;
+        [SerializeField] public float crouchSpeed = 3;
+        [SerializeField] public float sprintSpeed = 12;
+        [SerializeField] public float movementSpeed;
+        [SerializeField] public float jumpHeight = 1.0f;
 
-    [Header("Current Stats")]
-    [SerializeField] public int level;
+        [Header("Current Stats")]
+        [SerializeField] public int level;
+        [SerializeField] public float currentMana = 100;
+        [SerializeField] public float maxMana = 100;
+        [SerializeField] public float currentStamina = 100;
+        [SerializeField] public float maxStamina = 100;
+        [SerializeField] public float disableStaminaRegen;
+        [SerializeField] public float regenStamina = 30f;
+        [SerializeField] public float regenHealth;
+
+        [Header("Base Stats")]
+        public BaseStats[] baseStats;
+        public int baseStatPoints = 10;
+    }
+  
     [SerializeField] public float currentHealth = 100;
     [SerializeField] public float maxHealth = 100;
-    [SerializeField] public float currentMana = 100;
-    [SerializeField] public float maxMana = 100;
-    [SerializeField] public float currentStamina = 100;
-    [SerializeField] public float maxStamina = 100;
-    [SerializeField] public float regenHealth;
-
-    [Header("Base Stats")]
-    public BaseStats[] baseStats;
-    public int baseStatPoints = 10;
-
+    Player player;
+    Stats stats;
     //If able to change stats then return true
     public bool SetStats(int statIndex, int amount)
     {
-        baseStats[statIndex].additionalStat += amount;
+        stats.baseStats[statIndex].additionalStat += amount;
 
         //increasing
-        if (amount > 0 && baseStatPoints - amount < 0) //we cant add points if there are none left
+        if (amount > 0 && stats.baseStatPoints - amount < 0) //we cant add points if there are none left
         {
             return false;
         }
-        else if (amount < 0 && baseStats[statIndex].additionalStat + amount < 0) //additionalStat must be 0 or posititve int
+        else if (amount < 0 && stats.baseStats[statIndex].additionalStat + amount < 0) //additionalStat must be 0 or posititve int
         {
             return false;
         }
 
         //change the stats
-        baseStats[statIndex].additionalStat += amount;
-        baseStatPoints -= amount;
+        stats.baseStats[statIndex].additionalStat += amount;
+        stats.baseStatPoints -= amount;
 
         return true;
     }

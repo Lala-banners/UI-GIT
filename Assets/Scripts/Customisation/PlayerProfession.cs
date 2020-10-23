@@ -6,10 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerProfession
 {
-
     public string ProfessionName = "Profession";
-    public PlayerStats playerStats;
-    public PlayerController player;
+    //public PlayerStats playerStats;
+    //public Player player;
 
     public string AbilityName = "Ability Name";
     public string AbilityDescription = "Does an action";

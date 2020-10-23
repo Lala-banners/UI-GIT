@@ -7,10 +7,12 @@ using System;
 
 public class Customisation : MonoBehaviour
 {
-    [SerializeField] public PlayerController player;
+    [SerializeField] public Player player;
+    PlayerStats playerStats;
     public static Customisation instance = null;
     //the defaults for each profession
     [SerializeField] PlayerProfession[] playerProfessions;
+
 
     #region VARIABLES
     public int currentHeight;
@@ -24,10 +26,12 @@ public class Customisation : MonoBehaviour
     //an array of List<texture2d>
     //= 6 Lists
     public List<Texture2D>[] partsTexture = new List<Texture2D>[Enum.GetNames(typeof(CustomiseParts)).Length];
-    private int[] currentPartsTextureIndex = new int [Enum.GetNames(typeof(CustomiseParts)).Length];
+    [SerializeField]private int[] currentPartsTextureIndex = new int [Enum.GetNames(typeof(CustomiseParts)).Length];
 
     //Renderer for character mesh so we can reference material list within script for changing visuals
     public Renderer characterRenderer;
+
+
     #endregion
 
     #region FUNCTIONS
@@ -58,6 +62,31 @@ public class Customisation : MonoBehaviour
             partCount++;
         }
 
+        if (player == null)
+        {
+            Debug.LogError("player in Customisation is null");
+        }
+        else
+        {
+            if (player.customisationTextureIndex.Length != 0)
+            {
+                currentPartsTextureIndex = player.customisationTextureIndex;
+            }
+        }
+
+        if (playerProfessions == null
+            && playerProfessions.Length > 0)
+        {
+            player.Profession = playerProfessions[0];
+        }
+
+        //string[] of each body part =  Enum.GetNames(typeof(CustomiseParts))
+        //["Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour"]
+        foreach (string part in Enum.GetNames(typeof(CustomiseParts))) //Loop through array of body parts
+        {
+            SetTexture(part, 0); 
+        }
+
     }
     public void SceneChanger(int sceneIndex)
     {
@@ -65,7 +94,7 @@ public class Customisation : MonoBehaviour
     }
 
     /// <summary>
-    /// James help to make warrior babe in game environment
+    /// James help to put warrior babe in game environment
     /// </summary>
     private void Awake()
     {
@@ -140,15 +169,31 @@ public class Customisation : MonoBehaviour
         characterRenderer.materials = mats;
     }
 
-    /// <summary>
-    /// Apply the selected customization stats to the passed renderer
-    /// </summary>
-    /// <param name="renderer">the renderer being customised</param>
-    public void ApplyCustomisation(Renderer renderer)
+    public void SaveCharacter()
     {
-        // do the customisation like in SetTextures
-        
+        player.customisationTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
+        PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
+
+        /*
+        PlayerPrefs.SetInt("Skin Index", currentPartsTextureIndex[0]);
+        PlayerPrefs.SetInt("Hair Index", currentPartsTextureIndex[1]);
+        PlayerPrefs.SetInt("Eyes Index", currentPartsTextureIndex[2]);
+        PlayerPrefs.SetInt("Mouth Index", currentPartsTextureIndex[3]);
+        PlayerPrefs.SetInt("Clothes Index", currentPartsTextureIndex[4]);
+        PlayerPrefs.SetInt("Armour Index", currentPartsTextureIndex[5]);
+
+        //Set Character name in own time
+        //PlayerPrefs.SetString("Character Name", characterName);
+
+        for (int i = 0; i< player.playerStats.baseStats.Length; i++)
+        {
+            PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "default stat", player.playerStats.baseStats[0].defaultStat);
+            PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "additional stat", player.playerStats.baseStats[0].additionalStat);
+            PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "levelUpStat", player.playerStats.baseStats[0].levelUpStat);
+        }
+        PlayerPrefs.SetString("Character Profession", player.Profession.ProfessionName); */
     }
+
 
     //Updates specifically when GUI elements are called
     private void OnGUI()
@@ -156,13 +201,19 @@ public class Customisation : MonoBehaviour
         StatsOnGUI();
         CustomiseOnGUI();
         ProfessionsOnGUI();
+
+        if (GUI.Button(new Rect(10,250,120,20), "Save and Play"))
+        {
+            SaveCharacter();
+            SceneManager.LoadScene(1); //load game scene
+        }
     }
 
     public void ProfessionsOnGUI()
     {
         float currentHeight = 0;
 
-        GUI.Box(new Rect(Screen.width - 170, 230, 155, 60), "Profession");
+        GUI.Box(new Rect(Screen.width - 170, 230, 155, 100), "Profession");
 
         scrollPosition = GUI.BeginScrollView(new Rect(Screen.width - 170, 250, 155, 50), scrollPosition, 
                                              new Rect(0,0,100,30 * playerProfessions.Length));
@@ -191,13 +242,13 @@ public class Customisation : MonoBehaviour
         float currentHeight = 40;
         GUI.Box(new Rect(Screen.width - 140, 10, 130, 210), "Stats");
 
-        for (int i = 0; i < player.playerStats.baseStats.Length; i++)
+        for (int i = 0; i < player.stat.baseStats.Length; i++)
         {
-            BaseStats stat = player.playerStats.baseStats[i];
+            BaseStats stat = player.stat.baseStats[i];
 
             if (GUI.Button(new Rect(Screen.width - 135, currentHeight + i * 30, 20, 20), "-"))
             {
-                player.playerStats.SetStats(i, -1);
+                playerStats.SetStats(i, -1);
             }
 
             GUI.Label(new Rect(Screen.width - 110, currentHeight + i * 30, 70, 20),
@@ -205,7 +256,7 @@ public class Customisation : MonoBehaviour
 
             if (GUI.Button(new Rect(Screen.width - 40, currentHeight + i * 30, 20, 20), "+"))
             {
-                player.playerStats.SetStats(i, -1);
+                playerStats.SetStats(i, -1);
             }
             i++;
         }        

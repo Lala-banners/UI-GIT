@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class SaveSystem : MonoBehaviour
 {
     //How to Create a Save path to save a point in the game
-    public static void SavePlayer(PlayerController player)
+    public static void SavePlayer(Player player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 

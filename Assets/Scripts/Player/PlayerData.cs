@@ -3,22 +3,18 @@
 
 public class PlayerData
 {
-    public int level;
-    public float health;
-    public float[] position; // = If we want to save a position - Vector3 
+    public PlayerStats.Stats playerStats;
+    public PlayerProfession profession;
+    public int[] customisationTextureIndex;
 
     //This will run when we create new player data (class, name, variable will create a constructor)
     //Constructor is a method referencing the class inside the method
-    public PlayerData(PlayerController player)
+    public PlayerData(Player player)
     {
-        /*level = player.level;
-        health = player.health;
-
-        position = new float[3]; //Only have 3 numbers (Vector3)
-        position[0] = player.transform.position.x;
-        position[1] = player.transform.position.y;
-        position[2] = player.transform.position.z; */
-
+        playerStats = player.stat;
+        profession = player.Profession;
+        customisationTextureIndex = player.customisationTextureIndex;
 
     }
+
 }
