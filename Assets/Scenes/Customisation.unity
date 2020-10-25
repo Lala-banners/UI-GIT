@@ -5676,7 +5676,31 @@ MonoBehaviour:
   - ProfessionName: Paladin
     AbilityName: 
     AbilityDescription: 
-    defaultStats: []
+    defaultStats:
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
   - ProfessionName: Warrior
     AbilityName: 
     AbilityDescription: 
@@ -13004,21 +13028,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: customisationTextureIndex.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: customisation
-      value: 
-      objectReference: {fileID: 889636843}
-    - target: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: stat.regenHealth
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b43d1bf62b0226419cdd07481f04172, type: 3}

@@ -67,7 +67,10 @@ MonoBehaviour:
   gravity: -9.81
   mouseSensitivity: 100
   RegenCooldown: 5
-  customisationTextureIndex: 00000000000000000000000000000000040000000000000000000000
+  disableStaminaRegenTime: 0
+  staminaRegenCooldown: 1
+  StaminaDegen: 30
+  customisationTextureIndex: 
   stat:
     speed: 6
     crouchSpeed: 3
@@ -79,23 +82,42 @@ MonoBehaviour:
     maxMana: 100
     currentStamina: 100
     maxStamina: 100
-    regenHealth: 0
-    baseStats: []
+    disableStaminaRegen: 0
+    regenStamina: 30
+    regenHealth: 30
+    baseStats:
+    - baseStatName: Strength
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Dexterity
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Wisdom
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Intelligence
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Charisma
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+    - baseStatName: Constitution
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
     baseStatPoints: 10
   playerStats:
     currentHealth: 100
     maxHealth: 100
     _currentHealth: 100
     healthHearts: {fileID: 0}
-  customisation: {fileID: 0}
   profession:
     ProfessionName: Profession
-    playerStats:
-      currentHealth: 100
-      maxHealth: 100
-      _currentHealth: 100
-      healthHearts: {fileID: 0}
-    player: {fileID: 0}
     AbilityName: Ability Name
     AbilityDescription: Does an action
     defaultStats: []

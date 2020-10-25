@@ -43,10 +43,8 @@ public class PlayerStats
         public BaseStats[] baseStats;
         public int baseStatPoints = 10;
     }
-  
     [SerializeField] public float currentHealth = 100;
     [SerializeField] public float maxHealth = 100;
-    Player player;
     Stats stats;
     //If able to change stats then return true
     public bool SetStats(int statIndex, int amount)
