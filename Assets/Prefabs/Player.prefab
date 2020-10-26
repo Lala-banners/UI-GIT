@@ -85,6 +85,7 @@ MonoBehaviour:
     disableStaminaRegen: 0
     regenStamina: 30
     regenHealth: 30
+    defaultStat: 0
     baseStats:
     - baseStatName: Strength
       defaultStat: 0

@@ -4,16 +4,17 @@
 public struct BaseStats
 {
     public string baseStatName;
-    public int defaultStat; //stat from class
+    public int defaultStat; //stat from the class
     public int levelUpStat;
-    public int additionalStat; //addition stat 
+    //public int currentStat;
+    public int additionalStat; //bonus stats
     public int finalStat
     {
         get
         {
             return defaultStat + additionalStat;
         }
-    }
+    } 
 }
 
 [System.Serializable]
@@ -39,34 +40,19 @@ public class PlayerStats
         [SerializeField] public float regenStamina = 30f;
         [SerializeField] public float regenHealth;
 
+        [SerializeField] public float defaultStat;
+
         [Header("Base Stats")]
         public BaseStats[] baseStats;
-        public int baseStatPoints = 10;
+        public int baseStatPoints = 13;
     }
     [SerializeField] public float currentHealth = 100;
     [SerializeField] public float maxHealth = 100;
     Stats stats;
-    //If able to change stats then return true
-    public bool SetStats(int statIndex, int amount)
-    {
-        stats.baseStats[statIndex].additionalStat += amount;
 
-        //increasing
-        if (amount > 0 && stats.baseStatPoints - amount < 0) //we cant add points if there are none left
-        {
-            return false;
-        }
-        else if (amount < 0 && stats.baseStats[statIndex].additionalStat + amount < 0) //additionalStat must be 0 or posititve int
-        {
-            return false;
-        }
+    
 
-        //change the stats
-        stats.baseStats[statIndex].additionalStat += amount;
-        stats.baseStatPoints -= amount;
-
-        return true;
-    }
+    
 
     //getter setter
     //Can update the Quarter Hearts with get and set 
@@ -103,6 +89,30 @@ public class PlayerStats
         CurrentHealth += health;
     }
 
+    //If able to change stats then return true
+    public bool SetStats(int statIndex, int amount)
+    {
+        stats.baseStats[statIndex].additionalStat += amount;
+
+        //return true;
+
+        //increasing
+        if (amount > 0 && stats.baseStatPoints - amount < 0) //we cant add points if there are none left
+        {
+            return false;
+        }
+        else if (amount < 0 && stats.baseStats[statIndex].additionalStat + amount < 0) //additionalStat must be 0 or posititve int
+        {
+            return false;
+        }
+
+        //change the stats
+        stats.baseStats[statIndex].additionalStat += amount;
+        stats.baseStatPoints -= amount;
+
+        return true;
+    }
+    
 }
 
 

@@ -93,9 +93,6 @@ public class Customisation : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    /// <summary>
-    /// James help to put warrior babe in game environment
-    /// </summary>
     private void Awake()
     {
         if(instance == null)
@@ -174,6 +171,7 @@ public class Customisation : MonoBehaviour
         player.customisationTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
         PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
 
+        #region Commented out
         /*
         PlayerPrefs.SetInt("Skin Index", currentPartsTextureIndex[0]);
         PlayerPrefs.SetInt("Hair Index", currentPartsTextureIndex[1]);
@@ -192,6 +190,7 @@ public class Customisation : MonoBehaviour
             PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "levelUpStat", player.playerStats.baseStats[0].levelUpStat);
         }
         PlayerPrefs.SetString("Character Profession", player.Profession.ProfessionName); */
+        #endregion
     }
 
 
@@ -230,45 +229,42 @@ public class Customisation : MonoBehaviour
 
         GUI.EndScrollView();
 
-        GUI.Box(new Rect(Screen.width - 170, Screen.height - 90, 155, 80), "Display");
-        GUI.Label(new Rect(Screen.width - 140, Screen.height - 100 + 30, 100, 20), player.Profession.ProfessionName);
-        GUI.Label(new Rect(Screen.width - 140, Screen.height - 100 + 30, 100, 20), player.Profession.AbilityName);
-        GUI.Label(new Rect(Screen.width - 140, Screen.height - 100 + 30, 100, 20), player.Profession.AbilityDescription);
+        GUI.Box(new Rect(Screen.width - 170, Screen.height - 150, 155, 150), "Class Display");
+        GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 30, 100, 20), player.Profession.ProfessionName);
+        GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 50, 100, 20), player.Profession.AbilityName);
+        GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 70, 100, 100), player.Profession.AbilityDescription);
     }
 
     //IMGUI prototype - comment out onGUI methods and replace with real GUI elements
     private void StatsOnGUI()
     {
         float currentHeight = 40;
-        GUI.Box(new Rect(Screen.width - 140, 10, 130, 210), "Stats");
+                                       //X  //Y  //W  //H
+        GUI.Box(new Rect(Screen.width - 170, 10, 155, 210), "Stats");
 
         for (int i = 0; i < player.stat.baseStats.Length; i++)
         {
             BaseStats stat = player.stat.baseStats[i];
 
-            if (GUI.Button(new Rect(Screen.width - 135, currentHeight + i * 30, 20, 20), "-"))
+            if (GUI.Button(new Rect(Screen.width - 165, currentHeight + i * 30, 20, 20), "-"))
             {
                 playerStats.SetStats(i, -1);
             }
 
-            GUI.Label(new Rect(Screen.width - 110, currentHeight + i * 30, 70, 20),
+            GUI.Label(new Rect(Screen.width - 140, currentHeight + i * 30, 100, 20),
                 stat.baseStatName + ": " + stat.finalStat);
 
             if (GUI.Button(new Rect(Screen.width - 40, currentHeight + i * 30, 20, 20), "+"))
             {
-                playerStats.SetStats(i, -1);
+                playerStats.SetStats(i, 1);
             }
-            i++;
+            //i++;
         }        
     }
 
     
     private void CustomiseOnGUI()
     {
-        // Determine if we are actually customising
-
-        // if not return;
-
         float currentHeight = 40;
         GUI.Box(new Rect(10, 10, 110, 210), "Visuals");
         //string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
