@@ -10,8 +10,7 @@ public class Customisation : MonoBehaviour
     [SerializeField] public Player player;
     PlayerStats playerStats;
     public static Customisation instance = null;
-    //the defaults for each profession
-    [SerializeField] PlayerProfession[] playerProfessions;
+    [SerializeField] PlayerProfession[] playerProfessions; //the defaults for each profession
 
 
     #region VARIABLES

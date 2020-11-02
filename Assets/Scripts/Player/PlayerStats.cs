@@ -6,7 +6,6 @@ public struct BaseStats
     public string baseStatName;
     public int defaultStat; //stat from the class
     public int levelUpStat;
-    //public int currentStat;
     public int additionalStat; //bonus stats
     public int finalStat
     {
@@ -49,10 +48,6 @@ public class PlayerStats
     [SerializeField] public float currentHealth = 100;
     [SerializeField] public float maxHealth = 100;
     Stats stats;
-
-    
-
-    
 
     //getter setter
     //Can update the Quarter Hearts with get and set 
