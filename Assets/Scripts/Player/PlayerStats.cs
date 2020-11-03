@@ -33,6 +33,7 @@ public class PlayerStats
         [SerializeField] public int level;
         [SerializeField] public float currentMana = 100;
         [SerializeField] public float maxMana = 100;
+        [SerializeField] public float regenMana = 100;
         [SerializeField] public float currentStamina = 100;
         [SerializeField] public float maxStamina = 100;
         [SerializeField] public float disableStaminaRegen;

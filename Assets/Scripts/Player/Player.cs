@@ -19,15 +19,23 @@ public class Player : MonoBehaviour
     private float xRotation = 0f;
     Camera camera;
 
+    #region Health
     private bool disableRegen = false;
     private float disableRegenTime;
     public float RegenCooldown = 5f;
+    #endregion
 
-    
+    #region Stamina
     public float disableStaminaRegenTime;
     public float staminaRegenCooldown = 1f;
     public float StaminaDegen = 30f;
+    #endregion
 
+    #region Mana
+    public float disableManaRegen;
+    public float manaRegenCooldown = 5f;
+    public float manaDegen = 30f;
+    #endregion
 
     /// <summary>
     /// To save the player customisation to load into game scene (2).
@@ -40,7 +48,7 @@ public class Player : MonoBehaviour
     public PlayerStats.Stats stat; //Stats class inside PlayerStats
     public PlayerStats playerStats; //PlayerStats reference
     //public Customisation customisation;
-    [SerializeField]public PlayerProfession profession;
+    [SerializeField] public PlayerProfession profession;
     public BaseStats[] defaultStat;
     public PlayerProfession Profession
     {
@@ -48,7 +56,7 @@ public class Player : MonoBehaviour
         {
             return profession;
         }
-            set
+        set
         {
             ChangeProfession(value);
         }
@@ -75,11 +83,11 @@ public class Player : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         camera = Camera.main;
-       // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
 
         //Customisation.instance.ApplyCustomisation(someRenderer)
     }
-
+    
     public void ChangeProfession(PlayerProfession cProfession)
     {
         profession = cProfession;
@@ -95,80 +103,6 @@ public class Player : MonoBehaviour
                 stat.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
             }
         }
-    }
-
-    private void Update()
-    {
-        #region Health Regen
-        if (!disableRegen)
-        {
-            playerStats.CurrentHealth += stat.regenHealth * Time.deltaTime;
-        }
-        else
-        {
-            if (Time.time > disableRegenTime + staminaRegenCooldown) //after 5 seconds start regeneration 
-            {
-                disableRegen = false;
-            }
-        }
-        #endregion
-        #region Stamina Regen
-        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
-        {
-            if(stat.currentStamina < stat.maxStamina)
-            {
-                stat.currentStamina += stat.regenStamina * Time.deltaTime;
-            }
-            else
-            {
-                stat.currentStamina = stat.maxStamina;
-            }
-        }
-        #endregion
-    }
-
-    public void LevelUp()
-    {
-        stat.baseStatPoints += 3;
-
-        for (int i = 0; i < stat.baseStats.Length; i++)
-        {
-            stat.baseStats[i].additionalStat += 1;
-        }
-    }    
-
-    //Function for dealing damage to the player
-    public void DealDamage(float damage)
-    {
-        playerStats.CurrentHealth -= damage;
-        disableRegen = true;
-        disableRegenTime = Time.time;
-    }
-
-    //Function for healing
-    public void Heal(float health)
-    {
-        playerStats.CurrentHealth += health;
-    }
-
-    private void OnGUI()
-    {
-        if(GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
-        {
-            LevelUp();
-        }
-
-        if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
-        {
-            DealDamage(25f);
-        }
-
-        //Display current health
-        //display current mana
-        //display current stamina
-
-        //  MouseLook();
-        // Move();
     }
     private void MouseLook()
     {
@@ -190,8 +124,97 @@ public class Player : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move((velocity + move) * speed * Time.deltaTime);
     }
-    #endregion
+    private void Update()
+    {
+        MouseLook();
+        Move();
+        
+        #region Health Regen
+        //Display current health
+        if (!disableRegen)
+        {
+            playerStats.CurrentHealth += stat.regenHealth * Time.deltaTime;
+        }
+        else
+        {
+            if (Time.time > disableRegenTime + staminaRegenCooldown) //after 5 seconds start regeneration 
+            {
+                disableRegen = false;
+            }
+        }
+        #endregion
+        #region Stamina Regen
+        //display current stamina
+        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
+        {
+            if (stat.currentStamina < stat.maxStamina)
+            {
+                stat.currentStamina += stat.regenStamina * Time.deltaTime;
+            }
+            else
+            {
+                stat.currentStamina = stat.maxStamina;
+            }
+        }
+        #endregion
+
+        #region Mana Regen
+        //display current mana
+        if (!disableRegen)
+        {
+            stat.currentMana += stat.regenMana * Time.deltaTime;
+        }
+        else
+        {
+            if (Time.time > disableRegenTime + manaRegenCooldown) //after 5 seconds start regeneration 
+            {
+                disableRegen = false;
+            }
+        }
+        #endregion
+    }
+
+    public void LevelUp()
+    {
+        stat.baseStatPoints += 3;
+
+        for (int i = 0; i < stat.baseStats.Length; i++)
+        {
+            stat.baseStats[i].additionalStat += 1;
+        }
+    }
+
+    //Function for dealing damage to the player
+    public void DealDamage(float damage)
+    {
+        playerStats.CurrentHealth -= damage;
+        disableRegen = true;
+        disableRegenTime = Time.time;
+    }
+
+    //Function for healing
+    public void Heal(float health)
+    {
+        playerStats.CurrentHealth += health;
+    }
 }
+
+    /*private void OnGUI()
+    {
+        if(GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
+        {
+            LevelUp();
+        }
+
+        if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
+        {
+            DealDamage(25f);
+        }
+    }
+
+#endregion
+}*/
+
 /* Commented out Save() and Load()
  //Functions Save and Load 
 
@@ -219,6 +242,7 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 */
+#endregion
 
 
 
