@@ -469,7 +469,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c6a7606da64561e4984c12c6cb9026ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -952,7 +952,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c6a7606da64561e4984c12c6cb9026ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1160,7 +1160,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119417844}
-  - component: {fileID: 119417845}
   m_Layer: 5
   m_Name: Heart Health
   m_TagString: Untagged
@@ -1190,28 +1189,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &119417845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119417843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c9849474f78ea740b83105e79b083d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartSlots:
-  - {fileID: 1251989908}
-  - {fileID: 1724733084}
-  - {fileID: 2077588656}
-  hearts:
-  - {fileID: 4432793351920879750, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
-  - {fileID: 5642012044021194823, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
-  - {fileID: 8124259339964715380, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
-  - {fileID: 7685371531485235544, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
-  - {fileID: 4160753575623616581, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
 --- !u!1 &138906122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,7 +2927,7 @@ Transform:
   m_GameObject: {fileID: 321028332}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 40, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1538580149}
   m_RootOrder: 0
@@ -6123,18 +6100,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f7a17becf53ac469c2b12506f0c204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 535793795}
-  speed: 12
-  gravity: -9.81
-  mouseSensitivity: 100
   RegenCooldown: 5
+  staminaFill: {fileID: 752133747}
+  staminaSlider: {fileID: 1108981617}
+  staminaG:
+    serializedVersion: 2
+    key0: {r: 0, g: 1, b: 0.004989147, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 65535
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   disableStaminaRegenTime: 0
   staminaRegenCooldown: 5
   StaminaDegen: 30
+  manaFill: {fileID: 1231358372}
+  manaSlider: {fileID: 614689387}
+  manaG:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.11240196, b: 1, a: 1}
+    key1: {r: 0, g: 0.11240196, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   disableManaRegen: 0
   manaRegenCooldown: 5
   manaDegen: 30
   customisationTextureIndex: 
+  controller: {fileID: 535793795}
+  speed: 12
+  gravity: -9.81
+  mouseSensitivity: 100
   stat:
     speed: 6
     crouchSpeed: 3
@@ -6154,10 +6193,10 @@ MonoBehaviour:
     baseStats: []
     baseStatPoints: 10
   playerStats:
-    currentHealth: 100
+    curHealth: 100
     maxHealth: 100
+    healthHearts: {fileID: 637735776}
     _currentHealth: 100
-    healthHearts: {fileID: 119417845}
   profession:
     ProfessionName: Profession
     AbilityName: Ability Name
@@ -6729,7 +6768,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637735768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c9849474f78ea740b83105e79b083d8, type: 3}
   m_Name: 
@@ -6744,6 +6783,9 @@ MonoBehaviour:
   - {fileID: 8124259339964715380, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
   - {fileID: 7685371531485235544, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
   - {fileID: 4160753575623616581, guid: 352825f1b098cb143ab7e9432de0c807, type: 3}
+  currentHealth: 12
+  maximumHealth: 0
+  healthPerSection: 0
 --- !u!1 &639289530
 GameObject:
   m_ObjectHideFlags: 0
@@ -7468,8 +7510,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_SizeDelta: {x: -0.000045776, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &752133747
 MonoBehaviour:
@@ -7540,7 +7582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.0000076293945, y: 0}
+  m_AnchoredPosition: {x: -0, y: 0.0000009536743}
   m_SizeDelta: {x: -0.000015259, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &758987901
@@ -8695,7 +8737,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810157323}
-  m_LocalRotation: {x: 0.28094715, y: 0.5309835, z: -0.19224124, w: 0.77599525}
+  m_LocalRotation: {x: 0.2809472, y: 0.5309834, z: -0.1922412, w: 0.77599525}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11891,9 +11933,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1673750977}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13574,7 +13616,7 @@ Transform:
   m_GameObject: {fileID: 1339377140}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 40, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 95501303}
   m_RootOrder: 0
@@ -15735,7 +15777,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c6a7606da64561e4984c12c6cb9026ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15805,7 +15847,7 @@ Transform:
   m_GameObject: {fileID: 1541124849}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 40, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 18140547}
   m_RootOrder: 0

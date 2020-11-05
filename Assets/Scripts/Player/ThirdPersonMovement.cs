@@ -44,6 +44,7 @@ public class ThirdPersonMovement : MonoBehaviour
             float movementSpeed = player.stat.speed;
             if (player.stat.currentStamina > 0 && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
+                player.SetStamina();
                 player.disableStaminaRegenTime = Time.time;
                 player.stat.currentStamina -= player.StaminaDegen * Time.deltaTime;
                 movementSpeed = player.stat.sprintSpeed;

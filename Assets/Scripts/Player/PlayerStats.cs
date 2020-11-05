@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 [System.Serializable]
 public struct BaseStats
@@ -46,10 +47,11 @@ public class PlayerStats
         public BaseStats[] baseStats;
         public int baseStatPoints = 13;
     }
-    [SerializeField] public float currentHealth = 100;
-    [SerializeField] public float maxHealth = 100;
+    
+    [SerializeField] private float curHealth = 12;
+    [SerializeField] private float maxHealth = 100;
     Stats stats;
-
+    public QuarterHearts healthHearts;
     //getter setter
     //Can update the Quarter Hearts with get and set 
     public float _currentHealth = 100; //_ represents field
@@ -67,11 +69,11 @@ public class PlayerStats
             //everytime variable changes give it the value
             if (healthHearts != null)
             {
-                healthHearts.UpdateHearts(value, maxHealth);
+                healthHearts.UpdateHearts(curHealth, maxHealth);
             }
         }
     }
-    public QuarterHearts healthHearts;
+    
 
     //Function for dealing damage to the player
     public void DealDamage(float damage)

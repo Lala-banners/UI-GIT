@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
@@ -11,6 +12,45 @@ using System;
 public class Player : MonoBehaviour
 {
     #region Variables
+    #region Health
+    [Header("Health")]
+    private bool disableRegen = false;
+    private float disableRegenTime;
+    public float RegenCooldown = 5f;
+    #endregion
+
+
+
+    #region Stamina
+    [Header("Stamina")]
+    public Image staminaFill; // Image to apply the colors to.
+    public Slider staminaSlider;
+    public Gradient staminaG;
+    public float disableStaminaRegenTime;
+    public float staminaRegenCooldown = 1f;
+    public float StaminaDegen = 30f;
+    #endregion
+
+ 
+    #region Mana
+    [Header("Mana")]
+    public Image manaFill;
+    public Slider manaSlider;
+    public Gradient manaG;
+    public float disableManaRegen;
+    public float manaRegenCooldown = 5f;
+    public float manaDegen = 30f;
+    #endregion
+
+    [Space]
+
+    /// <summary>
+    /// To save the player customisation to load into game scene (2).
+    /// </summary>
+    public int[] customisationTextureIndex;
+    #endregion
+
+    [Header("Other")]
     public CharacterController controller;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -19,49 +59,18 @@ public class Player : MonoBehaviour
     private float xRotation = 0f;
     Camera camera;
 
-    #region Health
-    private bool disableRegen = false;
-    private float disableRegenTime;
-    public float RegenCooldown = 5f;
-    #endregion
-
-    #region Stamina
-    public float disableStaminaRegenTime;
-    public float staminaRegenCooldown = 1f;
-    public float StaminaDegen = 30f;
-    #endregion
-
-    #region Mana
-    public float disableManaRegen;
-    public float manaRegenCooldown = 5f;
-    public float manaDegen = 30f;
-    #endregion
-
-    /// <summary>
-    /// To save the player customisation to load into game scene (2).
-    /// </summary>
-    public int[] customisationTextureIndex;
-
-    #endregion
-
     #region References to other scripts
     public PlayerStats.Stats stat; //Stats class inside PlayerStats
     public PlayerStats playerStats; //PlayerStats reference
-    //public Customisation customisation;
     [SerializeField] public PlayerProfession profession;
     public BaseStats[] defaultStat;
     public PlayerProfession Profession
     {
-        get
-        {
-            return profession;
-        }
-        set
-        {
-            ChangeProfession(value);
-        }
+        get { return profession; }
+        set { ChangeProfession(value); }
     }
     #endregion
+
     #region FUNctions
     public void Awake()
     {
@@ -83,27 +92,9 @@ public class Player : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         camera = Camera.main;
-        // Cursor.lockState = CursorLockMode.Locked;
-
-        //Customisation.instance.ApplyCustomisation(someRenderer)
-    }
-    
-    public void ChangeProfession(PlayerProfession cProfession)
-    {
-        profession = cProfession;
-        SetUpProfession();
     }
 
-    public void SetUpProfession()
-    {
-        for (int i = 0; i < stat.baseStats.Length; i++)
-        {
-            if (profession.defaultStats.Length < i) //check if i exists in profession
-            {
-                stat.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
-            }
-        }
-    }
+
     private void MouseLook()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -126,11 +117,11 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+
         MouseLook();
         Move();
         
         #region Health Regen
-        //Display current health
         if (!disableRegen)
         {
             playerStats.CurrentHealth += stat.regenHealth * Time.deltaTime;
@@ -143,6 +134,7 @@ public class Player : MonoBehaviour
             }
         }
         #endregion
+
         #region Stamina Regen
         //display current stamina
         if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
@@ -150,6 +142,7 @@ public class Player : MonoBehaviour
             if (stat.currentStamina < stat.maxStamina)
             {
                 stat.currentStamina += stat.regenStamina * Time.deltaTime;
+                SetStamina();
             }
             else
             {
@@ -163,6 +156,7 @@ public class Player : MonoBehaviour
         if (!disableRegen)
         {
             stat.currentMana += stat.regenMana * Time.deltaTime;
+            SetMana();
         }
         else
         {
@@ -174,6 +168,37 @@ public class Player : MonoBehaviour
         #endregion
     }
 
+    #region Display Mana Bar
+    public void SetMana()
+    {
+        manaSlider.maxValue = stat.maxMana;
+        manaSlider.value = stat.currentMana;
+        manaFill.color = manaG.Evaluate(manaSlider.normalizedValue);
+    }
+    #endregion
+
+    public void UseMana()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SetMana();
+        }
+        else
+        {
+            print("Did not use mana");
+        }
+    }
+
+    #region Display Stamina
+    public void SetStamina()
+    {
+        staminaSlider.maxValue = stat.maxStamina;
+        staminaSlider.value = stat.currentStamina;
+        staminaFill.color = staminaG.Evaluate(staminaSlider.normalizedValue);
+        
+    }
+
+    #endregion
     public void LevelUp()
     {
         stat.baseStatPoints += 3;
@@ -197,20 +222,43 @@ public class Player : MonoBehaviour
     {
         playerStats.CurrentHealth += health;
     }
-}
+    
 
-    /*private void OnGUI()
+
+    #region Customisation
+    public void ChangeProfession(PlayerProfession cProfession)
     {
-        if(GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
-        {
-            LevelUp();
-        }
+        profession = cProfession;
+        SetUpProfession();
+    }
 
-        if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
+    public void SetUpProfession()
+    {
+        for (int i = 0; i < stat.baseStats.Length; i++)
         {
-            DealDamage(25f);
+            if (profession.defaultStats.Length < i) //check if i exists in profession
+            {
+                stat.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
+            }
         }
     }
+    #endregion
+
+}
+
+
+/*private void OnGUI()
+{
+    if(GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
+    {
+        LevelUp();
+    }
+
+    if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
+    {
+        DealDamage(25f);
+    }
+}
 
 #endregion
 }*/
@@ -243,8 +291,3 @@ public class Player : MonoBehaviour
     }
 */
 #endregion
-
-
-
-
-
