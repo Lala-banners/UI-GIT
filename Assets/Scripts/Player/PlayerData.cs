@@ -11,7 +11,7 @@ public class PlayerData
     //Constructor is a method referencing the class inside the method
     public PlayerData(Player player)
     {
-        playerStats = player.stat;
+        playerStats = player.stats;
         profession = player.Profession;
         customisationTextureIndex = player.customisationTextureIndex;
 

@@ -41,17 +41,18 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            float movementSpeed = player.stat.speed;
-            if (player.stat.currentStamina > 0 && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            float movementSpeed = player.stats.speed;
+            if (player.stats.currentStamina > 0 && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
+                player.stats.currentStamina -= player.staminaDegen * Time.deltaTime;
                 player.SetStamina();
                 player.disableStaminaRegenTime = Time.time;
-                player.stat.currentStamina -= player.StaminaDegen * Time.deltaTime;
-                movementSpeed = player.stat.sprintSpeed;
+                movementSpeed = player.stats.sprintSpeed;
+                
             }
             else if(Input.GetKey(KeyCode.C))
             {
-                movementSpeed = player.stat.crouchSpeed;
+                movementSpeed = player.stats.crouchSpeed;
             }
 
             controller.Move(moveDir * movementSpeed * Time.deltaTime);
@@ -65,7 +66,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
-            playerVelocity.y += Mathf.Sqrt(player.stat.jumpHeight * -3.0f * gravity);
+            playerVelocity.y += Mathf.Sqrt(player.stats.jumpHeight * -3.0f * gravity);
         }
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);

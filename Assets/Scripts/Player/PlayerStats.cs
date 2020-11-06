@@ -25,33 +25,44 @@ public class PlayerStats
     {
         [Header("Player Movement")]
         [SerializeField] public float speed = 6f;
-        [SerializeField] public float crouchSpeed = 3;
-        [SerializeField] public float sprintSpeed = 12;
+        [SerializeField] public float crouchSpeed = 3f;
+        [SerializeField] public float sprintSpeed = 12f;
         [SerializeField] public float movementSpeed;
         [SerializeField] public float jumpHeight = 1.0f;
 
-        [Header("Current Stats")]
-        [SerializeField] public int level;
-        [SerializeField] public float currentMana = 100;
-        [SerializeField] public float maxMana = 100;
-        [SerializeField] public float regenMana = 100;
-        [SerializeField] public float currentStamina = 100;
-        [SerializeField] public float maxStamina = 100;
-        [SerializeField] public float disableStaminaRegen;
-        [SerializeField] public float regenStamina = 30f;
-        [SerializeField] public float regenHealth;
+        [Header("Mana Stats")]
+        [SerializeField] public float currentMana = 100f;
+        [SerializeField] public float maxMana = 100f;
+        [SerializeField] public float regenMana = 20f;
 
+        [Header("Stamina Stats")]
+        [Tooltip("Amount of Stamina")]
+        [SerializeField] public float currentStamina = 100f;
+        [Tooltip("Maximum amount of Stamina")]
+        [SerializeField] public float maxStamina = 100f;
+        [Tooltip("Amount of Stamina that will be regenerated")]
+        [SerializeField] public float regenStamina = 30f;
+
+        [Header("General Stats")]
+        [SerializeField] public int level;
         [SerializeField] public float defaultStat;
+
+        [Tooltip("Regen Health")]
+        [SerializeField] public float regenHealth = 5f;
 
         [Header("Base Stats")]
         public BaseStats[] baseStats;
         public int baseStatPoints = 13;
     }
-    
-    [SerializeField] private float curHealth = 12;
-    [SerializeField] private float maxHealth = 100;
+
+    [Header("Health")]
+    private bool disableRegen = false;
+    private float disableRegenTime;
+    public float RegenCooldown = 5f;
+
     Stats stats;
     public QuarterHearts healthHearts;
+
     //getter setter
     //Can update the Quarter Hearts with get and set 
     public float _currentHealth = 100; //_ represents field
@@ -64,21 +75,22 @@ public class PlayerStats
 
         set
         {
-            _currentHealth = Mathf.Clamp(value, 0, maxHealth);
+            _currentHealth = Mathf.Clamp(value, 0, healthHearts.maximumHealth);
 
             //everytime variable changes give it the value
             if (healthHearts != null)
             {
-                healthHearts.UpdateHearts(curHealth, maxHealth);
+                healthHearts.UpdateHearts(healthHearts.currentHealth, healthHearts.maximumHealth);
             }
         }
     }
-    
 
     //Function for dealing damage to the player
     public void DealDamage(float damage)
     {
-        CurrentHealth -= damage;
+        CurrentHealth = CurrentHealth -= damage;
+        disableRegen = true;
+        disableRegenTime = Time.time;
     }
 
     //Function for healing
@@ -91,8 +103,6 @@ public class PlayerStats
     public bool SetStats(int statIndex, int amount)
     {
         stats.baseStats[statIndex].additionalStat += amount;
-
-        //return true;
 
         //increasing
         if (amount > 0 && stats.baseStatPoints - amount < 0) //we cant add points if there are none left
@@ -110,6 +120,8 @@ public class PlayerStats
 
         return true;
     }
+
+
     
 }
 

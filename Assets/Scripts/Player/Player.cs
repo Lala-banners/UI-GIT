@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System;
-
 
 /// <summary>
 /// Code relating to the player
@@ -12,38 +11,6 @@ using System;
 public class Player : MonoBehaviour
 {
     #region Variables
-    #region Health
-    [Header("Health")]
-    private bool disableRegen = false;
-    private float disableRegenTime;
-    public float RegenCooldown = 5f;
-    #endregion
-
-
-
-    #region Stamina
-    [Header("Stamina")]
-    public Image staminaFill; // Image to apply the colors to.
-    public Slider staminaSlider;
-    public Gradient staminaG;
-    public float disableStaminaRegenTime;
-    public float staminaRegenCooldown = 1f;
-    public float StaminaDegen = 30f;
-    #endregion
-
- 
-    #region Mana
-    [Header("Mana")]
-    public Image manaFill;
-    public Slider manaSlider;
-    public Gradient manaG;
-    public float disableManaRegen;
-    public float manaRegenCooldown = 5f;
-    public float manaDegen = 30f;
-    #endregion
-
-    [Space]
-
     /// <summary>
     /// To save the player customisation to load into game scene (2).
     /// </summary>
@@ -59,8 +26,31 @@ public class Player : MonoBehaviour
     private float xRotation = 0f;
     Camera camera;
 
+    [Header("Stamina Stats")]
+    [Tooltip("Amount of Stamina that will be taken")]
+    [SerializeField] public float staminaDegen = 10f;
+    [Tooltip("Amount of time stamina regeneration is impossible")]
+    [SerializeField] public float disableStaminaRegenTime = 10f;
+    [Tooltip("After there is no more stamina, wait until regen time starts")]
+    [SerializeField] public float staminaRegenCooldown = 1f;
+
+    [Header("Mana Stats")]
+    [SerializeField] public float disableManaRegenTime;
+    [SerializeField] public float manaRegenCooldown = 5f;
+    [SerializeField] public float manaDegen = 15f;
+
+    [Header("Mana Bar")]
+    public Image manaFill;
+    public Slider manaSlider;
+    public Gradient manaGradient;
+
+    [Header("Stamina Bar")]
+    public Image staminaFill; // Image to apply the colors to.
+    public Slider staminaSlider;
+    public Gradient staminaGradient;
+
     #region References to other scripts
-    public PlayerStats.Stats stat; //Stats class inside PlayerStats
+    public PlayerStats.Stats stats; //Stats class inside PlayerStats
     public PlayerStats playerStats; //PlayerStats reference
     [SerializeField] public PlayerProfession profession;
     public BaseStats[] defaultStat;
@@ -71,7 +61,14 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region FUNctions
+    public void SetStamina()
+    {
+        staminaSlider.maxValue = stats.maxStamina;
+        staminaSlider.value = stats.currentStamina;
+        staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
+    }
+    
+
     public void Awake()
     {
         //If not Customisation scene then load player data
@@ -81,7 +78,7 @@ public class Player : MonoBehaviour
             PlayerData loadedPlayer = PlayerBinarySave.LoadPlayerData();
             if (loadedPlayer != null)
             {
-                stat = loadedPlayer.playerStats;
+                stats = loadedPlayer.playerStats;
                 profession = loadedPlayer.profession;
                 customisationTextureIndex = loadedPlayer.customisationTextureIndex;
             }
@@ -93,6 +90,86 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
         camera = Camera.main;
     }
+
+
+    private void Update()
+    {
+        MouseLook();
+        Move();
+
+        //Stamina Regen
+        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
+        {
+            //If current stamina is less than max stamina (100)
+            if (stats.currentStamina < stats.maxStamina)
+            {
+                SetStamina();
+                stats.currentStamina += staminaDegen * Time.deltaTime;
+            }
+            else
+            {
+                stats.currentStamina = stats.maxStamina;
+            }
+        }
+
+        UseMana(25f); //spend mana when press M
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            playerStats.DealDamage(10f); //Deal 10 damage to player on collision with "enemy" cube
+            
+            print("Player Hurt!");
+        }
+
+        //Mana Regen
+        if (Time.time > disableManaRegenTime + manaRegenCooldown)
+        {
+            if (stats.currentMana < stats.maxMana)
+            {
+                SetMana();
+                stats.currentMana += manaDegen * Time.deltaTime;
+                print("Regenerating Mana");
+            }
+            else
+            {
+                stats.currentMana = stats.maxMana;
+            }
+        }
+}
+
+    //Set Mana Slider
+    public void SetMana()
+    {
+        manaSlider.maxValue = stats.maxMana;
+        manaSlider.value = stats.currentMana;
+        manaFill.color = manaGradient.Evaluate(manaSlider.normalizedValue);
+    }
+
+    public void UseMana(float spentMana) //Function to call Mana degen and regen
+    {
+        //If current mana is greater than/equal to 0 and press M
+        if (stats.currentMana >= 0 && (Input.GetKey(KeyCode.M)))
+        {
+            //Call Mana Slider
+            SetMana();
+            disableManaRegenTime = Time.time;
+            stats.currentMana -= manaDegen * Time.deltaTime;
+
+            print("Spent Mana");
+        }
+    }
+
+    //if (Time.time > disableRegenTime + RegenCooldown)
+    //{
+    //if (playerStats.healthHearts.currentHealth < playerStats.healthHearts.maximumHealth)
+    //{
+    //playerStats.healthHearts.currentHealth += stats.regenHealth * Time.deltaTime;
+    //}
+    //else
+    //{
+    //playerStats.healthHearts.currentHealth = playerStats.healthHearts.maximumHealth;
+    // }
+    // }
 
 
     private void MouseLook()
@@ -115,117 +192,30 @@ public class Player : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move((velocity + move) * speed * Time.deltaTime);
     }
-    private void Update()
+
+    private void OnGUI()
     {
+        if (GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
+        {
+            LevelUp();
+        }
 
-        MouseLook();
-        Move();
-        
-        #region Health Regen
-        if (!disableRegen)
+        if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
         {
-            playerStats.CurrentHealth += stat.regenHealth * Time.deltaTime;
-        }
-        else
-        {
-            if (Time.time > disableRegenTime + staminaRegenCooldown) //after 5 seconds start regeneration 
-            {
-                disableRegen = false;
-            }
-        }
-        #endregion
 
-        #region Stamina Regen
-        //display current stamina
-        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
-        {
-            if (stat.currentStamina < stat.maxStamina)
-            {
-                stat.currentStamina += stat.regenStamina * Time.deltaTime;
-                SetStamina();
-            }
-            else
-            {
-                stat.currentStamina = stat.maxStamina;
-            }
-        }
-        #endregion
-
-        #region Mana Regen
-        //display current mana
-        if (!disableRegen)
-        {
-            stat.currentMana += stat.regenMana * Time.deltaTime;
-            SetMana();
-        }
-        else
-        {
-            if (Time.time > disableRegenTime + manaRegenCooldown) //after 5 seconds start regeneration 
-            {
-                disableRegen = false;
-            }
-        }
-        #endregion
-    }
-
-    #region Display Mana Bar
-    public void SetMana()
-    {
-        manaSlider.maxValue = stat.maxMana;
-        manaSlider.value = stat.currentMana;
-        manaFill.color = manaG.Evaluate(manaSlider.normalizedValue);
-    }
-    #endregion
-
-    public void UseMana()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SetMana();
-        }
-        else
-        {
-            print("Did not use mana");
+            playerStats.DealDamage(25f);
         }
     }
-
-    #region Display Stamina
-    public void SetStamina()
-    {
-        staminaSlider.maxValue = stat.maxStamina;
-        staminaSlider.value = stat.currentStamina;
-        staminaFill.color = staminaG.Evaluate(staminaSlider.normalizedValue);
-        
-    }
-
-    #endregion
     public void LevelUp()
     {
-        stat.baseStatPoints += 3;
+        stats.baseStatPoints += 3;
 
-        for (int i = 0; i < stat.baseStats.Length; i++)
+        for (int i = 0; i < stats.baseStats.Length; i++)
         {
-            stat.baseStats[i].additionalStat += 1;
+            stats.baseStats[i].additionalStat += 1;
         }
     }
 
-    //Function for dealing damage to the player
-    public void DealDamage(float damage)
-    {
-        playerStats.CurrentHealth -= damage;
-        disableRegen = true;
-        disableRegenTime = Time.time;
-    }
-
-    //Function for healing
-    public void Heal(float health)
-    {
-        playerStats.CurrentHealth += health;
-    }
-    
-
-
-    #region Customisation
     public void ChangeProfession(PlayerProfession cProfession)
     {
         profession = cProfession;
@@ -234,60 +224,12 @@ public class Player : MonoBehaviour
 
     public void SetUpProfession()
     {
-        for (int i = 0; i < stat.baseStats.Length; i++)
+        for (int i = 0; i < stats.baseStats.Length; i++)
         {
             if (profession.defaultStats.Length < i) //check if i exists in profession
             {
-                stat.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
+                stats.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
             }
         }
     }
-    #endregion
-
 }
-
-
-/*private void OnGUI()
-{
-    if(GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
-    {
-        LevelUp();
-    }
-
-    if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
-    {
-        DealDamage(25f);
-    }
-}
-
-#endregion
-}*/
-
-/* Commented out Save() and Load()
- //Functions Save and Load 
-
-    player stats
-    public int level = 1;
-    public float health = 55;
-
-    public void Save()
-    {
-        SaveSystem.SavePlayer(this);
-    }
-
-
-    public void Load()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        level = data.level;
-        health = data.health;
-     
-        Vector3 pos = new Vector3(data.position[0],
-                data.position[1],
-                data.position[2]);
-
-        transform.position = pos;
-    }
-*/
-#endregion
