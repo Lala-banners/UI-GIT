@@ -18,13 +18,13 @@ public class Player : MonoBehaviour
     #endregion
 
     [Header("Other")]
-    public CharacterController controller;
+    //public CharacterController controller;
     public float speed = 12f;
     public float gravity = -9.81f;
-    private Vector3 velocity;
-    public float mouseSensitivity = 100f;
-    private float xRotation = 0f;
-    Camera camera;
+    //private Vector3 velocity;
+    //public float mouseSensitivity = 100f;
+    //private float xRotation = 0f;
+    //Camera camera;
 
     [Header("Stamina Stats")]
     [Tooltip("Amount of Stamina that will be taken")]
@@ -87,15 +87,17 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        camera = Camera.main;
+        //controller = GetComponent<CharacterController>();
+        //camera = Camera.main;
     }
 
 
     private void Update()
     {
-        MouseLook();
-        Move();
+        //MouseLook();
+        //Move();
+
+        UseMana(25f); //spend mana when press M
 
         //Stamina Regen
         if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
@@ -112,15 +114,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        UseMana(25f); //spend mana when press M
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            playerStats.DealDamage(10f); //Deal 10 damage to player on collision with "enemy" cube
-            
-            print("Player Hurt!");
-        }
-
         //Mana Regen
         if (Time.time > disableManaRegenTime + manaRegenCooldown)
         {
@@ -135,7 +128,18 @@ public class Player : MonoBehaviour
                 stats.currentMana = stats.maxMana;
             }
         }
-}
+
+    }
+
+    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            playerStats.DealDamage(10f);
+            Debug.Log(collision);
+        }
+    }
 
     //Set Mana Slider
     public void SetMana()
@@ -159,20 +163,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //if (Time.time > disableRegenTime + RegenCooldown)
-    //{
-    //if (playerStats.healthHearts.currentHealth < playerStats.healthHearts.maximumHealth)
-    //{
-    //playerStats.healthHearts.currentHealth += stats.regenHealth * Time.deltaTime;
-    //}
-    //else
-    //{
-    //playerStats.healthHearts.currentHealth = playerStats.healthHearts.maximumHealth;
-    // }
-    // }
-
-
-    private void MouseLook()
+    /*private void MouseLook()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -191,7 +182,7 @@ public class Player : MonoBehaviour
         Vector3 move = (transform.right * x) + (transform.forward * z);
         velocity.y += gravity * Time.deltaTime;
         controller.Move((velocity + move) * speed * Time.deltaTime);
-    }
+    }*/
 
     private void OnGUI()
     {
