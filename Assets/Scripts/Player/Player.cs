@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
         get { return profession; }
         set { ChangeProfession(value); }
     }
+    //public GameObject menu;
     #endregion
 
     public void SetStamina()
@@ -67,7 +68,21 @@ public class Player : MonoBehaviour
         staminaSlider.value = stats.currentStamina;
         staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
     }
-    
+
+
+    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
+    private void OnCollisionEnter(Collision playerCol)
+    {
+        //If player collides with object tagged as Enemy
+        if (playerCol.gameObject.Equals("Player"))
+        {
+            print("Player is hit");
+            //Player gets dealt damage
+            playerStats.DealDamage(10f);
+            playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth); //Updates the heart sprites
+            //Debug.Log("Player is losing health");
+        }
+    }
 
     public void Awake()
     {
@@ -94,6 +109,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        /*if (Input.GetKeyDown(KeyCode.H)) TEST FOR HEALTH DECREASE IT WORKS
+        {
+            playerStats.DealDamage(10f);
+            playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth);
+            Debug.Log("Player is losing health");
+        }
+        */
         //MouseLook();
         //Move();
 
@@ -127,17 +149,6 @@ public class Player : MonoBehaviour
             {
                 stats.currentMana = stats.maxMana;
             }
-        }
-
-    }
-
-    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-            playerStats.DealDamage(10f);
-            Debug.Log(collision);
         }
     }
 
@@ -191,11 +202,10 @@ public class Player : MonoBehaviour
             LevelUp();
         }
 
-        if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage"))
-        {
-
-            playerStats.DealDamage(25f);
-        }
+        //if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage")) 
+        //{
+            //playerStats.DealDamage(25f);
+        //}
     }
     public void LevelUp()
     {

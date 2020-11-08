@@ -6,8 +6,7 @@ public class QuarterHearts : MonoBehaviour
     [SerializeField] private Image[] heartSlots;
     [SerializeField] private Sprite[] hearts;
 
-    [Tooltip("Current Health")]
-    public float currentHealth = 100;
+    public float currentHealth;
 
     [Tooltip("Maximum Health")]
     public float maximumHealth = 100;

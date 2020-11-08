@@ -91,6 +91,7 @@ public class PlayerStats
         CurrentHealth = CurrentHealth -= damage;
         disableRegen = true;
         disableRegenTime = Time.time;
+        healthHearts.UpdateHearts(healthHearts.currentHealth, healthHearts.maximumHealth); //update the hearts
     }
 
     //Function for healing
