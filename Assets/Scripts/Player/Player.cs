@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         get { return profession; }
         set { ChangeProfession(value); }
     }
-    //public GameObject menu;
+    public GameObject deathMenu;
     #endregion
 
     public void SetStamina()
@@ -109,13 +109,22 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.H)) TEST FOR HEALTH DECREASE IT WORKS
+        if (Input.GetKeyDown(KeyCode.H)) //TEST FOR HEALTH DECREASE IT WORKS
         {
             playerStats.DealDamage(10f);
             playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth);
             Debug.Log("Player is losing health");
+
+            if (playerStats.CurrentHealth == 0) 
+            {
+                deathMenu.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                print("You are dead");
+            }
+            
         }
-        */
+        
         //MouseLook();
         //Move();
 
@@ -197,10 +206,10 @@ public class Player : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
-        {
-            LevelUp();
-        }
+        //if (GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
+        //{
+          //  LevelUp();
+        //}
 
         //if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage")) 
         //{

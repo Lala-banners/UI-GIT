@@ -31,6 +31,7 @@ public class Customisation : MonoBehaviour
     public Renderer characterRenderer;
 
 
+
     #endregion
 
     #region FUNCTIONS
@@ -85,8 +86,13 @@ public class Customisation : MonoBehaviour
         {
             SetTexture(part, 0);
         }
-
     }
+
+    private void Update()
+    {
+        CustomiseSkin();
+    }
+
     public void SceneChanger(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
@@ -170,7 +176,37 @@ public class Customisation : MonoBehaviour
         player.customisationTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
         PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
     }
-}
+
+    public void SaveAndPlay() //For save and play button
+    {
+        SaveCharacter();
+        SceneManager.LoadScene(1); //load game scene
+    }
+
+    public void CustomiseSkin() //for customising skin
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        int i = 0;
+        foreach (CustomiseParts Skin in Enum.GetValues(typeof(CustomiseParts)))
+        {
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                //Setting direction to right
+                SetTexture(names.ToString(), -1);
+            }
+
+            //GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names.ToString());
+
+            // if (GUI.Button(new Rect(90, currentHeight + i * 30, 20, 20), ">"))
+            //{
+            //Setting direction to left
+            //  SetTexture(names.ToString(), 1);
+            //}
+
+            i++;
+        }
+    }
+  
 #region Commented out OnGUI
 /*
 PlayerPrefs.SetInt("Skin Index", currentPartsTextureIndex[0]);
@@ -291,3 +327,4 @@ foreach (CustomiseParts names in Enum.GetValues(typeof(CustomiseParts)))
 }*/
 #endregion
 #endregion
+}
