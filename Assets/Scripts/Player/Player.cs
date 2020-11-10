@@ -19,22 +19,25 @@ public class Player : MonoBehaviour
 
     [Header("Other")]
     //public CharacterController controller;
-    public float speed = 12f;
-    public float gravity = -9.81f;
     //private Vector3 velocity;
     //public float mouseSensitivity = 100f;
     //private float xRotation = 0f;
     //Camera camera;
+    public float speed = 12f;
+    public float gravity = -9.81f;
+    
 
-    [Header("Stamina Stats")]
+    [Header("Stamina Regen/Degen Stats")]
     [Tooltip("Amount of Stamina that will be taken")]
     [SerializeField] public float staminaDegen = 10f;
+
     [Tooltip("Amount of time stamina regeneration is impossible")]
     [SerializeField] public float disableStaminaRegenTime = 10f;
+
     [Tooltip("After there is no more stamina, wait until regen time starts")]
     [SerializeField] public float staminaRegenCooldown = 1f;
 
-    [Header("Mana Stats")]
+    [Header("Mana Regen/Degen Stats")]
     [SerializeField] public float disableManaRegenTime;
     [SerializeField] public float manaRegenCooldown = 5f;
     [SerializeField] public float manaDegen = 15f;
@@ -61,7 +64,7 @@ public class Player : MonoBehaviour
     }
     public GameObject deathMenu;
     #endregion
-
+     
     public void SetStamina()
     {
         staminaSlider.maxValue = stats.maxStamina;

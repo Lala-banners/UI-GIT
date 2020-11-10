@@ -84,13 +84,14 @@ public class Customisation : MonoBehaviour
         //["Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour"]
         foreach (string part in Enum.GetNames(typeof(CustomiseParts))) //Loop through array of body parts
         {
-            SetTexture(part, 0);
+            SetTexture(part, true);
         }
     }
 
     private void Update()
     {
-        CustomiseSkin();
+        //OnClickRandomize();
+        //ChangeSkinColour(true);
     }
 
     public void SceneChanger(int sceneIndex)
@@ -114,7 +115,12 @@ public class Customisation : MonoBehaviour
     }
 
     //Function to set a texture 
-    void SetTexture(string type, int direction)
+    /// <summary>
+    /// Sets the texture based on the type we ask for, and the direction we are moving
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="moveRight">If set to true, use the next texture for this item, if false, the previous</param>
+    void SetTexture(string type, bool moveRight)
     {
         int partIndex = 0;
 
@@ -153,7 +159,16 @@ public class Customisation : MonoBehaviour
 
         //Getting current texture, increase number by 1 and storing that number (moving to next texture)
         int currentTexture = currentPartsTextureIndex[partIndex];
-        currentTexture += direction; //Move into direction
+        if(moveRight)
+        {
+            // move to the right
+            currentTexture++;
+        }
+        else
+        {
+            // move to the left
+            currentTexture--;
+        }
 
         if (currentTexture < 0)
         {
@@ -183,7 +198,7 @@ public class Customisation : MonoBehaviour
         SceneManager.LoadScene(1); //load game scene
     }
 
-    public void CustomiseSkin() //for customising skin
+    /*public void CustomiseSkin() //for customising skin
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         int i = 0;
@@ -192,7 +207,7 @@ public class Customisation : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 //Setting direction to right
-                SetTexture(names.ToString(), -1);
+                SetTexture(names.ToString(), false);
             }
 
             //GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names.ToString());
@@ -205,7 +220,75 @@ public class Customisation : MonoBehaviour
 
             i++;
         }
+    }*/
+
+
+    public void ChangeSkinColour(bool increase)
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        SetTexture(names[0].ToString(), increase);
+        SaveCharacter();
     }
+
+    public void ChangeHairColour(bool increase)
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        SetTexture(names[1].ToString(), increase);
+        SaveCharacter();
+    }
+
+    public void ChangeMouth(bool increase)
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        SetTexture(names[2].ToString(), increase);
+        SaveCharacter();
+    }
+
+    public void ChangeEyeColour(bool increase)
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        SetTexture(names[3].ToString(), increase);
+        SaveCharacter();
+    }
+
+    public void ChangeClothesColour(bool increase)
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        SetTexture(names[4].ToString(), increase);
+        SaveCharacter();
+    }
+
+    public void ChangeArmourColour(bool increase)
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        SetTexture(names[5].ToString(), increase);
+        SaveCharacter();
+    }
+
+    public void OnClickRandomize()
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        //SetTexture(names[0], UnityEngine.Random.Range(-5, 5));
+        for(int i = 0; i < names.Length; i++)
+        {
+            // Get this parts material
+            Material mat = characterRenderer.materials[i];
+
+            // Get this parts textures
+            List<Texture2D> partTextures = partsTexture[i];
+
+            mat.mainTexture = partTextures[UnityEngine.Random.Range(0, partTextures.Count)];
+        }
+    }
+
+    public void ChooseProfession()
+    {
+        //player.Profession = profession;
+        //player.Profession.AbilityDescription;
+        //player.Profession.AbilityName;
+    }
+
+    //public void SetBaseStats() {}
   
 #region Commented out OnGUI
 /*

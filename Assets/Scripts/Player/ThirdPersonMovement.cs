@@ -17,6 +17,7 @@ public class ThirdPersonMovement : MonoBehaviour
     float turnSmoothVelocity;
     [SerializeField] private Vector3 playerVelocity;
     private bool isGrounded;
+
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();

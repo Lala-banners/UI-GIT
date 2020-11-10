@@ -38,8 +38,10 @@ public class PlayerStats
         [Header("Stamina Stats")]
         [Tooltip("Amount of Stamina")]
         [SerializeField] public float currentStamina = 100f;
+
         [Tooltip("Maximum amount of Stamina")]
         [SerializeField] public float maxStamina = 100f;
+
         [Tooltip("Amount of Stamina that will be regenerated")]
         [SerializeField] public float regenStamina = 30f;
 
