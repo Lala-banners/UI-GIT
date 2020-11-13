@@ -64,14 +64,13 @@ public class Player : MonoBehaviour
     }
     public GameObject deathMenu;
     #endregion
-     
+
     public void SetStamina()
     {
         staminaSlider.maxValue = stats.maxStamina;
         staminaSlider.value = stats.currentStamina;
         staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
     }
-
 
     // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
     private void OnCollisionEnter(Collision playerCol)
@@ -112,6 +111,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Interact();
+
         if (Input.GetKeyDown(KeyCode.H)) //TEST FOR HEALTH DECREASE IT WORKS
         {
             playerStats.DealDamage(10f);
@@ -160,6 +161,25 @@ public class Player : MonoBehaviour
             else
             {
                 stats.currentMana = stats.maxMana;
+            }
+        }
+    }
+
+    public void Interact()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) //Keybinding code here
+        {
+            Ray ray; //Creates line from middle of the screen to infinity 
+            RaycastHit hitInfo; //Get back info about what we hit
+            ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+
+            //If Ray hits something
+            if(Physics.Raycast(ray, out hitInfo, 5f))
+            {
+                if(hitInfo.collider.TryGetComponent<NPC>(out NPC npc))
+                {
+                    //npc.
+                }
             }
         }
     }

@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     private string sortType = "";
     #endregion
 
+    #region OnGUI
     /*private void Display()
     {
         if (sortType == "")
@@ -50,9 +51,11 @@ public class Inventory : MonoBehaviour
             }
         }
     }*/
+    #endregion
 
     void UseItem()
     {
+        #region OnGUI
         /*GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
                             2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
 
@@ -68,6 +71,8 @@ public class Inventory : MonoBehaviour
                          "\nValue: " + selectedItem.Value +
                          "\nAmount: " + selectedItem.Amount);
         */
+        #endregion
+
         //Style
         switch (selectedItem.Type)
         {
@@ -93,8 +98,7 @@ public class Inventory : MonoBehaviour
                 break;
         }
     }
-}
-
+    #region OnGUI
     /*private void OnGUI()
     {
         scr.x = Screen.width / 16;
@@ -120,5 +124,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    
-}*/
+
+    }*/
+    #endregion
+}
