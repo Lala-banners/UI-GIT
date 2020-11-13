@@ -55,9 +55,9 @@ public class Player : MonoBehaviour
     #region References to other scripts
     public PlayerStats.Stats stats; //Stats class inside PlayerStats
     public PlayerStats playerStats; //PlayerStats reference
-    [SerializeField] public PlayerProfession profession;
+    [SerializeField] public ProfessionInfo profession;
     public BaseStats[] defaultStat;
-    public PlayerProfession Profession
+    public ProfessionInfo Profession
     {
         get { return profession; }
         set { ChangeProfession(value); }
@@ -173,14 +173,27 @@ public class Player : MonoBehaviour
             RaycastHit hitInfo; //Get back info about what we hit
             ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
+            //THIS IS HOW TO MAKE A MASK
+            //Method of finding layer with name
+            //Get the layer id
+            int layerMask = LayerMask.NameToLayer("Interactable"); 
+
+            //Moving binary 1 over to the left, method 1 if dont want to search for the name of layer
+            //Actually turning it into a layer and not a value
+            layerMask = 1 << layerMask;
+
             //If Ray hits something
-            if(Physics.Raycast(ray, out hitInfo, 5f))
+            if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
             {
                 if(hitInfo.collider.TryGetComponent<NPC>(out NPC npc))
                 {
-                    //npc.
+                    npc.Interact(); //Override NPC because otherwise would run wrong method
                 }
             }
+
+            //Pick up items here from inventory 
+            //If raycast hit an item from the ground, then pick up item off the ground. Create new class for ItemOnGround()
+            //In Item on ground class make reference to item
         }
     }
 
@@ -239,6 +252,7 @@ public class Player : MonoBehaviour
             //playerStats.DealDamage(25f);
         //}
     }
+
     public void LevelUp()
     {
         stats.baseStatPoints += 3;
@@ -249,7 +263,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ChangeProfession(PlayerProfession cProfession)
+    public void ChangeProfession(ProfessionInfo cProfession)
     {
         profession = cProfession;
         SetUpProfession();

@@ -19,7 +19,7 @@ public enum GoalType
 }
 
 [System.Serializable]
-public class QuestGoal 
+public abstract class QuestGoal : MonoBehaviour
 {
     public QuestState questState;
 
@@ -27,14 +27,12 @@ public class QuestGoal
 
     //public Inventory inv;
 
-    //Requirements for Gather goal type
-    public int itemId;
-    public int requiredAmount;
-    public int currentAmount;
+    public abstract bool isCompleted();
 
-    public void ItemCollected(int ID)
+
+    /*public void ItemCollected(string name)
     {
-        if(goalType == GoalType.Gather && ID == itemId)
+        if(goalType == GoalType.Gather && itemName == name)
         {
             currentAmount++;
 
@@ -44,5 +42,5 @@ public class QuestGoal
                 Debug.Log("Quest Complete");
             }
         }
-    }
+    }*/
 }

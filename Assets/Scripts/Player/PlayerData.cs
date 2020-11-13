@@ -4,7 +4,7 @@
 public class PlayerData
 {
     public PlayerStats.Stats playerStats;
-    public PlayerProfession profession;
+    public ProfessionInfo profession;
     public int[] customisationTextureIndex;
 
     //This will run when we create new player data (class, name, variable will create a constructor)

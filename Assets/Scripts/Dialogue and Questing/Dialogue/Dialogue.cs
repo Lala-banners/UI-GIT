@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Dialogue : MonoBehaviour
 {
 
+    [Header("NPC Name and Dialogue")]
+    public string name;
+    public string[] dialogueText;
     //the dialogue bpx takes up the whole bottom 3rd of the screen and displays the NPC's name and current dialogue line
     //GUI.Box(new Rect(0, 6 + scr.y, Screen.width, scr.y * 3), name + " : " + dialogueText[currentLineIndex]); 
 }

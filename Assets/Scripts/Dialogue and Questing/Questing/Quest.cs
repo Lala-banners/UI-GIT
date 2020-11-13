@@ -16,6 +16,7 @@ public class Quest
     [Header("Player")]
     public int requiredLevel;
 
-    public QuestGoal goal;
+    public QuestGoal goal; //if wanted multiple goals, make array []
+
 
 }

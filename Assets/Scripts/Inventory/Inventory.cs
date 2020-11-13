@@ -8,17 +8,95 @@ public class Inventory : MonoBehaviour
     #region Inventory Variables
     public List<Item> inventory = new List<Item>();
     [SerializeField] private Item selectedItem;
+    public Item item;
     #endregion
 
-    #region Display Inv Vars
-    public GUIStyle[] Styles;
     [SerializeField] private bool showInventory = false;
+
+    void UseItem()
+    {
+        switch (selectedItem.Type)
+        {
+            case ItemType.Food:
+                break;
+            case ItemType.Weapon:
+                break;
+            case ItemType.Apparel:
+                break;
+            case ItemType.Crafting:
+                break;
+            case ItemType.Ingredients:
+                break;
+            case ItemType.Potions:
+                break;
+            case ItemType.Scrolls:
+                break;
+            case ItemType.Quest:
+                break;
+            case ItemType.Money:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void FindItem(string itemName)
+    {
+        Item foundItem = inventory.Find(findItem => findItem.Name == itemName);
+
+        return foundItem;
+    }
+
+    #region Example
+    //string itemName2;
+    //bool thisFindsItem(Item findItem)
+    //{
+        //return findItem.Name == itemName2;
+    //}
+    #endregion
+
+    public void AddItem(Item item)
+    {
+        Item foundItem = inventory.Find(FindItem => FindItem.Name == item.Name);
+
+        if(foundItem != null)
+        {
+            foundItem.Amount++;
+        }
+        else
+        {
+            Item newItem = new Item(item, 1);
+            inventory.Add(newItem);
+        }
+    }
+
+
+    #region GUI Inventory Variables
+    public GUIStyle[] Styles;
     private Vector2 scr; //screen
     private Vector2 scrollPos;
     private string sortType = "";
     #endregion
 
-    #region OnGUI
+    #region OnGUI Items
+    /*GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
+                        2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
+
+    //description, value, amount
+    //Icon
+    GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
+    GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
+                     2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
+    GUI.Box(new Rect(4.25f * scr.x, 4 * scr.y,
+                     3 * scr.x,
+                     3 * scr.y),
+                     selectedItem.Description +
+                     "\nValue: " + selectedItem.Value +
+                     "\nAmount: " + selectedItem.Amount);
+    */
+    #endregion
+
+    #region OnGUI Display
     /*private void Display()
     {
         if (sortType == "")
@@ -53,52 +131,7 @@ public class Inventory : MonoBehaviour
     }*/
     #endregion
 
-    void UseItem()
-    {
-        #region OnGUI
-        /*GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
-                            2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
-
-        //description, value, amount
-        //Icon
-        GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
-        GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
-                         2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
-        GUI.Box(new Rect(4.25f * scr.x, 4 * scr.y,
-                         3 * scr.x,
-                         3 * scr.y),
-                         selectedItem.Description +
-                         "\nValue: " + selectedItem.Value +
-                         "\nAmount: " + selectedItem.Amount);
-        */
-        #endregion
-
-        //Style
-        switch (selectedItem.Type)
-        {
-            case ItemType.Food:
-                break;
-            case ItemType.Weapon:
-                break;
-            case ItemType.Apparel:
-                break;
-            case ItemType.Crafting:
-                break;
-            case ItemType.Ingredients:
-                break;
-            case ItemType.Potions:
-                break;
-            case ItemType.Scrolls:
-                break;
-            case ItemType.Quest:
-                break;
-            case ItemType.Money:
-                break;
-            default:
-                break;
-        }
-    }
-    #region OnGUI
+    #region void OnGUI
     /*private void OnGUI()
     {
         scr.x = Screen.width / 16;
@@ -127,4 +160,5 @@ public class Inventory : MonoBehaviour
 
     }*/
     #endregion
+
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 [System.Serializable]
@@ -10,8 +11,8 @@ public class Customisation : MonoBehaviour
     [SerializeField] public Player player;
     PlayerStats playerStats;
     public static Customisation instance = null;
-    [SerializeField] PlayerProfession[] playerProfessions; //the defaults for each profession
-
+    [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
+    public Dropdown professionDropdown;
 
     #region VARIABLES
     public int currentHeight;
@@ -74,10 +75,10 @@ public class Customisation : MonoBehaviour
             }
         }
 
-        if (playerProfessions == null
-            && playerProfessions.Length > 0)
+        if (professionInfo == null
+            && professionInfo.Length > 0)
         {
-            player.Profession = playerProfessions[0];
+            player.Profession = professionInfo[0];
         }
 
         //string[] of each body part =  Enum.GetNames(typeof(CustomiseParts))
@@ -198,31 +199,6 @@ public class Customisation : MonoBehaviour
         SceneManager.LoadScene(1); //load game scene
     }
 
-    /*public void CustomiseSkin() //for customising skin
-    {
-        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
-        int i = 0;
-        foreach (CustomiseParts Skin in Enum.GetValues(typeof(CustomiseParts)))
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                //Setting direction to right
-                SetTexture(names.ToString(), false);
-            }
-
-            //GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names.ToString());
-
-            // if (GUI.Button(new Rect(90, currentHeight + i * 30, 20, 20), ">"))
-            //{
-            //Setting direction to left
-            //  SetTexture(names.ToString(), 1);
-            //}
-
-            i++;
-        }
-    }*/
-
-
     public void ChangeSkinColour(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
@@ -281,11 +257,23 @@ public class Customisation : MonoBehaviour
         }
     }
 
+
+    /*Step by step what I want to happen
+     * When click on dropdown and click on an option
+     * Text appears with profession name, ability name and ability description
+     * 
+     * 
+     */
+
+    //Function to select a profession and info will be displayed
     public void ChooseProfession()
     {
-        //player.Profession = profession;
-        //player.Profession.AbilityDescription;
-        //player.Profession.AbilityName;
+        //professionInfo[].ProfessionName;
+        //professionInfo[].AbilityName;
+        //professionInfo[].AbilityDescription;
+
+
+
     }
 
     //public void SetBaseStats() {}
@@ -337,7 +325,7 @@ scrollPosition = GUI.BeginScrollView(new Rect(Screen.width - 170, 250, 155, 50),
                                      new Rect(0,0,100,30 * playerProfessions.Length));
 
 int i = 0;
-foreach (PlayerProfession profession in playerProfessions)
+foreach (ProfessionInfo profession in playerProfessions)
 {
     if (GUI.Button(new Rect(20, currentHeight + i * 30, 100, 20), profession.ProfessionName))
     {
