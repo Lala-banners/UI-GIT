@@ -1649,6 +1649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46dc49f11233c3c4d96b4a9d77a2a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
+  dialogueText: []
 --- !u!4 &196776508
 Transform:
   m_ObjectHideFlags: 0
@@ -1887,7 +1889,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 535793796}
-  playerProfessions: []
+  professionInfo: []
+  professionDropdown: {fileID: 0}
   currentHeight: 0
   TextureLocation: Character/
   LoadScene: GameScene
@@ -3735,6 +3738,13 @@ MonoBehaviour:
     amount: 7
     icon: {fileID: 2800000, guid: e2c13859a1cfae84f95d943bf3e8e20d, type: 3}
     type: 7
+  item:
+    name: 
+    description: 
+    value: 0
+    amount: 0
+    icon: {fileID: 0}
+    type: 0
   showInventory: 0
   Styles:
   - m_Name: 
@@ -6308,8 +6318,16 @@ MonoBehaviour:
     ProfessionName: Profession
     AbilityName: Ability Name
     AbilityDescription: Does an action
-    defaultStats: []
-  defaultStat: []
+    defaultStats:
+    - baseStatName: 
+      defaultStat: 0
+      levelUpStat: 0
+      additionalStat: 0
+  defaultStat:
+  - baseStatName: 
+    defaultStat: 0
+    levelUpStat: 0
+    additionalStat: 0
   deathMenu: {fileID: 2023676224}
 --- !u!114 &535793797
 MonoBehaviour:
@@ -8647,7 +8665,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810157323}
-  m_LocalRotation: {x: 0.34042525, y: 0.00000002288009, z: -0.0000000082837355, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: -0.000000022880096, z: 0.000000008283737, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9529,12 +9547,7 @@ MonoBehaviour:
     experienceReward: 0
     goldReward: 0
     requiredLevel: 0
-    goal:
-      questState: 0
-      goalType: 0
-      itemName: 
-      requiredAmount: 0
-      currentAmount: 0
+    goal: {fileID: 0}
 --- !u!1001 &881649102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19600,12 +19613,7 @@ MonoBehaviour:
     experienceReward: 0
     goldReward: 0
     requiredLevel: 0
-    goal:
-      questState: 0
-      goalType: 0
-      itemName: 
-      requiredAmount: 0
-      currentAmount: 0
+    goal: {fileID: 0}
 --- !u!1 &2023676224
 GameObject:
   m_ObjectHideFlags: 0

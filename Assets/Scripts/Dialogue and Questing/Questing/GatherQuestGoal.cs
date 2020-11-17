@@ -40,9 +40,9 @@ public class GatherQuestGoal : QuestGoal
             return false;
         }
 
-        Item item = playerInv.FindItem(itemName);
+        //Item item = playerInv.FindItem(itemName);
 
-        if(item == null)
+       /* if(item == null)
         {
             return false;
         }
@@ -51,7 +51,7 @@ public class GatherQuestGoal : QuestGoal
         {
             return true;
         }
-
+       */
         return false;
     }
 }

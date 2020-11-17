@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 [System.Serializable]
 
@@ -11,10 +12,16 @@ public class Customisation : MonoBehaviour
     [SerializeField] public Player player;
     PlayerStats playerStats;
     public static Customisation instance = null;
-    [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
-    public Dropdown professionDropdown;
 
     #region VARIABLES
+    [Header("Profession")]
+    public Text abilityName;
+    public Text abilityDescription;
+    public Text professionName;
+
+    [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
+    public TMP_Dropdown professionDropdown;
+
     public int currentHeight;
     [SerializeField]
     private string TextureLocation = "Character/";
@@ -87,12 +94,6 @@ public class Customisation : MonoBehaviour
         {
             SetTexture(part, true);
         }
-    }
-
-    private void Update()
-    {
-        //OnClickRandomize();
-        //ChangeSkinColour(true);
     }
 
     public void SceneChanger(int sceneIndex)
@@ -187,6 +188,13 @@ public class Customisation : MonoBehaviour
         characterRenderer.materials = mats;
     }
 
+    public void ChooseProfession(int classIndex)
+    {
+        professionName.text = professionInfo[classIndex].ProfessionName;
+        abilityDescription.text = professionInfo[classIndex].AbilityDescription;
+        abilityName.text = professionInfo[classIndex].AbilityName;
+    }
+
     public void SaveCharacter()
     {
         player.customisationTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
@@ -257,26 +265,13 @@ public class Customisation : MonoBehaviour
         }
     }
 
-
-    /*Step by step what I want to happen
-     * When click on dropdown and click on an option
-     * Text appears with profession name, ability name and ability description
-     * 
-     * 
-     */
-
-    //Function to select a profession and info will be displayed
-    public void ChooseProfession()
+    public void StrengthPoints(bool addPoint)
     {
-        //professionInfo[].ProfessionName;
-        //professionInfo[].AbilityName;
-        //professionInfo[].AbilityDescription;
+        //Make point pool numbers add and subtract
 
-
-
+       
     }
 
-    //public void SetBaseStats() {}
   
 #region Commented out OnGUI
 /*

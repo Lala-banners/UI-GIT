@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
     {
         Item foundItem = inventory.Find(findItem => findItem.Name == itemName);
 
-        return foundItem;
+        //return foundItem;
     }
 
     #region Example
@@ -65,8 +65,8 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            Item newItem = new Item(item, 1);
-            inventory.Add(newItem);
+            //Item newItem = new Item(item, 1);
+            //inventory.Add(newItem);
         }
     }
 
