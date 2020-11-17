@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 114002303}
   - component: {fileID: 114002302}
   m_Layer: 5
-  m_Name: Positive Button
+  m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,7 +1397,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114002303}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &114002303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2298,7 +2320,7 @@ GameObject:
   - component: {fileID: 259521625}
   - component: {fileID: 259521624}
   m_Layer: 5
-  m_Name: Negative Button
+  m_Name: Minus Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2366,7 +2388,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 259521625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &259521625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,7 +3005,7 @@ GameObject:
   - component: {fileID: 407992078}
   - component: {fileID: 407992077}
   m_Layer: 5
-  m_Name: Positive Button
+  m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3040,7 +3073,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 407992078}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636843}
+        m_MethodName: StrengthPoints
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &407992078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3643,7 +3687,7 @@ GameObject:
   - component: {fileID: 521252092}
   - component: {fileID: 521252091}
   m_Layer: 5
-  m_Name: Negative Button
+  m_Name: Minus Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3711,7 +3755,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 521252092}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &521252092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5325,7 +5380,7 @@ GameObject:
   - component: {fileID: 762189987}
   - component: {fileID: 762189986}
   m_Layer: 5
-  m_Name: Positive Button
+  m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5393,7 +5448,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 762189987}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &762189987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5443,7 +5520,7 @@ GameObject:
   - component: {fileID: 772927996}
   - component: {fileID: 772927995}
   m_Layer: 5
-  m_Name: Positive Button
+  m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5511,7 +5588,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 772927996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &772927996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5623,7 +5722,7 @@ GameObject:
   - component: {fileID: 834559014}
   - component: {fileID: 834559013}
   m_Layer: 5
-  m_Name: Negative Button
+  m_Name: Minus Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5691,7 +5790,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 834559014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &834559014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6028,6 +6138,7 @@ MonoBehaviour:
   abilityName: {fileID: 713068119}
   abilityDescription: {fileID: 1628573271}
   professionName: {fileID: 1383685645}
+  pointsAmount: {fileID: 1749558563}
   professionInfo:
   - ProfessionName: Paladin
     AbilityName: Fight for Honor
@@ -6389,7 +6500,7 @@ GameObject:
   - component: {fileID: 985246995}
   - component: {fileID: 985246994}
   m_Layer: 5
-  m_Name: Positive Button
+  m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6457,7 +6568,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 985246995}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &985246995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7588,7 +7721,7 @@ GameObject:
   - component: {fileID: 1071589049}
   - component: {fileID: 1071589048}
   m_Layer: 5
-  m_Name: Negative Button
+  m_Name: Minus Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7656,7 +7789,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1071589049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &1071589049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11687,7 +11831,7 @@ GameObject:
   - component: {fileID: 1749558564}
   - component: {fileID: 1749558563}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Point Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11730,7 +11874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Points: 0'
+  m_text: 'Points: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11799,10 +11943,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1749558563}
-    characterCount: 9
+    characterCount: 8
     spriteCount: 0
     spaceCount: 1
-    wordCount: 2
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -12229,7 +12373,7 @@ GameObject:
   - component: {fileID: 1937308718}
   - component: {fileID: 1937308717}
   m_Layer: 5
-  m_Name: Positive Button
+  m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12297,7 +12441,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1937308718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1937308718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12347,7 +12513,7 @@ GameObject:
   - component: {fileID: 1941117639}
   - component: {fileID: 1941117638}
   m_Layer: 5
-  m_Name: Negative Button
+  m_Name: Minus Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12415,7 +12581,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1941117639}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636841}
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &1941117639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12465,7 +12642,7 @@ GameObject:
   - component: {fileID: 1947603559}
   - component: {fileID: 1947603558}
   m_Layer: 5
-  m_Name: Negative Button
+  m_Name: Minus Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12533,7 +12710,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1947603559}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636843}
+        m_MethodName: StrengthPoints
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1947603559
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Customisation : MonoBehaviour
 {
     [SerializeField] public Player player;
     PlayerStats playerStats;
+    public BaseStats _base;
     public static Customisation instance = null;
 
     #region VARIABLES
@@ -18,6 +19,7 @@ public class Customisation : MonoBehaviour
     public Text abilityName;
     public Text abilityDescription;
     public Text professionName;
+    public TMP_Text pointsAmount;
 
     [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
     public TMP_Dropdown professionDropdown;
@@ -37,9 +39,6 @@ public class Customisation : MonoBehaviour
 
     //Renderer for character mesh so we can reference material list within script for changing visuals
     public Renderer characterRenderer;
-
-
-
     #endregion
 
     #region FUNCTIONS
@@ -222,6 +221,34 @@ public class Customisation : MonoBehaviour
                 Debug.LogError("Invalid set profession type");
                 break;
         }
+
+        //int maxStat = player.stats.defaultStat[professionIndex].Count;
+
+        int maxStat = _base.finalStat;
+
+        int curStat = _base.defaultStat;
+
+        if(pointIncrease)
+        {
+            curStat++;
+        }
+        else
+        {
+            curStat--;
+        }
+
+        if (curStat < 0)
+        {
+            curStat = maxStat - 1;
+        }
+        else if (curStat > maxStat - 1)
+        {
+            curStat = 0;
+        }
+
+        pointsAmount.text = _base.baseStatName;
+        //curStat = player.stats.baseStats[professionIndex];
+        //player.stats.baseStatPoints[professionIndex] = curStat;
     }
 
     public void ChooseProfession(int classIndex)
@@ -243,6 +270,7 @@ public class Customisation : MonoBehaviour
         SceneManager.LoadScene(1); //load game scene
     }
 
+    #region Character Customisation
     public void ChangeSkinColour(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
@@ -300,48 +328,45 @@ public class Customisation : MonoBehaviour
             mat.mainTexture = partTextures[UnityEngine.Random.Range(0, partTextures.Count)];
         }
     }
+    #endregion
 
+    #region Point Pool
     public void StrengthPoints(bool addPoint)
     {
         string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution"};
         SetPlayerProfession(points[0].ToString(), addPoint);
-       
     }
 
     public void DexterityPoints(bool addPoint)
     {
         string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-
-
+        SetPlayerProfession(points[1].ToString(), addPoint);
     }
 
     public void WisdomPoints(bool addPoint)
     {
         string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-
-
+        SetPlayerProfession(points[2].ToString(), addPoint);
     }
 
     public void IntelligencePoints(bool addPoint)
     {
         string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-
-
+        SetPlayerProfession(points[3].ToString(), addPoint);
     }
 
     public void CharismaPoints(bool addPoint)
     {
         string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-
-
+        SetPlayerProfession(points[4].ToString(), addPoint);
     }
 
     public void ConstitutionPoints(bool addPoint)
     {
         string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-
-
+        SetPlayerProfession(points[5].ToString(), addPoint);
     }
+    #endregion
 
     #region Commented out OnGUI
     /*
