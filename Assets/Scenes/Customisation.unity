@@ -6050,24 +6050,24 @@ MonoBehaviour:
     AbilityDescription: Cuts health in half for increased damage
     defaultStats: []
   - ProfessionName: Druid
-    AbilityName: 
-    AbilityDescription: 
+    AbilityName: Faith
+    AbilityDescription: Raises Mana
     defaultStats: []
   - ProfessionName: Monk
-    AbilityName: 
-    AbilityDescription: 
+    AbilityName: True Sight
+    AbilityDescription: Raises Stamina
     defaultStats: []
   - ProfessionName: Ranger
-    AbilityName: 
-    AbilityDescription: 
+    AbilityName: Long Shot
+    AbilityDescription: Raises Defence
     defaultStats: []
   - ProfessionName: Sorcerer
-    AbilityName: 
-    AbilityDescription: 
+    AbilityName: Nature Magic
+    AbilityDescription: Increases Mana
     defaultStats: []
   - ProfessionName: Warlock
-    AbilityName: 
-    AbilityDescription: 
+    AbilityName: Artificial Magic
+    AbilityDescription: Decreases Stamina
     defaultStats: []
   professionDropdown: {fileID: 977502789}
   currentHeight: 0

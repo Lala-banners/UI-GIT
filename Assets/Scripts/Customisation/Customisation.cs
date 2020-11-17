@@ -188,6 +188,42 @@ public class Customisation : MonoBehaviour
         characterRenderer.materials = mats;
     }
 
+    public void SetPlayerProfession(string type, bool pointIncrease)
+    {
+        int professionIndex = 0;
+
+        switch (type)
+        {
+            case "Strength":
+                professionIndex = 0;
+                break;
+
+            case "Dexterity":
+                professionIndex = 1;
+                break;
+
+            case "Wisdom":
+                professionIndex = 2;
+                break;
+
+            case "Intelligence":
+                professionIndex = 3;
+                break;
+
+            case "Charisma":
+                professionIndex = 4;
+                break;
+
+            case "Constitution":
+                professionIndex = 5;
+                break;
+
+            default:
+                Debug.LogError("Invalid set profession type");
+                break;
+        }
+    }
+
     public void ChooseProfession(int classIndex)
     {
         professionName.text = professionInfo[classIndex].ProfessionName;
@@ -267,130 +303,164 @@ public class Customisation : MonoBehaviour
 
     public void StrengthPoints(bool addPoint)
     {
-        //Make point pool numbers add and subtract
-
+        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution"};
+        SetPlayerProfession(points[0].ToString(), addPoint);
        
     }
 
-  
-#region Commented out OnGUI
-/*
-PlayerPrefs.SetInt("Skin Index", currentPartsTextureIndex[0]);
-PlayerPrefs.SetInt("Hair Index", currentPartsTextureIndex[1]);
-PlayerPrefs.SetInt("Eyes Index", currentPartsTextureIndex[2]);
-PlayerPrefs.SetInt("Mouth Index", currentPartsTextureIndex[3]);
-PlayerPrefs.SetInt("Clothes Index", currentPartsTextureIndex[4]);
-PlayerPrefs.SetInt("Armour Index", currentPartsTextureIndex[5]);
-
-//Set Character name in own time
-//PlayerPrefs.SetString("Character Name", characterName);
-
-for (int i = 0; i< player.playerStats.baseStats.Length; i++)
-{
-    PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "default stat", player.playerStats.baseStats[0].defaultStat);
-    PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "additional stat", player.playerStats.baseStats[0].additionalStat);
-    PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "levelUpStat", player.playerStats.baseStats[0].levelUpStat);
-}
-PlayerPrefs.SetString("Character Profession", player.Profession.ProfessionName); 
-#endregion
-}
-
-
-//Updates specifically when GUI elements are called
-private void OnGUI()
-{
-StatsOnGUI();
-CustomiseOnGUI();
-ProfessionsOnGUI();
-
-if (GUI.Button(new Rect(10,250,120,20), "Save and Play"))
-{
-    SaveCharacter();
-    SceneManager.LoadScene(1); //load game scene
-}
-}
-
-public void ProfessionsOnGUI()
-{
-float currentHeight = 0;
-
-GUI.Box(new Rect(Screen.width - 170, 230, 155, 100), "Profession");
-
-scrollPosition = GUI.BeginScrollView(new Rect(Screen.width - 170, 250, 155, 50), scrollPosition, 
-                                     new Rect(0,0,100,30 * playerProfessions.Length));
-
-int i = 0;
-foreach (ProfessionInfo profession in playerProfessions)
-{
-    if (GUI.Button(new Rect(20, currentHeight + i * 30, 100, 20), profession.ProfessionName))
+    public void DexterityPoints(bool addPoint)
     {
-        player.Profession = profession;
-    }
-    i++;
-}
+        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
-GUI.EndScrollView();
 
-GUI.Box(new Rect(Screen.width - 170, Screen.height - 150, 155, 150), "Class Display");
-GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 30, 100, 20), player.Profession.ProfessionName);
-GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 50, 100, 20), player.Profession.AbilityName);
-GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 70, 100, 100), player.Profession.AbilityDescription);
-}
-
-//IMGUI prototype - comment out onGUI methods and replace with real GUI elements
-private void StatsOnGUI()
-{
-float currentHeight = 40;
-                               //X  //Y  //W  //H
-GUI.Box(new Rect(Screen.width - 170, 10, 155, 210), "Stats");
-
-for (int i = 0; i < player.stat.baseStats.Length; i++)
-{
-    BaseStats stat = player.stat.baseStats[i];
-
-    if (GUI.Button(new Rect(Screen.width - 165, currentHeight + i * 30, 20, 20), "-"))
-    {
-        playerStats.SetStats(i, -1);
     }
 
-    GUI.Label(new Rect(Screen.width - 140, currentHeight + i * 30, 100, 20),
-        stat.baseStatName + ": " + stat.finalStat);
-
-    if (GUI.Button(new Rect(Screen.width - 40, currentHeight + i * 30, 20, 20), "+"))
+    public void WisdomPoints(bool addPoint)
     {
-        playerStats.SetStats(i, 1);
-    }
-    //i++;
-}        
-}
+        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
 
-private void CustomiseOnGUI()
-{
-float currentHeight = 40;
-GUI.Box(new Rect(10, 10, 110, 210), "Visuals");
-//string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
-int i = 0;
-foreach (CustomiseParts names in Enum.GetValues(typeof(CustomiseParts)))
-{
-    if (GUI.Button(new Rect(20, currentHeight + i * 30, 20, 20), "<"))
-    {
-        //Setting direction to right
-        SetTexture(names.ToString(), -1);
     }
 
-    GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names.ToString());
-
-    if (GUI.Button(new Rect(90, currentHeight + i * 30, 20, 20), ">"))
+    public void IntelligencePoints(bool addPoint)
     {
-        //Setting direction to left
-        SetTexture(names.ToString(), 1);
+        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
+
+
     }
 
-    i++;
-}
+    public void CharismaPoints(bool addPoint)
+    {
+        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
-}*/
-#endregion
-#endregion
+
+    }
+
+    public void ConstitutionPoints(bool addPoint)
+    {
+        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
+
+
+    }
+
+    #region Commented out OnGUI
+    /*
+    PlayerPrefs.SetInt("Skin Index", currentPartsTextureIndex[0]);
+    PlayerPrefs.SetInt("Hair Index", currentPartsTextureIndex[1]);
+    PlayerPrefs.SetInt("Eyes Index", currentPartsTextureIndex[2]);
+    PlayerPrefs.SetInt("Mouth Index", currentPartsTextureIndex[3]);
+    PlayerPrefs.SetInt("Clothes Index", currentPartsTextureIndex[4]);
+    PlayerPrefs.SetInt("Armour Index", currentPartsTextureIndex[5]);
+
+    //Set Character name in own time
+    //PlayerPrefs.SetString("Character Name", characterName);
+
+    for (int i = 0; i< player.playerStats.baseStats.Length; i++)
+    {
+        PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "default stat", player.playerStats.baseStats[0].defaultStat);
+        PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "additional stat", player.playerStats.baseStats[0].additionalStat);
+        PlayerPrefs.SetInt(player.playerStats.baseStats[i].baseStatName + "levelUpStat", player.playerStats.baseStats[0].levelUpStat);
+    }
+    PlayerPrefs.SetString("Character Profession", player.Profession.ProfessionName); 
+    #endregion
+    }
+
+
+    //Updates specifically when GUI elements are called
+    private void OnGUI()
+    {
+    StatsOnGUI();
+    CustomiseOnGUI();
+    ProfessionsOnGUI();
+
+    if (GUI.Button(new Rect(10,250,120,20), "Save and Play"))
+    {
+        SaveCharacter();
+        SceneManager.LoadScene(1); //load game scene
+    }
+    }
+
+    public void ProfessionsOnGUI()
+    {
+    float currentHeight = 0;
+
+    GUI.Box(new Rect(Screen.width - 170, 230, 155, 100), "Profession");
+
+    scrollPosition = GUI.BeginScrollView(new Rect(Screen.width - 170, 250, 155, 50), scrollPosition, 
+                                         new Rect(0,0,100,30 * playerProfessions.Length));
+
+    int i = 0;
+    foreach (ProfessionInfo profession in playerProfessions)
+    {
+        if (GUI.Button(new Rect(20, currentHeight + i * 30, 100, 20), profession.ProfessionName))
+        {
+            player.Profession = profession;
+        }
+        i++;
+    }
+
+    GUI.EndScrollView();
+
+    GUI.Box(new Rect(Screen.width - 170, Screen.height - 150, 155, 150), "Class Display");
+    GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 30, 100, 20), player.Profession.ProfessionName);
+    GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 50, 100, 20), player.Profession.AbilityName);
+    GUI.Label(new Rect(Screen.width - 140, Screen.height - 150 + 70, 100, 100), player.Profession.AbilityDescription);
+    }
+
+    //IMGUI prototype - comment out onGUI methods and replace with real GUI elements
+    private void StatsOnGUI()
+    {
+    float currentHeight = 40;
+                                   //X  //Y  //W  //H
+    GUI.Box(new Rect(Screen.width - 170, 10, 155, 210), "Stats");
+
+    for (int i = 0; i < player.stat.baseStats.Length; i++)
+    {
+        BaseStats stat = player.stat.baseStats[i];
+
+        if (GUI.Button(new Rect(Screen.width - 165, currentHeight + i * 30, 20, 20), "-"))
+        {
+            playerStats.SetStats(i, -1);
+        }
+
+        GUI.Label(new Rect(Screen.width - 140, currentHeight + i * 30, 100, 20),
+            stat.baseStatName + ": " + stat.finalStat);
+
+        if (GUI.Button(new Rect(Screen.width - 40, currentHeight + i * 30, 20, 20), "+"))
+        {
+            playerStats.SetStats(i, 1);
+        }
+        //i++;
+    }        
+    }
+
+
+    private void CustomiseOnGUI()
+    {
+    float currentHeight = 40;
+    GUI.Box(new Rect(10, 10, 110, 210), "Visuals");
+    //string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+    int i = 0;
+    foreach (CustomiseParts names in Enum.GetValues(typeof(CustomiseParts)))
+    {
+        if (GUI.Button(new Rect(20, currentHeight + i * 30, 20, 20), "<"))
+        {
+            //Setting direction to right
+            SetTexture(names.ToString(), -1);
+        }
+
+        GUI.Label(new Rect(45, currentHeight + i * 30, 60, 20), names.ToString());
+
+        if (GUI.Button(new Rect(90, currentHeight + i * 30, 20, 20), ">"))
+        {
+            //Setting direction to left
+            SetTexture(names.ToString(), 1);
+        }
+
+        i++;
+    }
+
+    }*/
+    #endregion
+    #endregion
 }
