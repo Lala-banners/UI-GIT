@@ -9,23 +9,103 @@ public class Inventory : MonoBehaviour
     public List<Item> inventory = new List<Item>();
     [SerializeField] private Item selectedItem;
     public Item item;
+    [SerializeField] private Player player;
+    [SerializeField] public bool showInventory = false;
+    public int money = 100;
     #endregion
 
-    [SerializeField] private bool showInventory = false;
+    #region GUI Inventory Variables
+    public GUIStyle[] Styles;
+    private Vector2 scr; //screen
+    private Vector2 scrollPos;
+    private string sortType = "";
+    #endregion
+
+    #region Equipment
+    [System.Serializable]
+    public struct Equipment
+    {
+        public string slotName; //chest, feet, head etc
+        public Transform equipLocation; //where the equipment will be set
+        public GameObject currentItem;
+        public Item item; //ref for check to make sure its not the same item
+    };
+    public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
+    #endregion
+
 
     void UseItem()
     {
+        GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
+                        2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
+
+        //description, value, amount
+        //Icon
+        GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
+        GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
+                         2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
+        GUI.Box(new Rect(4.25f * scr.x, 4 * scr.y,
+                         3 * scr.x,
+                         3 * scr.y),
+                         selectedItem.Description +
+                         "\nValue: " + selectedItem.Value +
+                         "\nAmount: " + selectedItem.Amount);
+
         switch (selectedItem.Type)
         {
             case ItemType.Food:
+                if(player.playerStats.CurrentHealth < player.playerStats.healthHearts.maximumHealth)
+                {
+                    if(GUI.Button(new Rect(4.5f * scr.x, 6.5f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
+                    {
+                        selectedItem.Amount--;
+                        player.playerStats.Heal(selectedItem.Heal);
+                        //player.stats.currentMana += selectedItem.healMana; 
+
+                        if(selectedItem.Amount <= 0)
+                        {
+                            inventory.Remove(selectedItem);
+                            selectedItem = null;
+                            break;
+                        }
+                        print("Eat");
+                    }
+                }
                 break;
             case ItemType.Weapon:
+                if(equipmentSlots[2].currentItem == null || 
+                    selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
+                {
+                    if(GUI.Button(new Rect(4.75f * scr.x, 6.5f * scr.y, 
+                        scr.x, 0.25f * scr.y), "Equip"))
+                    {
+                        if(equipmentSlots[2].currentItem == null)
+                        {
+                            Destroy(equipmentSlots[2].currentItem);
+                        }
+                        GameObject currentItem = Instantiate(selectedItem.Mesh, equipmentSlots[2].equipLocation);
+                        equipmentSlots[2].currentItem = currentItem;
+                        equipmentSlots[2].item = selectedItem;
+                    }
+                }
+                else //if item equipped is the same as eqiped item, then upequip the weapon
+                {
+                    if(GUI.Button(new Rect(4.75f * scr.x, 6.5f * scr.y, 
+                        scr.x, 0.25f * scr.y), "Unequip"))
+                    {
+                        Destroy(equipmentSlots[2].currentItem);
+                        equipmentSlots[2].item = null;
+                    }
+                }
                 break;
-            case ItemType.Apparel:
+            case ItemType.Apparel: //Change colour of armour
+                //if()
                 break;
             case ItemType.Crafting:
+                //if()
                 break;
             case ItemType.Ingredients:
+                //if()
                 break;
             case ItemType.Potions:
                 break;
@@ -57,47 +137,26 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
+        //inventory.Add(item);
         Item foundItem = inventory.Find(FindItem => FindItem.Name == item.Name);
 
         if(foundItem != null)
         {
             foundItem.Amount++;
+            print("Found an item!");
         }
         else
         {
-            //Item newItem = new Item(item, 1);
-            //inventory.Add(newItem);
+            Item newItem = new Item(item, 1);
+            inventory.Add(item);
         }
     }
 
 
-    #region GUI Inventory Variables
-    public GUIStyle[] Styles;
-    private Vector2 scr; //screen
-    private Vector2 scrollPos;
-    private string sortType = "";
-    #endregion
-
-    #region OnGUI Items
-    /*GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
-                        2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
-
-    //description, value, amount
-    //Icon
-    GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
-    GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
-                     2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
-    GUI.Box(new Rect(4.25f * scr.x, 4 * scr.y,
-                     3 * scr.x,
-                     3 * scr.y),
-                     selectedItem.Description +
-                     "\nValue: " + selectedItem.Value +
-                     "\nAmount: " + selectedItem.Amount);
-    */
-    #endregion
+    
 
     #region OnGUI Display
-    /*private void Display()
+    private void Display()
     {
         if (sortType == "")
         {
@@ -128,11 +187,11 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-    }*/
+    }
     #endregion
 
     #region void OnGUI
-    /*private void OnGUI()
+    private void OnGUI()
     {
         scr.x = Screen.width / 16;
         scr.y = Screen.height / 9;
@@ -157,8 +216,6 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
-    }*/
+    }
     #endregion
 
-}

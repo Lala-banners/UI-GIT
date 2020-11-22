@@ -26,11 +26,11 @@ public class Item
     [SerializeField] private int value;
     [SerializeField] private int amount;
     [SerializeField] private Texture2D icon;
-    private GameObject mesh;
+    [SerializeField] private GameObject mesh;
     [SerializeField] private ItemType type;
-    private int damage;
-    private int armour;
-    private int heal;
+    [SerializeField] private int damage;
+    [SerializeField] private int armour;
+    [SerializeField] private int heal;
     #endregion
 
     #region Public Properties
@@ -99,5 +99,30 @@ public class Item
         get { return heal; }
         set { heal = value; }
     }
+
+    public int healMana
+    {
+        get { return healMana; }
+        set { healMana = value; }
+    }
     #endregion
+
+    public Item()
+    {
+
+    }
+
+    public Item(Item copyItem, int copyAmount)
+    {
+        name = copyItem.Name;
+        description = copyItem.Description;
+        value = copyItem.Value;
+        amount = copyAmount;
+        icon = copyItem.Icon;
+        mesh = copyItem.Mesh;
+        type = copyItem.Type;
+        damage = copyItem.Damage;
+        armour = copyItem.Armour;
+        heal = copyItem.Heal;
+    }
 }

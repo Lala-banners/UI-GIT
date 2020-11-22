@@ -18,15 +18,9 @@ public class Player : MonoBehaviour
     #endregion
 
     [Header("Other")]
-    //public CharacterController controller;
-    //private Vector3 velocity;
-    //public float mouseSensitivity = 100f;
-    //private float xRotation = 0f;
-    //Camera camera;
     public float speed = 12f;
     public float gravity = -9.81f;
     
-
     [Header("Stamina Regen/Degen Stats")]
     [Tooltip("Amount of Stamina that will be taken")]
     [SerializeField] public float staminaDegen = 10f;
@@ -76,14 +70,14 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision playerCol)
     {
         //If player collides with object tagged as Enemy
-        if (playerCol.gameObject.Equals("Player"))
-        {
-            print("Player is hit");
+        //if (playerCol.gameObject.Equals("Player"))
+        //{
+            //print("Player is hit");
             //Player gets dealt damage
-            playerStats.DealDamage(10f);
-            playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth); //Updates the heart sprites
+            //playerStats.DealDamage(10f);
+            //playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth); //Updates the heart sprites
             //Debug.Log("Player is losing health");
-        }
+        //}
     }
 
     public void Awake()
@@ -104,10 +98,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        //controller = GetComponent<CharacterController>();
-        //camera = Camera.main;
-    }
 
+    }
 
     private void Update()
     {
@@ -128,9 +120,6 @@ public class Player : MonoBehaviour
             }
             
         }
-        
-        //MouseLook();
-        //Move();
 
         UseMana(25f); //spend mana when press M
 
