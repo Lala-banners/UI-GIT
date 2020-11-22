@@ -21,7 +21,7 @@ public class QuestManager : MonoBehaviour
 
     public void DeclineQuest()
     {
-
+        //dialogue.dialogueText[2] = di
     }
 
     public void ClaimQuest()
@@ -29,7 +29,7 @@ public class QuestManager : MonoBehaviour
         if(currentQuest.goal.questState == QuestState.Completed && currentQuest.goal.isCompleted() == true)
         {
             //Add money
-            //inv.money += currentQuest.goldReward;
+            inv.money += currentQuest.goldReward;
 
             //Add experience
 

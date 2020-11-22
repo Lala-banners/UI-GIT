@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
         set { ChangeProfession(value); }
     }
     public GameObject deathMenu;
+    public Inventory inventory;
+    public GameObject inventoryObject;
     #endregion
 
     public void SetStamina()
@@ -64,20 +66,6 @@ public class Player : MonoBehaviour
         staminaSlider.maxValue = stats.maxStamina;
         staminaSlider.value = stats.currentStamina;
         staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
-    }
-
-    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
-    private void OnCollisionEnter(Collision playerCol)
-    {
-        //If player collides with object tagged as Enemy
-        //if (playerCol.gameObject.Equals("Player"))
-        //{
-            //print("Player is hit");
-            //Player gets dealt damage
-            //playerStats.DealDamage(10f);
-            //playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth); //Updates the heart sprites
-            //Debug.Log("Player is losing health");
-        //}
     }
 
     public void Awake()
@@ -96,16 +84,40 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ShowInventory()
+    {
+        if (Input.GetKey(KeyCode.I)) //Toggle Inventory on and off
+        {
+            inventoryObject.SetActive(true);
+        }
+    }
+
     private void Start()
     {
-
+        
     }
+
+    // OnControllerColliderHit is called when the controller hits a collider while performing a Move
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        InWorldItems items = hit.collider.GetComponent<InWorldItems>();
+        if(inventory.item != null)
+        {
+            inventory.AddItem(inventory.item);
+            print("Item has been picked up");
+        }
+    }
+
+
 
     private void Update()
     {
         Interact();
 
-        if (Input.GetKeyDown(KeyCode.H)) //TEST FOR HEALTH DECREASE IT WORKS
+        ShowInventory();
+
+        #region Health
+        if (Input.GetKeyDown(KeyCode.H)) //HEALTH DECREASE
         {
             playerStats.DealDamage(10f);
             playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth);
@@ -118,26 +130,11 @@ public class Player : MonoBehaviour
                 Cursor.visible = true;
                 print("You are dead");
             }
-            
         }
+        #endregion
 
-        UseMana(25f); //spend mana when press M
-
-        //Stamina Regen
-        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
-        {
-            //If current stamina is less than max stamina (100)
-            if (stats.currentStamina < stats.maxStamina)
-            {
-                SetStamina();
-                stats.currentStamina += staminaDegen * Time.deltaTime;
-            }
-            else
-            {
-                stats.currentStamina = stats.maxStamina;
-            }
-        }
-
+        #region Mana
+        UseMana(25f); //MANA DECREASE WHEN PRESS M
         //Mana Regen
         if (Time.time > disableManaRegenTime + manaRegenCooldown)
         {
@@ -152,11 +149,29 @@ public class Player : MonoBehaviour
                 stats.currentMana = stats.maxMana;
             }
         }
+        #endregion
+
+        #region Stamina
+        //Stamina Regen
+        if (Time.time > disableStaminaRegenTime + staminaRegenCooldown)
+        {
+            //If current stamina is less than max stamina (100)
+            if (stats.currentStamina < stats.maxStamina)
+            {
+                SetStamina();
+                stats.currentStamina += staminaDegen * Time.deltaTime;
+            }
+            else
+            {
+                stats.currentStamina = stats.maxStamina;
+            }
+        }
+        #endregion
     }
 
     public void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E)) //Keybinding code here
+        if (Input.GetKeyDown(KeyCode.E)) 
         {
             Ray ray; //Creates line from middle of the screen to infinity 
             RaycastHit hitInfo; //Get back info about what we hit
@@ -179,10 +194,6 @@ public class Player : MonoBehaviour
                     npc.Interact(); //Override NPC because otherwise would run wrong method
                 }
             }
-
-            //Pick up items here from inventory 
-            //If raycast hit an item from the ground, then pick up item off the ground. Create new class for ItemOnGround()
-            //In Item on ground class make reference to item
         }
     }
 

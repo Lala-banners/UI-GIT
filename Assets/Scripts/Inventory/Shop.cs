@@ -14,7 +14,6 @@ public class Shop : MonoBehaviour
     #region Display Shop Variables
     [SerializeField] public bool showShop = false;
     private Vector2 scr;
-    //Maybe some dialogue
     #endregion
 
 
@@ -35,6 +34,7 @@ public class Shop : MonoBehaviour
         
     }
 
+    #region IMGUI
     private void OnGUI()
     {
         scr.x = Screen.width / 16;
@@ -86,7 +86,6 @@ public class Shop : MonoBehaviour
                     }
                 }
                 //Display Player Inventory
-
                 playerInv.showInventory = true;
 
                 if (GUI.Button(new Rect(0.25f * scr.x, 8.5f * scr.y, scr.x, 0.5f * scr.y), "Exit Shop")) 
@@ -94,8 +93,8 @@ public class Shop : MonoBehaviour
                     playerInv.showInventory = false;
                     showShop = false;
                 }
-
             }
         }
     }
+    #endregion
 }

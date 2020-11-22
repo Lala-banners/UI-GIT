@@ -1651,6 +1651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showDialogue: 0
   currentLineIndex: 0
+  playerMovement: {fileID: 535793797}
   scr: {x: 0, y: 0}
   name: Bob
   dialogueText:
@@ -3756,6 +3757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae72fd0cf29773469a34a74be457465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemText: {fileID: 1011763579}
   inventory:
   - name: Apple
     description: This is a consumable
@@ -6311,6 +6313,8 @@ MonoBehaviour:
     levelUpStat: 0
     additionalStat: 0
   deathMenu: {fileID: 2023676224}
+  inventory: {fileID: 368877527}
+  inventoryObject: {fileID: 995686707}
 --- !u!114 &535793797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7727,7 +7731,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 758987904}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 368877526}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &758987904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8557,7 +8572,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782602518}
-  m_LocalRotation: {x: 0.3060453, y: 0.000000023165901, z: -0.0000000074471513, w: 0.952017}
+  m_LocalRotation: {x: 0.3060453, y: -0.000000023165901, z: 0.0000000074471513, w: 0.952017}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11329,8 +11344,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13448,8 +13463,8 @@ GameObject:
   - component: {fileID: 1341587621}
   - component: {fileID: 1341587625}
   m_Layer: 0
-  m_Name: '"Item"'
-  m_TagString: Untagged
+  m_Name: Item
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13522,8 +13537,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341587620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 713.8484, y: 1.07, z: 511.6234}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 710, y: 1.07, z: 513.73}
+  m_LocalScale: {x: 0.3545, y: 0.3545, z: 0.3545}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
@@ -21155,6 +21170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '"Enemies"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870539649621748965, guid: 1cd764398cb664a49b1ae09b3b704b68,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7870539649621748970, guid: 1cd764398cb664a49b1ae09b3b704b68,
         type: 3}

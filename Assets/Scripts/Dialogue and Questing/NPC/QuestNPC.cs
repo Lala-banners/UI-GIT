@@ -29,7 +29,7 @@ public class QuestNPC : NPC
             case QuestState.Active:
                 if(NPCsQuest.goal.isCompleted())
                 {
-                    Debug.Log("Quest Claimed");
+                    Debug.Log("Quest Completed!");
                     questManager.ClaimQuest();
                 }
                 else
@@ -38,6 +38,7 @@ public class QuestNPC : NPC
                 }
                 break;
             case QuestState.Claimed:
+                
                 //some dialogue 
                 //"You have already completed this quest, bugger off"
                 break;

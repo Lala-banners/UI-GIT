@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
+    public TMP_Text itemText;
+
     #region Inventory Variables
     public List<Item> inventory = new List<Item>();
     [SerializeField] private Item selectedItem;
@@ -33,13 +36,20 @@ public class Inventory : MonoBehaviour
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
 
+    
 
-    void UseItem()
+    private void Update()
+    {
+        
+    }
+
+    
+
+    void UseItemGUI()
     {
         GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
                         2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
 
-        //description, value, amount
         //Icon
         GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
         GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
@@ -127,14 +137,6 @@ public class Inventory : MonoBehaviour
         //return foundItem;
     }
 
-    #region Example
-    //string itemName2;
-    //bool thisFindsItem(Item findItem)
-    //{
-        //return findItem.Name == itemName2;
-    //}
-    #endregion
-
     public void AddItem(Item item)
     {
         //inventory.Add(item);
@@ -212,7 +214,7 @@ public class Inventory : MonoBehaviour
             Display();
             if (selectedItem != null)
             {
-                UseItem();
+                UseItemGUI();
             }
         }
     }
