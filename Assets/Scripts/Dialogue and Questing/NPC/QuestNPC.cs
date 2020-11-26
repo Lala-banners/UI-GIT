@@ -20,7 +20,7 @@ public class QuestNPC : NPC
     //Depending on type of quest, interact differently with that quest NPC
     public override void Interact()
     {
-        switch(NPCsQuest.goal.questState)
+        switch(NPCsQuest.goal.questState) //--
         {
             case QuestState.Available:
             questManager.AcceptQuest(NPCsQuest);
