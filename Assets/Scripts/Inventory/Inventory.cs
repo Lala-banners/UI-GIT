@@ -1,24 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-    public TMP_Text itemText;
+    #region Inventory Singleton
+    public static Inventory instance; //Making inventory a singleton because there is only one at all times.
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of Inventory found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
 
     #region Inventory Variables
-    public List<Item> inventory = new List<Item>();
-    [SerializeField] private Item selectedItem;
-    public Item item;
+    public List<ItemData> items = new List<ItemData>();
+    [SerializeField] private ItemData selectedItem;
+    public ItemData item;
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
     public int money = 100;
+    public TMP_Text itemText;
     #endregion
 
     #region GUI Inventory Variables
-    public GUIStyle[] Styles;
+    private GUIStyle[] Styles;
     private Vector2 scr; //screen
     private Vector2 scrollPos;
     private string sortType = "";
@@ -31,19 +45,10 @@ public class Inventory : MonoBehaviour
         public string slotName; //chest, feet, head etc
         public Transform equipLocation; //where the equipment will be set
         public GameObject currentItem;
-        public Item item; //ref for check to make sure its not the same item
+        public ItemData item; //ref for check to make sure its not the same item
     };
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
-
-    
-
-    private void Update()
-    {
-        
-    }
-
-    
 
     void UseItemGUI()
     {
@@ -64,17 +69,17 @@ public class Inventory : MonoBehaviour
         switch (selectedItem.Type)
         {
             case ItemType.Food:
-                if(player.playerStats.CurrentHealth < player.playerStats.healthHearts.maximumHealth)
+                if (player.playerStats.CurrentHealth < player.playerStats.healthHearts.maximumHealth)
                 {
-                    if(GUI.Button(new Rect(4.5f * scr.x, 6.5f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
+                    if (GUI.Button(new Rect(4.5f * scr.x, 6.5f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
                     {
                         selectedItem.Amount--;
                         player.playerStats.Heal(selectedItem.Heal);
                         //player.stats.currentMana += selectedItem.healMana; 
 
-                        if(selectedItem.Amount <= 0)
+                        if (selectedItem.Amount <= 0)
                         {
-                            inventory.Remove(selectedItem);
+                            items.Remove(selectedItem);
                             selectedItem = null;
                             break;
                         }
@@ -83,13 +88,13 @@ public class Inventory : MonoBehaviour
                 }
                 break;
             case ItemType.Weapon:
-                if(equipmentSlots[2].currentItem == null || 
+                if (equipmentSlots[2].currentItem == null ||
                     selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
                 {
-                    if(GUI.Button(new Rect(4.75f * scr.x, 6.5f * scr.y, 
+                    if (GUI.Button(new Rect(4.75f * scr.x, 6.5f * scr.y,
                         scr.x, 0.25f * scr.y), "Equip"))
                     {
-                        if(equipmentSlots[2].currentItem == null)
+                        if (equipmentSlots[2].currentItem == null)
                         {
                             Destroy(equipmentSlots[2].currentItem);
                         }
@@ -98,9 +103,9 @@ public class Inventory : MonoBehaviour
                         equipmentSlots[2].item = selectedItem;
                     }
                 }
-                else //if item equipped is the same as eqiped item, then upequip the weapon
+                else //if item equipped is the same as equipped item, then upequip the weapon
                 {
-                    if(GUI.Button(new Rect(4.75f * scr.x, 6.5f * scr.y, 
+                    if (GUI.Button(new Rect(4.75f * scr.x, 6.5f * scr.y,
                         scr.x, 0.25f * scr.y), "Unequip"))
                     {
                         Destroy(equipmentSlots[2].currentItem);
@@ -109,13 +114,10 @@ public class Inventory : MonoBehaviour
                 }
                 break;
             case ItemType.Apparel: //Change colour of armour
-                //if()
                 break;
             case ItemType.Crafting:
-                //if()
                 break;
             case ItemType.Ingredients:
-                //if()
                 break;
             case ItemType.Potions:
                 break;
@@ -132,42 +134,39 @@ public class Inventory : MonoBehaviour
 
     public void FindItem(string itemName)
     {
-        Item foundItem = inventory.Find(findItem => findItem.Name == itemName);
+        ItemData foundItem = items.Find(findItem => findItem.Name == itemName);
 
         //return foundItem;
     }
 
-    public void AddItem(Item item)
+    public void AddItem(ItemData item)
     {
-        //inventory.Add(item);
-        Item foundItem = inventory.Find(FindItem => FindItem.Name == item.Name);
+        items.Add(item);
+        ItemData foundItem = items.Find(FindItem => FindItem.Name == item.Name);
 
-        if(foundItem != null)
+        if (foundItem != null)
         {
             foundItem.Amount++;
             print("Found an item!");
         }
         else
         {
-            Item newItem = new Item(item, 1);
-            inventory.Add(item);
+            ItemData newItem = new ItemData(item, 1);
+            items.Add(item);
         }
     }
-
-
-    
 
     #region OnGUI Display
     private void Display()
     {
         if (sortType == "")
         {
-            for (int i = 0; i < inventory.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scr.y, 3.75f * scr.x, 8.5f * scr.y), scrollPos, new Rect(0, 0, 0, inventory.Count * .25f * scr.y), false, true);
-                if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inventory[i].Name))
+                scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scr.y, 3.75f * scr.x, 8.5f * scr.y), scrollPos, new Rect(0, 0, 0, items.Count * .25f * scr.y), false, true);
+                if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), items[i].Name))
                 {
-                    selectedItem = inventory[i];
+                    selectedItem = items[i];
                 }
                 GUI.EndScrollView();
             }
@@ -177,13 +176,13 @@ public class Inventory : MonoBehaviour
             //if not empty, display sort type
             ItemType type = (ItemType)Enum.Parse(typeof(ItemType), sortType);
             int slotCount = 0;
-            for (int i = 0; i < inventory.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                if (inventory[i].Type == type)
+                if (items[i].Type == type)
                 {
-                    if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + slotCount * (0.25f * scr.y), 3f * scr.x, 0.25f * scr.y), inventory[i].Name))
+                    if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + slotCount * (0.25f * scr.y), 3f * scr.x, 0.25f * scr.y), items[i].Name))
                     {
-                        selectedItem = inventory[i];
+                        selectedItem = items[i];
                     }
                     slotCount++;
                 }
@@ -198,6 +197,7 @@ public class Inventory : MonoBehaviour
         scr.x = Screen.width / 16;
         scr.y = Screen.height / 9;
 
+
         if (showInventory)
         {
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
@@ -206,7 +206,7 @@ public class Inventory : MonoBehaviour
 
             for (int i = 0; i < CountOfItemTypes; i++)
             {
-                if (GUI.Button(new Rect(4 * scr.x + i * scr.x, 0, scr.x,0.25f * scr.y), itemTypes[i]))
+                if (GUI.Button(new Rect(4 * scr.x + i * scr.x, 0, scr.x, 0.25f * scr.y), itemTypes[i]))
                 {
                     sortType = itemTypes[i];
                 }
@@ -217,7 +217,8 @@ public class Inventory : MonoBehaviour
                 UseItemGUI();
             }
         }
+
     }
-    }
-    #endregion
+}
+#endregion
 

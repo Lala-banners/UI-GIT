@@ -10,7 +10,7 @@ public class PlayerBinarySave : MonoBehaviour //Save and Load to binary file!
         BinaryFormatter formatter = new BinaryFormatter();
 
         //location to save
-        string path = Application.dataPath + "/doggo.dragonborn";
+        string path = Application.dataPath + "/player.save";
 
         //create file at file path
         FileStream stream = new FileStream(path, FileMode.Create);
@@ -28,7 +28,7 @@ public class PlayerBinarySave : MonoBehaviour //Save and Load to binary file!
     public static PlayerData LoadPlayerData()
     {
         //location to save
-        string path = Application.dataPath + "/doggo.dragonborn";
+        string path = Application.dataPath + "/player.load";
 
         //If there is a file at that path
         if (File.Exists(path))

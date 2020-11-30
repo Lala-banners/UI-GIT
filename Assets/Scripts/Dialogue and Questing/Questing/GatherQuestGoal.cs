@@ -18,7 +18,7 @@ public class GatherQuestGoal : QuestGoal
 
         if (playerInv == null)
         {
-            Debug.LogError("There is no player with inventory in the scene");
+            Debug.LogError("There is no player with items in the scene");
         }
     }
 
@@ -40,7 +40,7 @@ public class GatherQuestGoal : QuestGoal
             return false;
         }
 
-        //Item item = playerInv.FindItem(itemName);
+        //ItemData item = playerInv.FindItem(itemName);
 
        /* if(item == null)
         {

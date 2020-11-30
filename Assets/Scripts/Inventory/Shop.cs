@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
     #region Shop Variables
-    public List<Item> shopInventory = new List<Item>();
-    private Item selectedItem;
+    public List<ItemData> shopInventory = new List<ItemData>();
+    private ItemData selectedItem;
 
     private Inventory playerInv;
     #endregion
@@ -24,7 +23,7 @@ public class Shop : MonoBehaviour
 
         if(playerInv == null)
         {
-            Debug.LogError("There is no player with an inventory in the scene");
+            Debug.LogError("There is no player with an items in the scene");
         }
     }
 
@@ -67,7 +66,7 @@ public class Shop : MonoBehaviour
                     if(playerInv.money >= selectedItem.Value)
                     {
                         if(GUI.Button(new Rect(10.5f * scr.x, 6.5f * scr.y, 
-                                        scr.x, 0.25f * scr.y), "Purchase Item"))
+                                        scr.x, 0.25f * scr.y), "Purchase ItemData"))
                         {
                             playerInv.money -= selectedItem.Value;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public enum ItemType
@@ -17,7 +15,7 @@ public enum ItemType
 }
 
 [System.Serializable]
-public class Item 
+public class ItemData 
 {
     #region Private Variables
     private int id;
@@ -107,12 +105,12 @@ public class Item
     }
     #endregion
 
-    public Item()
+    public ItemData()
     {
 
     }
 
-    public Item(Item copyItem, int copyAmount)
+    public ItemData(ItemData copyItem, int copyAmount)
     {
         name = copyItem.Name;
         description = copyItem.Description;
