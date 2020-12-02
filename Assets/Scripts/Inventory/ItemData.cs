@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public enum ItemType
 {
     Food,
@@ -104,11 +103,6 @@ public class ItemData
         set { healMana = value; }
     }
     #endregion
-
-    public ItemData()
-    {
-
-    }
 
     public ItemData(ItemData copyItem, int copyAmount)
     {

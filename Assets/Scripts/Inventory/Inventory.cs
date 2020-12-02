@@ -50,7 +50,8 @@ public class Inventory : MonoBehaviour
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
 
-    //TODO : Lara : Use item, Buy item, pick up item, equip items.
+    //TODO : Lara : 1 -> Use item, Buy item, pick up item, discard item spawns item back into world.
+    //TODO : Lara : 2 -> equip items, toggle inv on an off.
 
     void UseItemGUI()
     {

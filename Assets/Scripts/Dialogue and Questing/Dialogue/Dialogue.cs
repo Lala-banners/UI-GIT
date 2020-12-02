@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
+    //TODO : Lara : Dialogue -> talk to NPC, approval system based on dialogue choice (dislike, neutral, like), GUI & UI.
     [Header("References")]
     public bool showDialogue;
     public int currentLineIndex; //index for current line of dialogue
