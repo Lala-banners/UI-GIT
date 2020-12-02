@@ -6,7 +6,7 @@ using TMPro;
 public class Inventory : MonoBehaviour
 {
     #region Inventory Singleton
-    public static Inventory instance; //Making inventory a singleton because there is only one at all times.
+    public static Inventory instance = null; //Making inventory a singleton because there is only one at all times.
 
     private void Awake()
     {
@@ -49,6 +49,8 @@ public class Inventory : MonoBehaviour
     };
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
+
+    //TODO : Lara : Use item, Buy item, pick up item, equip items.
 
     void UseItemGUI()
     {
@@ -135,8 +137,6 @@ public class Inventory : MonoBehaviour
     public void FindItem(string itemName)
     {
         ItemData foundItem = items.Find(findItem => findItem.Name == itemName);
-
-        //return foundItem;
     }
 
     public void AddItem(ItemData item)

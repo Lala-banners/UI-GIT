@@ -6,7 +6,6 @@ public class Shop : MonoBehaviour
     #region Shop Variables
     public List<ItemData> shopInventory = new List<ItemData>();
     private ItemData selectedItem;
-
     private Inventory playerInv;
     #endregion
 
@@ -25,12 +24,6 @@ public class Shop : MonoBehaviour
         {
             Debug.LogError("There is no player with an items in the scene");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     #region IMGUI
