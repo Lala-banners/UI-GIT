@@ -1,24 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
     //TODO : Lara : Dialogue -> talk to NPC, approval system based on dialogue choice (dislike, neutral, like), GUI & UI.
     [Header("References")]
     public bool showDialogue;
-    public int currentLineIndex; //index for current line of dialogue
+    public int currentLineIndex, optionIndex; //index for current line of dialogue
+    //index for our current line of dialogue and an index for a set question marker of the dialogue 
+  
+    [Header("NPC Name and Dialogue")]
+    //name of this specific NPC
+    public new string name;
+    //array for text for our dialogue
+    public string[] dialogueText;
 
     public ThirdPersonMovement playerMovement;
     public Vector2 scr;
-
-    [Header("NPC Name and Dialogue")]
-    public string name;
-    public string[] dialogueText;
-    //public NPC npc;
-    
-    //the dialogue box takes up the whole bottom 3rd of the screen and displays the NPC's name and current dialogue line
 
     public void ShowDialogue()
     {
@@ -50,7 +47,7 @@ public class Dialogue : MonoBehaviour
                 }
                 else
                 {
-                    if(GUI.Button(new Rect(15 * scr.x, 8.5f * scr.y, scr.x, scr.y * 0.5f), "Bye"))
+                    if (GUI.Button(new Rect(15 * scr.x, 8.5f * scr.y, scr.x, scr.y * 0.5f), "Bye"))
                     {
                         showDialogue = false;
                         currentLineIndex = 0;

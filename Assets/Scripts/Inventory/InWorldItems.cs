@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InWorldItems : MonoBehaviour
 {
+
+    public ItemData itemData;
+
+   
     // Start is called before the first frame update
     void Start()
     {

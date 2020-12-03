@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 [System.Serializable]
@@ -18,7 +16,7 @@ public class GatherQuestGoal : QuestGoal
 
         if (playerInv == null)
         {
-            Debug.LogError("There is no player with items in the scene");
+            Debug.LogError("There is no player with inventory in the scene");
         }
     }
 

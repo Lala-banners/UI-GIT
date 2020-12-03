@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum QuestState
 {
@@ -12,10 +10,7 @@ public enum QuestState
 
 public enum GoalType
 {
-    Gather,
-    //Kill,
-    //Escort,
-    //Locate
+    Gather
 }
 
 [System.Serializable]

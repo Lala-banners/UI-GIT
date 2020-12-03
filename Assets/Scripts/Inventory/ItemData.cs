@@ -14,7 +14,7 @@ public enum ItemType
 }
 
 [System.Serializable]
-public class ItemData 
+public class ItemData
 {
     #region Private Variables
     private int id;
@@ -79,19 +79,19 @@ public class ItemData
         set { type = value; }
     }
 
-    public int Damage 
+    public int Damage
     {
         get { return damage; }
         set { damage = value; }
     }
 
-    public int Armour 
+    public int Armour
     {
         get { return armour; }
         set { armour = value; }
     }
 
-    public int Heal 
+    public int Heal
     {
         get { return heal; }
         set { heal = value; }
@@ -103,18 +103,5 @@ public class ItemData
         set { healMana = value; }
     }
     #endregion
-
-    public ItemData(ItemData copyItem, int copyAmount)
-    {
-        name = copyItem.Name;
-        description = copyItem.Description;
-        value = copyItem.Value;
-        amount = copyAmount;
-        icon = copyItem.Icon;
-        mesh = copyItem.Mesh;
-        type = copyItem.Type;
-        damage = copyItem.Damage;
-        armour = copyItem.Armour;
-        heal = copyItem.Heal;
-    }
 }
+

@@ -22,7 +22,7 @@ public class Shop : MonoBehaviour
 
         if(playerInv == null)
         {
-            Debug.LogError("There is no player with an items in the scene");
+            Debug.LogError("There is no player with an inventory in the scene");
         }
     }
 
@@ -63,7 +63,7 @@ public class Shop : MonoBehaviour
                         {
                             playerInv.money -= selectedItem.Value;
 
-                            //Add to player
+                            //Add to inventory
                             playerInv.AddItem(selectedItem);
 
                             //Remove from shop

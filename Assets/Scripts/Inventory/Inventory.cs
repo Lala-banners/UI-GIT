@@ -2,33 +2,28 @@
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    #region Inventory Singleton
-    public static Inventory instance = null; //Making inventory a singleton because there is only one at all times.
-
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogWarning("More than one instance of Inventory found");
-            return;
-        }
-
-        instance = this;
-    }
-    #endregion
-
+    public PauseHandler pause;
 
     #region Inventory Variables
-    public List<ItemData> items = new List<ItemData>();
+    public List<ItemData> inventory = new List<ItemData>(); //List of inventory = inventory
     [SerializeField] private ItemData selectedItem;
     public ItemData item;
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
     public int money = 100;
     public TMP_Text itemText;
+    public TMP_Text descriptionText;
+    public TMP_Text amountText;
+    public TMP_Text valueText;
+    public Texture2D icon;
+    public GameObject mesh;
+    public Transform dropLocation;
+    public GameObject itemPrefab;
+    public GameObject axePrefab, swordPrefab, shieldPrefab;
     #endregion
 
     #region GUI Inventory Variables
@@ -37,6 +32,115 @@ public class Inventory : MonoBehaviour
     private Vector2 scrollPos;
     private string sortType = "";
     #endregion
+
+    //TODO : Lara : Convert all IMGUI to Canvas! (Inventory, shop, money, quests, dialogue etc)
+
+    //For eating apples, using potions etc
+    public void UseItem()
+    {
+
+    }
+
+    public void DisplayItem() //Display in Inventory
+    {
+        //Display the item information from ItemData
+        itemText.text = selectedItem.Name.ToString();
+        descriptionText.text = selectedItem.Description.ToString();
+        amountText.text = selectedItem.Amount.ToString();
+        valueText.text = selectedItem.Value.ToString();
+        icon = selectedItem.Icon;
+        mesh = selectedItem.Mesh;
+    }
+
+    public void Discard() //THIS WORKS!
+    {
+        GameObject droppedItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity); //instantiate item at drop location
+        droppedItem.name = selectedItem.Name;
+        inventory.Remove(selectedItem); //removes from inventory
+    }
+
+    //Function for moving items from inventory to chest 
+    public void Move()
+    {
+
+    }
+
+    public void EquipWeapon()
+    {
+        #region Equip Axe
+        if (equipmentSlots[2].currentItem == null ||
+                    selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
+        {
+            if (equipmentSlots[2].currentItem == null)
+            {
+                Destroy(equipmentSlots[2].currentItem);
+            }
+            Instantiate<GameObject>(axePrefab, equipmentSlots[2].equipLocation);
+            equipmentSlots[2].currentItem = axePrefab;
+            equipmentSlots[2].item = selectedItem;
+        }
+        else //if item equipped is the same as equipped item, then upequip the weapon
+        {
+            Destroy(equipmentSlots[2].currentItem);
+            equipmentSlots[2].item = null;
+        }
+        #endregion
+
+        #region Equip Sword
+        if (equipmentSlots[2].currentItem == null ||
+                    selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
+        {
+            if (equipmentSlots[2].currentItem == null)
+            {
+                Destroy(equipmentSlots[2].currentItem);
+            }
+            Instantiate<GameObject>(swordPrefab, equipmentSlots[3].equipLocation);
+            equipmentSlots[2].currentItem = swordPrefab;
+            equipmentSlots[2].item = selectedItem;
+        }
+        else //if item equipped is the same as equipped item, then upequip the weapon
+        {
+            Destroy(equipmentSlots[2].currentItem);
+            equipmentSlots[2].item = null;
+        }
+        #endregion
+
+        #region Equip Shield
+        if (equipmentSlots[3].currentItem == null ||
+                    selectedItem.Name != equipmentSlots[3].item.Name) //If no weapon equipped, then equip selected weapon
+        {
+            if (equipmentSlots[3].currentItem == null)
+            {
+                Destroy(equipmentSlots[3].currentItem);
+            }
+            Instantiate<GameObject>(shieldPrefab, equipmentSlots[3].equipLocation);
+            equipmentSlots[3].currentItem = shieldPrefab;
+            equipmentSlots[3].item = selectedItem;
+        }
+        else //if item equipped is the same as equipped item, then upequip the weapon
+        {
+            Destroy(equipmentSlots[2].currentItem);
+            equipmentSlots[2].item = null;
+        }
+        #endregion
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!pause.inventory.activeSelf)
+            {
+                pause.Paused(pause.inventory);
+            }
+            else
+            {
+                pause.UnPaused();
+                pause.inventory.SetActive(false);
+            }
+        }
+    }
 
     #region Equipment
     [System.Serializable]
@@ -50,8 +154,8 @@ public class Inventory : MonoBehaviour
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
 
-    //TODO : Lara : 1 -> Use item, Buy item, pick up item, discard item spawns item back into world.
-    //TODO : Lara : 2 -> equip items, toggle inv on an off.
+    //TODO : Lara : 1 -> Use item, Buy item, (in canvas)
+    //TODO : Lara : 2 -> equip weapons from inventory, (in canvas)
 
     void UseItemGUI()
     {
@@ -78,15 +182,13 @@ public class Inventory : MonoBehaviour
                     {
                         selectedItem.Amount--;
                         player.playerStats.Heal(selectedItem.Heal);
-                        //player.stats.currentMana += selectedItem.healMana; 
 
                         if (selectedItem.Amount <= 0)
                         {
-                            items.Remove(selectedItem);
+                            inventory.Remove(selectedItem);
                             selectedItem = null;
                             break;
                         }
-                        print("Eat");
                     }
                 }
                 break;
@@ -116,7 +218,7 @@ public class Inventory : MonoBehaviour
                     }
                 }
                 break;
-            case ItemType.Apparel: //Change colour of armour
+            case ItemType.Apparel:
                 break;
             case ItemType.Crafting:
                 break;
@@ -133,28 +235,24 @@ public class Inventory : MonoBehaviour
             default:
                 break;
         }
+
+        if (GUI.Button(new Rect(5.25f * scr.x, 6.75f * scr.y, scr.x, 0.25f * scr.y), "Discard"))
+        {
+            /*GameObject droppedItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity); //instantiate item at drop location
+            droppedItem.name = selectedItem.Name;
+            inventory.Remove(selectedItem); //removes from inventory*/
+        }
     }
 
     public void FindItem(string itemName)
     {
-        ItemData foundItem = items.Find(findItem => findItem.Name == itemName);
+        ItemData foundItem = inventory.Find(findItem => findItem.Name == itemName);
     }
 
     public void AddItem(ItemData item)
     {
-        items.Add(item);
-        ItemData foundItem = items.Find(FindItem => FindItem.Name == item.Name);
-
-        if (foundItem != null)
-        {
-            foundItem.Amount++;
-            print("Found an item!");
-        }
-        else
-        {
-            ItemData newItem = new ItemData(item, 1);
-            items.Add(item);
-        }
+        inventory.Add(item);
+        ItemData foundItem = inventory.Find(FindItem => FindItem.Name == item.Name);
     }
 
     #region OnGUI Display
@@ -162,12 +260,12 @@ public class Inventory : MonoBehaviour
     {
         if (sortType == "")
         {
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
-                scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scr.y, 3.75f * scr.x, 8.5f * scr.y), scrollPos, new Rect(0, 0, 0, items.Count * .25f * scr.y), false, true);
-                if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), items[i].Name))
+                scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scr.y, 3.75f * scr.x, 8.5f * scr.y), scrollPos, new Rect(0, 0, 0, inventory.Count * .25f * scr.y), false, true);
+                if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inventory[i].Name))
                 {
-                    selectedItem = items[i];
+                    selectedItem = inventory[i];
                 }
                 GUI.EndScrollView();
             }
@@ -177,13 +275,13 @@ public class Inventory : MonoBehaviour
             //if not empty, display sort type
             ItemType type = (ItemType)Enum.Parse(typeof(ItemType), sortType);
             int slotCount = 0;
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
-                if (items[i].Type == type)
+                if (inventory[i].Type == type)
                 {
-                    if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + slotCount * (0.25f * scr.y), 3f * scr.x, 0.25f * scr.y), items[i].Name))
+                    if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + slotCount * (0.25f * scr.y), 3f * scr.x, 0.25f * scr.y), inventory[i].Name))
                     {
-                        selectedItem = items[i];
+                        selectedItem = inventory[i];
                     }
                     slotCount++;
                 }
@@ -215,10 +313,9 @@ public class Inventory : MonoBehaviour
             Display();
             if (selectedItem != null)
             {
-                UseItemGUI();
+                //UseItemGUI();
             }
         }
-
     }
 }
 #endregion

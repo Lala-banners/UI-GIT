@@ -7,15 +7,17 @@ public class PauseHandler : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject keybinds;
     public GameObject HUD;
+    public GameObject inventory;
 
-    void Paused()
+    public void Paused(GameObject panel)
     {
         isPaused = true;
         Time.timeScale = 0;
-        pauseMenu.SetActive(true);
-        HUD.SetActive(false);
+        pauseMenu.SetActive(false);
+        inventory.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        panel.SetActive(true);
     }
 
     public void UnPaused()
@@ -26,14 +28,12 @@ public class PauseHandler : MonoBehaviour
         keybinds.SetActive(false);
         optionsMenu.SetActive(false);
         HUD.SetActive(true);
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        inventory.SetActive(false);
     }
 
     private void Start()
     {
         UnPaused();
-
     }
 
     private void Update()
@@ -50,7 +50,7 @@ public class PauseHandler : MonoBehaviour
                 isPaused = !isPaused;
                 if(isPaused)
                 {
-                    Paused();
+                    Paused(pauseMenu);
                 }
                 else
                 {

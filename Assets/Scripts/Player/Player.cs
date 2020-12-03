@@ -61,6 +61,34 @@ public class Player : MonoBehaviour
     public GameObject inventoryObject;
     #endregion
 
+    public void Interact()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Ray ray = new Ray(transform.position + transform.forward * 0.5f, transform.forward); //Creates line from player to infinity 
+            RaycastHit hitInfo; //Get back info about what we hit
+            //ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+
+            //THIS IS HOW TO MAKE A MASK
+            //Method of finding layer with name
+            //Get the layer id
+            int layerMask = LayerMask.NameToLayer("Interactable");
+
+            //Moving binary 1 over to the left, method 1 if dont want to search for the name of layer
+            //Actually turning it into a layer and not a value
+            layerMask = 1 << layerMask;
+
+            //If Ray hits something
+            if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
+            {
+                if (hitInfo.collider.TryGetComponent<NPC>(out NPC npc))
+                {
+                    npc.Interact(); //Override NPC because otherwise would run wrong method
+                }
+            }
+        }
+    }
+
     public void SetStamina()
     {
         staminaSlider.maxValue = stats.maxStamina;
@@ -84,14 +112,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ShowInventory()
-    {
-        if (Input.GetKey(KeyCode.I)) //Toggle Inventory on and off
-        {
-            inventoryObject.SetActive(true);
-        }
-    }
-
     private void Start()
     {
         
@@ -100,21 +120,19 @@ public class Player : MonoBehaviour
     // OnControllerColliderHit is called when the controller hits a collider while performing a Move
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        InWorldItems items = hit.collider.GetComponent<InWorldItems>();
-        if(inventory.item != null)
+        InWorldItems items = hit.collider.GetComponent<InWorldItems>(); //if player collides with item
+        if(items != null) //if item exists and is food inventory.item.Type == ItemType.Food
         {
-            inventory.AddItem(inventory.item);
+            inventory.AddItem(inventory.item); //add to inventory
             print("Item has been picked up");
+            Destroy(items.gameObject);
         }
     }
-
 
 
     private void Update()
     {
         Interact();
-
-        ShowInventory();
 
         #region Health
         if (Input.GetKeyDown(KeyCode.H)) //HEALTH DECREASE
@@ -167,34 +185,6 @@ public class Player : MonoBehaviour
             }
         }
         #endregion
-    }
-
-    public void Interact()
-    {
-        if (Input.GetKeyDown(KeyCode.E)) 
-        {
-            Ray ray; //Creates line from middle of the screen to infinity 
-            RaycastHit hitInfo; //Get back info about what we hit
-            ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-
-            //THIS IS HOW TO MAKE A MASK
-            //Method of finding layer with name
-            //Get the layer id
-            int layerMask = LayerMask.NameToLayer("Interactable"); 
-
-            //Moving binary 1 over to the left, method 1 if dont want to search for the name of layer
-            //Actually turning it into a layer and not a value
-            layerMask = 1 << layerMask;
-
-            //If Ray hits something
-            if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
-            {
-                if(hitInfo.collider.TryGetComponent<NPC>(out NPC npc))
-                {
-                    npc.Interact(); //Override NPC because otherwise would run wrong method
-                }
-            }
-        }
     }
 
     //Set Mana Slider
