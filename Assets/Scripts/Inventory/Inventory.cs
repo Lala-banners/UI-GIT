@@ -9,11 +9,17 @@ public class Inventory : MonoBehaviour
     public PauseHandler pause;
 
     #region Inventory Variables
+    [Header("Inventory References")]
     public List<ItemData> inventory = new List<ItemData>(); //List of inventory = inventory
     [SerializeField] private ItemData selectedItem;
     public ItemData item;
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
+    public Chest currentChest;
+    public Shop currentShop;
+
+    [Header("Inventory Variables")]
+    public string[] enumTypesForItems;
     public int money = 100;
     public TMP_Text itemText;
     public TMP_Text descriptionText;
@@ -34,6 +40,21 @@ public class Inventory : MonoBehaviour
     #endregion
 
     //TODO : Lara : Convert all IMGUI to Canvas! (Inventory, shop, money, quests, dialogue etc)
+
+    private void Start()
+    {
+        player = this.gameObject.GetComponent<Player>();
+        enumTypesForItems = new string[] { "All", " Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potions", "Scrolls", "Quest" };
+
+        inventory.Add(ItemData.CreateItem(0));
+        inventory.Add(ItemData.CreateItem(1));
+        inventory.Add(ItemData.CreateItem(100));
+        inventory.Add(ItemData.CreateItem(101));
+        inventory.Add(ItemData.CreateItem(102));
+        inventory.Add(ItemData.CreateItem(200));
+        inventory.Add(ItemData.CreateItem(201));
+        inventory.Add(ItemData.CreateItem(202));
+    }
 
     //For eating apples, using potions etc
     public void UseItem()

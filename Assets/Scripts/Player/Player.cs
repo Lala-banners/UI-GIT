@@ -112,13 +112,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
-
     // OnControllerColliderHit is called when the controller hits a collider while performing a Move
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnControllerColliderHit(ControllerColliderHit hit) //To pick up item
     {
         InWorldItems items = hit.collider.GetComponent<InWorldItems>(); //if player collides with item
         if(items != null) //if item exists and is food inventory.item.Type == ItemType.Food
@@ -128,7 +123,6 @@ public class Player : MonoBehaviour
             Destroy(items.gameObject);
         }
     }
-
 
     private void Update()
     {

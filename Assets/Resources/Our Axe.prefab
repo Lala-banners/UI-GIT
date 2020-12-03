@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3192123200760265208}
   - component: {fileID: 3192123200760265209}
   - component: {fileID: 3192123200760265210}
-  m_Layer: 0
+  - component: {fileID: 8247645531986052025}
+  m_Layer: 8
   m_Name: Our Axe
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3192123200760265211}
-  m_LocalRotation: {x: -0.10569464, y: -0.036418647, z: 0.75637084, w: -0.6445196}
+  m_LocalRotation: {x: 0.10569807, y: 0.0364183, z: -0.756372, w: 0.6445177}
   m_LocalPosition: {x: -0.0044981763, y: 0.00440154, z: -0.00032619943}
-  m_LocalScale: {x: 0.096732825, y: 0.09673282, z: 0.09673282}
+  m_LocalScale: {x: 0.09673283, y: 0.09673282, z: 0.09673284}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.031, y: -6.6080003, z: -99.769005}
 --- !u!33 &3192123200760265209
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,3 +80,27 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &8247645531986052025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3192123200760265211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b2284a609e079449a7da0910a2b798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData:
+    name: Axe
+    description: Best stabby boi
+    value: 5
+    amount: 1
+    icon: {fileID: 2800000, guid: 08b1490ecaaa1a742a20efcdeae82540, type: 3}
+    mesh: {fileID: 3192123200760265211}
+    type: 1
+    damage: 20
+    armour: 0
+    heal: 0
+    healMana: 0

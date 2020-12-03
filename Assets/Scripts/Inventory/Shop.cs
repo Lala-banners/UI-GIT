@@ -7,13 +7,13 @@ public class Shop : MonoBehaviour
     public List<ItemData> shopInventory = new List<ItemData>();
     private ItemData selectedItem;
     private Inventory playerInv;
+    public Approval appDialogue;
     #endregion
 
     #region Display Shop Variables
     [SerializeField] public bool showShop = false;
     private Vector2 scr;
     #endregion
-
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,16 @@ public class Shop : MonoBehaviour
         {
             Debug.LogError("There is no player with an inventory in the scene");
         }
+
+        //Add all items in ItemData to the shop inventory
+        shopInventory.Add(ItemData.CreateItem(Random.Range(0, 2)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(0, 2)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        shopInventory.Add(ItemData.CreateItem(Random.Range(100, 102)));
     }
 
     #region IMGUI
@@ -84,6 +94,7 @@ public class Shop : MonoBehaviour
                 {
                     playerInv.showInventory = false;
                     showShop = false;
+                    appDialogue.showDialogue = true;
                 }
             }
         }

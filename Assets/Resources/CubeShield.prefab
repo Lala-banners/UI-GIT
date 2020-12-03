@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8102492120330241365}
   - component: {fileID: 8102492120330241364}
   - component: {fileID: 8102492120330241367}
-  m_Layer: 0
+  - component: {fileID: 788135313}
+  m_Layer: 8
   m_Name: CubeShield
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,3 +94,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &788135313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102492120330241449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b2284a609e079449a7da0910a2b798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData:
+    name: Shield
+    description: Protec
+    value: 10
+    amount: 1
+    icon: {fileID: 2800000, guid: 21c2a569f789c2c44b2495da1732ca72, type: 3}
+    mesh: {fileID: 8102492120330241449}
+    type: 1
+    damage: 0
+    armour: 10
+    heal: 0
+    healMana: 0
