@@ -102,6 +102,11 @@ public class PlayerStats
         CurrentHealth += health;
     }
 
+    public void HealMana(float mana)
+    {
+        
+    }
+
     //If able to change stats then return true
     public bool SetStats(int statIndex, int amount)
     {

@@ -38,12 +38,29 @@ public class Inventory : MonoBehaviour
     //For eating apples, using potions etc
     public void UseItem()
     {
+        #region Heal with potion
+        if (player.playerStats.CurrentHealth < player.playerStats.healthHearts.maximumHealth)
+        {
+            selectedItem.Amount--;
+            player.playerStats.Heal(selectedItem.Heal);
 
+            if (selectedItem.Amount <= 0)
+            {
+                inventory.Remove(selectedItem);
+                selectedItem = null;
+            }
+        }
+        #endregion
+
+        #region Heal Mana
+        selectedItem.Amount--;
+        player.playerStats.HealMana(selectedItem.HealMana);
+        #endregion
     }
 
     public void DisplayItem() //Display in Inventory
     {
-        //Display the item information from ItemData
+        //Display the sword information from ItemData
         itemText.text = selectedItem.Name.ToString();
         descriptionText.text = selectedItem.Description.ToString();
         amountText.text = selectedItem.Amount.ToString();
@@ -68,16 +85,16 @@ public class Inventory : MonoBehaviour
     public void EquipWeapon()
     {
         #region Equip Axe
-        if (equipmentSlots[2].currentItem == null ||
-                    selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
+        if (equipmentSlots[2].currentItem == null || selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
         {
-            if (equipmentSlots[2].currentItem == null)
+            Destroy(equipmentSlots[2].currentItem);
+
+            if (equipmentSlots[2].currentItem != null || selectedItem.Name == equipmentSlots[2].item.Name)
             {
-                Destroy(equipmentSlots[2].currentItem);
+                //equipmentSlots[2].item.Mesh
+                equipmentSlots[2].currentItem = Instantiate<GameObject>(axePrefab, equipmentSlots[2].equipLocation); ;
+                equipmentSlots[2].item = selectedItem;
             }
-            Instantiate<GameObject>(axePrefab, equipmentSlots[2].equipLocation);
-            equipmentSlots[2].currentItem = axePrefab;
-            equipmentSlots[2].item = selectedItem;
         }
         else //if item equipped is the same as equipped item, then upequip the weapon
         {
@@ -94,14 +111,16 @@ public class Inventory : MonoBehaviour
             {
                 Destroy(equipmentSlots[2].currentItem);
             }
-            Instantiate<GameObject>(swordPrefab, equipmentSlots[3].equipLocation);
-            equipmentSlots[2].currentItem = swordPrefab;
+            GameObject swordGO = Instantiate<GameObject>(shieldPrefab, equipmentSlots[3].equipLocation);
+            equipmentSlots[2].currentItem = swordGO;
+            //Instantiate<GameObject>(swordPrefab, equipmentSlots[3].equipLocation);
             equipmentSlots[2].item = selectedItem;
         }
         else //if item equipped is the same as equipped item, then upequip the weapon
         {
-            Destroy(equipmentSlots[2].currentItem);
+            GameObject item = equipmentSlots[2].currentItem;
             equipmentSlots[2].item = null;
+            Destroy(item);
         }
         #endregion
 
@@ -113,8 +132,8 @@ public class Inventory : MonoBehaviour
             {
                 Destroy(equipmentSlots[3].currentItem);
             }
-            Instantiate<GameObject>(shieldPrefab, equipmentSlots[3].equipLocation);
-            equipmentSlots[3].currentItem = shieldPrefab;
+            GameObject shieldGO =  Instantiate<GameObject>(shieldPrefab, equipmentSlots[3].equipLocation);
+            equipmentSlots[3].currentItem = shieldGO;
             equipmentSlots[3].item = selectedItem;
         }
         else //if item equipped is the same as equipped item, then upequip the weapon

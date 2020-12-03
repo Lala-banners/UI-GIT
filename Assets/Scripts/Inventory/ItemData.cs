@@ -28,6 +28,7 @@ public class ItemData
     [SerializeField] private int damage;
     [SerializeField] private int armour;
     [SerializeField] private int heal;
+    [SerializeField] private int healMana;
     #endregion
 
     #region Public Properties
@@ -97,7 +98,7 @@ public class ItemData
         set { heal = value; }
     }
 
-    public int healMana
+    public int HealMana
     {
         get { return healMana; }
         set { healMana = value; }
