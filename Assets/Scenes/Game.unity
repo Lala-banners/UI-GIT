@@ -4581,7 +4581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDlg: 0
-  index: 0
+  currentLineIndex: 0
   optionIndex: 0
   scr: {x: 0, y: 0}
   player: {fileID: 535793796}
@@ -9390,7 +9390,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782602518}
-  m_LocalRotation: {x: 0.3060453, y: 0.000000023165901, z: -0.0000000074471513, w: 0.952017}
+  m_LocalRotation: {x: 0.3060453, y: -0.000000023165901, z: 0.0000000074471513, w: 0.952017}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19037,6 +19037,8 @@ GameObject:
   - component: {fileID: 2023166079}
   - component: {fileID: 2023166078}
   - component: {fileID: 2023166082}
+  - component: {fileID: 2023166083}
+  - component: {fileID: 2023166077}
   m_Layer: 8
   m_Name: Quest NPC
   m_TagString: Untagged
@@ -19044,6 +19046,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2023166077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023166076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcaf9431333c7c241919c4fbc0888be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDlg: 0
+  currentLineIndex: 0
+  optionIndex: 0
+  scr: {x: 0, y: 0}
+  player: {fileID: 0}
+  name: 
+  dialogueText: []
 --- !u!136 &2023166078
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19144,6 +19165,32 @@ MonoBehaviour:
     goal: {fileID: 0}
   completeText:
   - Thanks! Quest Complete!
+--- !u!114 &2023166083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023166076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3caa31306bdb714fab7042c1b20692b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dislikeTxt: []
+  neutralTxt: []
+  likeTxt: []
+  approval: 0
+  response1: 
+  response2: 
+  myQuest: {fileID: 1462075878}
+  myShop: {fileID: 222853233}
+  inventory: {fileID: 368877527}
+  showDialogue: 0
+  currentLineIndex: 0
+  optionIndex: 0
+  scr: {x: 0, y: 0}
+  dialogueText: []
 --- !u!1 &2023676224
 GameObject:
   m_ObjectHideFlags: 0
