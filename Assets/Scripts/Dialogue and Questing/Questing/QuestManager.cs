@@ -11,10 +11,6 @@ public class QuestManager : MonoBehaviour
 
     Dialogue dialogue;
 
-    //QuestGiver
-    //public Quest currentQuest;
-    //For multiple quests: public Quest[] quests;
-
     public void OpenQuestWindow()
     {
         questWindow.SetActive(true);

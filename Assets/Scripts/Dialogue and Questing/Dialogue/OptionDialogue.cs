@@ -2,41 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Approval : MonoBehaviour
+public class OptionDialogue : MonoBehaviour
 {
-    #region Approval Variables
-    public string[] dislikeTxt, neutralTxt, likeTxt;
-    public int approval;
-    public string response1, response2; //response of player (yes or no)
-    public QuestManager myQuest;
-    public Shop myShop;
-    public Inventory inventory;
-    #endregion
-
-    #region Dialogue Variables
-    public bool showDialogue;
+    #region Variables
+    [Header("References")]
+    //boolean to toggle if we can see a characters dialogue box
+    public bool showDlg;
+    //index for our current line of dialogue and an index for a set question marker of the dialogue 
     public int currentLineIndex, optionIndex;
     public Vector2 scr;
+    public Player player;
+    //mouselook script reference for the maincamera
+    [Header("NPC Name and Dialogue")]
+    //name of this specific NPC
+    public new string name;
+    //array for text for our dialogue
     public string[] dialogueText;
     #endregion
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        dialogueText = neutralTxt;
-        myQuest = GetComponent<QuestManager>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // OnGUI is called for rendering and handling GUI events
     private void OnGUI()
     {
-        if (showDialogue)
+        if (showDlg)
         {
             //set up our ratio messurements for 16:9
             scr.x = Screen.width / 16;
@@ -44,18 +33,7 @@ public class Approval : MonoBehaviour
 
             //the dialogue box takes up the whole bottom 3rd of the screen and displays the NPC's name and current dialogue line
             GUI.Box(new Rect(0, 6 * scr.y, Screen.width, 3 * scr.y), name + " : " + dialogueText[currentLineIndex]);
-            if (approval <= -1)
-            {
-                dialogueText = dislikeTxt;
-            }
-            if (approval == 0)
-            {
-                dialogueText = neutralTxt;
-            }
-            if (approval >= 1)
-            {
-                dialogueText = likeTxt;
-            }
+
             //if not at the end of the dialogue or not at the options index
             if (!(currentLineIndex >= dialogueText.Length - 1 || currentLineIndex == optionIndex))
             {
@@ -70,25 +48,16 @@ public class Approval : MonoBehaviour
             else if (currentLineIndex == optionIndex)
             {
                 //Accept button allows us to skip forward to the next line of dialogue
-                if (GUI.Button(new Rect(14 * scr.x, 8.5f * scr.y, scr.x * 2, 0.5f * scr.y), response1))
+                if (GUI.Button(new Rect(14 * scr.x, 8.5f * scr.y, scr.x * 2, 0.5f * scr.y), "Accept"))
                 {
                     //move forward in our dialouge array
                     currentLineIndex++;
-                    if (approval < 1)
-                    {
-                        approval++;
-                        myQuest.OpenQuestWindow();
-                    }
                 }
                 //Decline button skips us to the end of the characters dialogue 
-                if (GUI.Button(new Rect(12 * scr.x, 8.5f * scr.y, scr.x * 2, 0.5f * scr.y), response2))
+                if (GUI.Button(new Rect(12 * scr.x, 8.5f * scr.y, scr.x * 2, 0.5f * scr.y), "Decline"))
                 {
                     //skip to end of dlg;
                     currentLineIndex = dialogueText.Length - 1;
-                    if (approval > -1)
-                    {
-                        approval--;
-                    }
                 }
             }
             //else we are at the end
@@ -97,25 +66,16 @@ public class Approval : MonoBehaviour
                 if (GUI.Button(new Rect(15 * scr.x, 8.5f * scr.y, scr.x, scr.y * 0.5f), "Bye"))
                 {
                     //close the dialogue box
-                    showDialogue = false;
+                    showDlg = false;
                     //set index back to 0 
                     currentLineIndex = 0;
+
                     //lock the mouse cursor
                     Cursor.lockState = CursorLockMode.Locked;
                     //set the cursor to being invisible       
                     Cursor.visible = false;
                 }
             }
-
-            if (GUI.Button(new Rect(0.25f * scr.x, 8.5f * scr.y, scr.x, 0.5f * scr.y), "Shop"))
-            {
-                myShop.showShop = true;
-                inventory.showInventory = true;
-                inventory.currentShop = myShop;
-                showDialogue = false;
-            }
         }
     }
-
-
 }

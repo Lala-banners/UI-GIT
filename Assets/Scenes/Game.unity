@@ -497,7 +497,7 @@ Transform:
   - {fileID: 637735771}
   - {fileID: 1462075877}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &34194615
 GameObject:
@@ -1921,7 +1921,7 @@ Transform:
   - {fileID: 2050578582}
   - {fileID: 492721502}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &196135521
 GameObject:
@@ -3999,7 +3999,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 535793794}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374235501
 GameObject:
@@ -4432,6 +4432,8 @@ GameObject:
   - component: {fileID: 382869884}
   - component: {fileID: 382869883}
   - component: {fileID: 382869888}
+  - component: {fileID: 382869889}
+  - component: {fileID: 382869887}
   m_Layer: 8
   m_Name: Dialogue NPC
   m_TagString: Untagged
@@ -4507,14 +4509,46 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382869882}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 708.67, y: 0.7, z: 515.992}
   m_LocalScale: {x: 0.65515, y: 0.65515, z: 0.65515}
   m_Children:
   - {fileID: 492390293}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 626651931}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &382869887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382869882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3caa31306bdb714fab7042c1b20692b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dislikeTxt:
+  - HELP DO MY QUEST
+  - YOU SUCK!
+  neutralTxt:
+  - Hi, please do my quest
+  - Thanks!
+  likeTxt:
+  - 'OMG I LOVE YOU '
+  - DO MY QUEST
+  approval: 0
+  response1: Yes
+  response2: No
+  myQuest: {fileID: 1462075878}
+  myShop: {fileID: 222853233}
+  inventory: {fileID: 368877527}
+  showDialogue: 0
+  currentLineIndex: 0
+  optionIndex: 0
+  scr: {x: 0, y: 0}
+  dialogueText: []
 --- !u!114 &382869888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4534,6 +4568,25 @@ MonoBehaviour:
   - Hi
   - The weather is nice
   - Bye
+--- !u!114 &382869889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382869882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcaf9431333c7c241919c4fbc0888be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDlg: 0
+  index: 0
+  optionIndex: 0
+  scr: {x: 0, y: 0}
+  player: {fileID: 535793796}
+  name: 
+  dialogueText: []
 --- !u!4 &394723941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4748898696422280, guid: f84072c624d54cc4ebdf4b5b74ae095d,
@@ -6792,7 +6845,6 @@ Transform:
   - {fileID: 5006512736169747532}
   - {fileID: 1200294137}
   - {fileID: 395026590}
-  - {fileID: 853922482}
   - {fileID: 368877528}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -7585,6 +7637,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606426872}
   m_CullTransparentMesh: 0
+--- !u!1 &626651930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 626651931}
+  m_Layer: 0
+  m_Name: NPCs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &626651931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626651930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 382869886}
+  - {fileID: 2023166081}
+  - {fileID: 1713584259}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &637735768
 GameObject:
   m_ObjectHideFlags: 0
@@ -9397,7 +9482,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810157323}
-  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.0000000082837355, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: 0.000000022880096, z: -0.000000008283737, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10180,63 +10265,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852196176}
   m_CullTransparentMesh: 0
---- !u!1 &853922481
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 853922482}
-  - component: {fileID: 853922483}
-  m_Layer: 0
-  m_Name: Quest Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &853922482
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 853922481}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 535793794}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &853922483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 853922481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5eb44ffba504aa44b0ba1ba4116292a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quest:
-    title: 
-    description: 
-    experienceReward: 0
-    goldReward: 0
-    requiredLevel: 0
-    goal: {fileID: 0}
-  player: {fileID: 535793796}
-  inv: {fileID: 368877527}
-  questWindow: {fileID: 0}
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  experienceText: {fileID: 0}
-  goldText: {fileID: 0}
 --- !u!1001 &877339256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12048,7 +12076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1111773715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12990,7 +13018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1211092134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15378,7 +15406,7 @@ Transform:
   m_LocalScale: {x: 0.3545, y: 0.3545, z: 0.3545}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1524774744
 GameObject:
@@ -15496,7 +15524,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542606463}
-  m_LocalRotation: {x: 0.32326594, y: -0.00000003256508, z: 0.000000011124474, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326594, y: 0.00000003256508, z: -0.000000011124474, w: 0.9463082}
   m_LocalPosition: {x: 710, y: 3.67, z: 509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -15603,7 +15631,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558624430}
-  m_LocalRotation: {x: 0.32326588, y: -0.000000016282542, z: 0.0000000055622356, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326588, y: 0.000000016282542, z: -0.0000000055622356, w: 0.9463082}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16926,13 +16954,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713584255}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 714.15, y: 0.7, z: 517.31}
   m_LocalScale: {x: 0.65515, y: 0.65515, z: 0.65515}
   m_Children:
   - {fileID: 1341363983}
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_Father: {fileID: 626651931}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1713584260
 MonoBehaviour:
@@ -19084,13 +19112,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023166076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 705.534, y: 0.7, z: 515.992}
   m_LocalScale: {x: 0.65515, y: 0.65515, z: 0.65515}
   m_Children:
   - {fileID: 322811513}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 626651931}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2023166082
 MonoBehaviour:
@@ -19106,7 +19134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Jessy
   dialogue: {fileID: 196776507}
-  questManager: {fileID: 853922483}
+  questManager: {fileID: 0}
   NPCsQuest:
     title: Get 5 Scrolls
     description: I want 5 scrolls
@@ -20427,7 +20455,7 @@ PrefabInstance:
     - target: {fileID: 1956869619845447989, guid: 930e7b5e30c227944a91b963305663e5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1956869619845447989, guid: 930e7b5e30c227944a91b963305663e5,
         type: 3}

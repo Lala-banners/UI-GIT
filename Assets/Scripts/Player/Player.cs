@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
             //If Ray hits something
             if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
             {
-                if (hitInfo.collider.TryGetComponent<NPC>(out NPC npc))
+                if (hitInfo.collider.TryGetComponent<DialogueNPC>(out DialogueNPC npc))
                 {
                     npc.Interact(); //Override NPC because otherwise would run wrong method
                 }
