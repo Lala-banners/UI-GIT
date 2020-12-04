@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InWorldItems : MonoBehaviour
 {
-    public ItemData itemData;
+    public Item itemData;
 
    
     // Start is called before the first frame update

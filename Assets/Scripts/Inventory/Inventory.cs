@@ -10,9 +10,11 @@ public class Inventory : MonoBehaviour
 
     #region Inventory Variables
     [Header("Inventory References")]
-    public List<ItemData> inventory = new List<ItemData>(); //List of inventory = inventory
-    [SerializeField] private ItemData selectedItem;
-    public ItemData item;
+    public List<Item> inventory = new List<Item>(); //List of inventory = inventory
+    public GameObject slotPrefab;
+    public Transform invetorySlotParent;
+    [SerializeField] private Item selectedItem;
+    public Item item;
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
     public Chest currentChest;
@@ -25,7 +27,7 @@ public class Inventory : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text amountText;
     public TMP_Text valueText;
-    public Texture2D icon;
+    public Sprite icon;
     public GameObject mesh;
     public Transform dropLocation;
     public GameObject itemPrefab;
@@ -79,8 +81,10 @@ public class Inventory : MonoBehaviour
         #endregion
     }
 
-    public void DisplayItem() //Display in Inventory
+    public void DisplayItem(Item item) //Display in Inventory
     {
+        selectedItem = item;
+
         //Display the sword information from ItemData
         itemText.text = selectedItem.Name.ToString();
         descriptionText.text = selectedItem.Description.ToString();
@@ -172,6 +176,25 @@ public class Inventory : MonoBehaviour
         {
             if (!pause.inventory.activeSelf)
             {
+
+                foreach(Item item in inventory)
+                {
+                    GameObject itemSlot = Instantiate(slotPrefab, invetorySlotParent);
+                    Button itemButton = itemSlot.GetComponent<Button>();
+
+                    itemButton.onClick.AddListener(()=>DisplayItem(item));
+                    //itemButton.onClick.AddListener(()=>ThisHasPara(4));
+
+                    SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
+                    Image image = slotImage.image;
+
+                    if (image != null)
+                    {
+                        image.sprite = item.Icon;
+                    }
+                }
+
+
                 pause.Paused(pause.inventory);
             }
             else
@@ -182,6 +205,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+   /* void ThisHasPara(int x)
+    {
+
+    }*/
+
     #region Equipment
     [System.Serializable]
     public struct Equipment
@@ -189,7 +217,7 @@ public class Inventory : MonoBehaviour
         public string slotName; //chest, feet, head etc
         public Transform equipLocation; //where the equipment will be set
         public GameObject currentItem;
-        public ItemData item; //ref for check to make sure its not the same item
+        public Item item; //ref for check to make sure its not the same item
     };
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
@@ -203,7 +231,7 @@ public class Inventory : MonoBehaviour
                         2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
 
         //Icon
-        GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
+        GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon.texture);
         GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
                          2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
         GUI.Box(new Rect(4.25f * scr.x, 4 * scr.y,
@@ -286,13 +314,13 @@ public class Inventory : MonoBehaviour
 
     public void FindItem(string itemName)
     {
-        ItemData foundItem = inventory.Find(findItem => findItem.Name == itemName);
+        Item foundItem = inventory.Find(findItem => findItem.Name == itemName);
     }
 
-    public void AddItem(ItemData item)
+    public void AddItem(Item item)
     {
         inventory.Add(item);
-        ItemData foundItem = inventory.Find(FindItem => FindItem.Name == item.Name);
+        Item foundItem = inventory.Find(FindItem => FindItem.Name == item.Name);
     }
 
     #region OnGUI Display
