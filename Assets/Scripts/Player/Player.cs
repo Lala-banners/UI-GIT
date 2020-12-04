@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
         InWorldItems items = hit.collider.GetComponent<InWorldItems>(); //if player collides with item
         if(items != null) //if item exists and is food inventory.item.Type == ItemType.Food
         {
-            inventory.AddItem(inventory.item); //add to inventory
+            inventory.AddItem(items.itemData); //add to inventory
             print("Item has been picked up");
             Destroy(items.gameObject);
         }

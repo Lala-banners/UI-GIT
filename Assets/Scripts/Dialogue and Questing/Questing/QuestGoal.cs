@@ -17,8 +17,11 @@ public enum GoalType
 public abstract class QuestGoal : MonoBehaviour
 {
     public QuestState questState;
-
+    public int itemId;
+    public int requiredAmount;
+    public int currentAmount;
     public GoalType goalType;
+    public bool isReached;
 
     public Inventory inv;
 
@@ -26,16 +29,16 @@ public abstract class QuestGoal : MonoBehaviour
 
     public abstract bool isCompleted();
 
-    public void ItemCollected(string name, float requiredAmount)
+    public void ItemCollected(int id)
     {
-        if(goalType == GoalType.Gather && item.Name == name)
+        if (goalType == GoalType.Gather && id == itemId)
         {
-            item.Amount++;
-
-            if(item.Amount >= requiredAmount)
+            currentAmount++;
+            if (currentAmount >= requiredAmount) //Added from Quest
             {
+                isReached = true;
                 questState = QuestState.Completed;
-                Debug.Log("Quest Complete");
+                Debug.Log("QUEST COMPLETE");
             }
         }
     }

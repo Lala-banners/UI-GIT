@@ -106,40 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df40e1c224852141835adf2807009c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestInv:
-  - name: Axe
-    description: 
-    value: 0
-    amount: 0
-    icon: {fileID: 2800000, guid: 08b1490ecaaa1a742a20efcdeae82540, type: 3}
-    mesh: {fileID: 0}
-    type: 1
-    damage: 20
-    armour: 0
-    heal: 0
-    healMana: 0
-  - name: Sword
-    description: Stabby boi
-    value: 1
-    amount: 1
-    icon: {fileID: 2800000, guid: e3d3728e8118b9c4fa185c06229fd3d8, type: 3}
-    mesh: {fileID: 0}
-    type: 1
-    damage: 10
-    armour: 0
-    heal: 0
-    healMana: 0
-  - name: Shield
-    description: Protecc
-    value: 1
-    amount: 1
-    icon: {fileID: 2800000, guid: 21c2a569f789c2c44b2495da1732ca72, type: 3}
-    mesh: {fileID: 0}
-    type: 1
-    damage: 0
-    armour: 20
-    heal: 0
-    healMana: 0
+  chestInv: []
   inventory: []
   selectedItem:
     name: 
@@ -148,6 +115,7 @@ MonoBehaviour:
     amount: 0
     icon: {fileID: 0}
     mesh: {fileID: 0}
+    button: {fileID: 0}
     type: 0
     damage: 0
     armour: 0
@@ -156,5 +124,5 @@ MonoBehaviour:
   showChestInv: 0
   scr: {x: 0, y: 0}
   chestObj: {fileID: 0}
-  invObject: {fileID: 0}
+  playerInv: {fileID: 0}
   states: 0

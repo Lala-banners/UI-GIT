@@ -1,20 +1,34 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
+    public Quest quest;
     public Player player;
     public Inventory inv;
+    public GameObject questWindow;
+    public TMP_Text titleText, descriptionText, experienceText, goldText;
 
     Dialogue dialogue;
 
     //QuestGiver
-    public Quest currentQuest;
+    //public Quest currentQuest;
     //For multiple quests: public Quest[] quests;
+
+    public void OpenQuestWindow()
+    {
+        questWindow.SetActive(true);
+        titleText.text = quest.title;
+        descriptionText.text = quest.description;
+        experienceText.text = quest.experienceReward.ToString();
+        goldText.text = quest.goldReward.ToString();
+    }
 
     public void AcceptQuest(Quest acceptedQuest)
     {
-        currentQuest = acceptedQuest;
-        currentQuest.goal.questState = QuestState.Active;
+        quest = acceptedQuest;
+        questWindow.SetActive(false);
+        quest.goal.questState = QuestState.Active;
     }
 
     public void DeclineQuest()
@@ -24,14 +38,14 @@ public class QuestManager : MonoBehaviour
 
     public void ClaimQuest()
     {
-        if(currentQuest.goal.questState == QuestState.Completed && currentQuest.goal.isCompleted() == true)
+        if(quest.goal.questState == QuestState.Completed && quest.goal.isCompleted() == true)
         {
             //Add money
-            inv.money += currentQuest.goldReward;
+            inv.money += quest.goldReward;
 
             //Add experience
 
-            currentQuest.goal.questState = QuestState.Claimed;
+            quest.goal.questState = QuestState.Claimed;
             Debug.Log("Quest Claimed");
         }
     }

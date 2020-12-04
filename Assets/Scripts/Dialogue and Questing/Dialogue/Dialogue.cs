@@ -14,14 +14,14 @@ public class Dialogue : MonoBehaviour
     //array for text for our dialogue
     public string[] dialogueText;
 
-    public ThirdPersonMovement playerMovement;
+    //public ThirdPersonMovement playerMovement;
     public Vector2 scr;
 
     public void ShowDialogue()
     {
         if(showDialogue)
         {
-            playerMovement.enabled = false;
+            //playerMovement.enabled = false;
         }
     }
 
@@ -29,7 +29,7 @@ public class Dialogue : MonoBehaviour
     {
         if(showDialogue)
         {
-            playerMovement.enabled = false;
+            //playerMovement.enabled = false;
 
             //set up ratio for 16:9
             scr.x = Screen.width / 16;
@@ -51,7 +51,7 @@ public class Dialogue : MonoBehaviour
                     {
                         showDialogue = false;
                         currentLineIndex = 0;
-                        playerMovement.enabled = true;
+                        //playerMovement.enabled = true;
                     }
                 }
             }

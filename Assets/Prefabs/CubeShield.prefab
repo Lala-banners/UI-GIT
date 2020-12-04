@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8102492120330241364}
   - component: {fileID: 8102492120330241367}
   - component: {fileID: 788135313}
-  - component: {fileID: 5234722978071615190}
   m_Layer: 8
   m_Name: CubeShield
   m_TagString: Item
@@ -108,26 +107,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData:
-    name: 
-    description: 
-    value: 0
-    amount: 0
-    icon: {fileID: 0}
-    mesh: {fileID: 0}
-    type: 0
+    name: Shield
+    description: Protec
+    value: 35
+    amount: 1
+    icon: {fileID: 21300000, guid: 21c2a569f789c2c44b2495da1732ca72, type: 3}
+    mesh: {fileID: 8102492120330241449}
+    type: 1
     damage: 0
-    armour: 0
+    armour: 30
     heal: 0
     healMana: 0
---- !u!114 &5234722978071615190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8102492120330241449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2d3f32000f0104990a64f960225116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

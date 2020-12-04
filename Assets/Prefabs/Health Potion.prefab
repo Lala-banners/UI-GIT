@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5015905474821855538}
   - component: {fileID: 5015905474821855539}
   - component: {fileID: 492721504}
-  - component: {fileID: 3600709222609112140}
   m_Layer: 8
   m_Name: Health Potion
   m_TagString: Item
@@ -109,26 +108,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData:
-    name: 
-    description: 
-    value: 0
-    amount: 0
-    icon: {fileID: 0}
-    mesh: {fileID: 0}
-    type: 0
+    name: Health Potion
+    description: Heals 25 hp
+    value: 50
+    amount: 1
+    icon: {fileID: 21300000, guid: 837b0a32a41578849b6b1d071c46e45a, type: 3}
+    mesh: {fileID: 5015905474821855536}
+    type: 5
     damage: 0
     armour: 0
-    heal: 0
+    heal: 25
     healMana: 0
---- !u!114 &3600709222609112140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5015905474821855536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2d3f32000f0104990a64f960225116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

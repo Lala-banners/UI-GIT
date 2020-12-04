@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public enum ItemType
 {
@@ -24,6 +25,7 @@ public class ItemData
     [SerializeField] private int amount;
     [SerializeField] private Sprite icon;
     [SerializeField] private GameObject mesh;
+    [SerializeField] public Button button;
     [SerializeField] private ItemType type;
     [SerializeField] private int damage;
     [SerializeField] private int armour;

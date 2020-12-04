@@ -15,13 +15,14 @@ public class Chest : MonoBehaviour
     public bool showChestInv;
     public Vector2 scr;
     public GameObject chestObj;
-    public GameObject invObject;
+    //public GameObject invObject;
+    public Player playerInv;
 
     private void Start()
     {
         Closed();
-        chestInv.Add(ItemData.CreateItem(Random.Range(0, 2)));
-        chestInv.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        //chestInv.Add(ItemData.CreateItem(Random.Range(0, 2)));
+        //chestInv.Add(ItemData.CreateItem(Random.Range(100, 102)));
     }
 
     public ChestStates states;
@@ -31,7 +32,8 @@ public class Chest : MonoBehaviour
         states = ChestStates.open;
         //showChestInv = true;
         chestObj.SetActive(true);
-        invObject.SetActive(true);
+        playerInv.inventory.ActivateInventory();
+        //invObject.SetActive(true);
     }
     
     public void Closed()
@@ -39,7 +41,8 @@ public class Chest : MonoBehaviour
         states = ChestStates.closed; 
         //showChestInv = false;
         chestObj.SetActive(false);
-        invObject.SetActive(false);
+        playerInv.inventory.ActivateInventory();
+        //invObject.SetActive(false);
     }
 
     // OnTriggerEnter is called when the Collider other enters the trigger
@@ -83,7 +86,7 @@ public class Chest : MonoBehaviour
                 if (GUI.Button(new Rect(10.5f * scr.x, 6.75f * scr.y, scr.x, 0.25f * scr.y), "Take Item"))
                 {
                     //add to player
-                    inventory.Add(ItemData.CreateItem(selectedItem.ID));
+                    //inventory.Add(ItemData.CreateItem(selectedItem.ID));
 
                     //remove from chest
                     chestInv.Remove(selectedItem);

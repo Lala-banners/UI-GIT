@@ -10,11 +10,12 @@ public class Inventory : MonoBehaviour
 
     #region Inventory Variables
     [Header("Inventory References")]
-    public List<ItemData> inventory = new List<ItemData>(); //List of inventory = inventory
+    public List<ItemData> inventory = new List<ItemData>(); //List of inventory
     [SerializeField] private ItemData selectedItem;
-    public ItemData item;
+    public ItemData currentItem;
     public GameObject slotPrefab;
     public Transform inventorySlotParent;
+    public Button use, discard, move; //references to use and discard buttons
 
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
@@ -28,11 +29,13 @@ public class Inventory : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text amountText;
     public TMP_Text valueText;
-    public Texture2D icon;
-    public GameObject mesh;
+    public Image icon;
+    private GameObject mesh;
     public Transform dropLocation;
     public GameObject itemPrefab;
     public GameObject axePrefab, swordPrefab, shieldPrefab;
+
+    public GameObject itemSelectedPanel;
     #endregion
 
     #region GUI Inventory Variables
@@ -46,17 +49,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        player = this.gameObject.GetComponent<Player>();
         enumTypesForItems = new string[] { "All", " Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potions", "Scrolls", "Quest" };
-
-        /*inventory.Add(ItemData.CreateItem(0));
-        inventory.Add(ItemData.CreateItem(1));
-        inventory.Add(ItemData.CreateItem(100));
-        inventory.Add(ItemData.CreateItem(101));
-        inventory.Add(ItemData.CreateItem(102));
-        inventory.Add(ItemData.CreateItem(200));
-        inventory.Add(ItemData.CreateItem(201));
-        inventory.Add(ItemData.CreateItem(202));*/
     }
 
     //For eating apples, using potions etc
@@ -65,50 +58,67 @@ public class Inventory : MonoBehaviour
         #region Heal with potion
         if (player.playerStats.CurrentHealth < player.playerStats.healthHearts.maximumHealth)
         {
+            if(selectedItem.Amount > 0 )
+            {
+                player.playerStats.Heal(25);
+            }
             selectedItem.Amount--;
-            player.playerStats.Heal(selectedItem.Heal);
+            Debug.Log("No more health potions in inventory");
+            
 
             if (selectedItem.Amount <= 0)
             {
                 inventory.Remove(selectedItem);
-                selectedItem = null;
+                Destroy(selectedItem.button.gameObject);
+                itemSelectedPanel.SetActive(false);
+            }
+            else
+            {
+                DisplayItem(selectedItem);
             }
         }
-        #endregion
-
-        #region Heal Mana
-        selectedItem.Amount--;
-        player.playerStats.HealMana(selectedItem.HealMana);
         #endregion
     }
 
     public void DisplayItem(ItemData item) //Display in Inventory
     {
-        //Display the sword information from ItemData
+        selectedItem = item;
+        itemSelectedPanel.SetActive(true);
+
+        //Display information from ItemData
         itemText.text = selectedItem.Name.ToString();
         descriptionText.text = selectedItem.Description.ToString();
         amountText.text = selectedItem.Amount.ToString();
         valueText.text = selectedItem.Value.ToString();
-        icon = selectedItem.Icon != null ? selectedItem.Icon.texture : null;
+        icon.sprite = selectedItem.Icon != null ? selectedItem.Icon : null;
         mesh = selectedItem.Mesh;
+
+        use.onClick.AddListener(UseItem);
+        discard.onClick.AddListener(DiscardItem);
+        move.onClick.AddListener(MoveItem);
+
     }
 
-    public void Discard() //THIS WORKS!
+    public void MoveItem()
+    {
+        //Move from inventory to chest
+        selectedItem.Amount--;
+        inventory.Remove(selectedItem);
+        currentChest.chestInv.Add(selectedItem);
+        Destroy(selectedItem.button);
+        print("IT WORKS!");
+      
+    }
+
+    public void DiscardItem() //THIS WORKS!
     {
         GameObject droppedItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity); //instantiate item at drop location
         droppedItem.name = selectedItem.Name;
         inventory.Remove(selectedItem); //removes from inventory
     }
 
-    //Function for moving items from inventory to chest 
-    public void Move()
-    {
-
-    }
-
     public void EquipWeapon()
     {
-        #region Equip Axe
         if (equipmentSlots[2].currentItem == null || selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
         {
             Destroy(equipmentSlots[2].currentItem);
@@ -125,81 +135,53 @@ public class Inventory : MonoBehaviour
             Destroy(equipmentSlots[2].currentItem);
             equipmentSlots[2].item = null;
         }
-        #endregion
+    }
 
-        #region Equip Sword
-        if (equipmentSlots[2].currentItem == null ||
-                    selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
+    public void ActivateInventory()
+    {
+        if (!pause.inventory.activeSelf)
         {
-            if (equipmentSlots[2].currentItem == null)
+            pause.Paused(pause.inventory);
+
+            Button[] allChildren = inventorySlotParent.GetComponentsInChildren<Button>();
+
+            for (int x = allChildren.Length - 1; x >= 0; x--)
             {
-                Destroy(equipmentSlots[2].currentItem);
+                Destroy(allChildren[x].gameObject);
             }
-            GameObject swordGO = Instantiate<GameObject>(shieldPrefab, equipmentSlots[3].equipLocation);
-            equipmentSlots[2].currentItem = swordGO;
-            //Instantiate<GameObject>(swordPrefab, equipmentSlots[3].equipLocation);
-            equipmentSlots[2].item = selectedItem;
-        }
-        else //if item equipped is the same as equipped item, then upequip the weapon
-        {
-            GameObject item = equipmentSlots[2].currentItem;
-            equipmentSlots[2].item = null;
-            Destroy(item);
-        }
-        #endregion
 
-        #region Equip Shield
-        if (equipmentSlots[3].currentItem == null ||
-                    selectedItem.Name != equipmentSlots[3].item.Name) //If no weapon equipped, then equip selected weapon
-        {
-            if (equipmentSlots[3].currentItem == null)
+            foreach (ItemData item in inventory)
             {
-                Destroy(equipmentSlots[3].currentItem);
-            }
-            GameObject shieldGO =  Instantiate<GameObject>(shieldPrefab, equipmentSlots[3].equipLocation);
-            equipmentSlots[3].currentItem = shieldGO;
-            equipmentSlots[3].item = selectedItem;
-        }
-        else //if item equipped is the same as equipped item, then upequip the weapon
-        {
-            Destroy(equipmentSlots[2].currentItem);
-            equipmentSlots[2].item = null;
-        }
-        #endregion
+                //Inventory Button
+                GameObject itemSlot = Instantiate(slotPrefab, inventorySlotParent); //Clone item at item slot
+                Button itemButton = itemSlot.GetComponent<Button>();
 
+                selectedItem = item;
+                selectedItem.button = itemButton;
+
+                itemButton.onClick.AddListener(() => DisplayItem(item));
+
+                SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
+                Image image = slotImage.image;
+
+                if (image != null)
+                {
+                    image.sprite = item.Icon;
+                }
+            }
+        }
+        else
+        {
+            pause.UnPaused();
+            pause.inventory.SetActive(false);
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (!pause.inventory.activeSelf)
-            {
-                pause.Paused(pause.inventory);
-
-                foreach (ItemData item in inventory)
-                {
-                    GameObject itemSlot = Instantiate(slotPrefab, inventorySlotParent);
-                    Button itemButton = itemSlot.GetComponent<Button>();
-
-                    itemButton.onClick.AddListener(() => DisplayItem(item));
-                    //itemButton.onClick.AddListener(()=>ThisHasPara(4));
-
-                    SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
-                    Image image = slotImage.image;
-
-                    if (image != null)
-                    {
-                        image.sprite = item.Icon;
-                    }
-                }
-
-            }
-            else
-            {
-                pause.UnPaused();
-                pause.inventory.SetActive(false);
-            }
+            ActivateInventory();
         }
     }
 
@@ -220,8 +202,7 @@ public class Inventory : MonoBehaviour
     public Equipment[] equipmentSlots; //First slot head, second chest, third weapon etc
     #endregion
 
-    //TODO : Lara : 1 -> Use item, Buy item, (in canvas)
-    //TODO : Lara : 2 -> equip weapons from inventory, (in canvas)
+    //TODO : Lara : 1 -> Buy item
 
     void UseItemGUI()
     {

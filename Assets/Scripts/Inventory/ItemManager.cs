@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+
 
 public class ItemManager : MonoBehaviour
 {
     public int itemId;
     public ItemType itemType;
     Inventory inv;
+    public List<ItemData> items = new List<ItemData>();
     public int amount;
 
     //Function for collecting inventory from the world
@@ -18,7 +21,7 @@ public class ItemManager : MonoBehaviour
         //Else if type is weapon, apparel or quest then add item to inventory
         else if(itemType == ItemType.Weapon || itemType == ItemType.Apparel || itemType == ItemType.Quest)
         {
-            inv.AddItem(inv.item); //add to inventory
+            inv.AddItem(inv.currentItem); //add to inventory
         }
         else //if type is food, crafting, ingridients, potions or scrolls
         {
