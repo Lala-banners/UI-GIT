@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8102492120330241364}
   - component: {fileID: 8102492120330241367}
   - component: {fileID: 769743864}
+  - component: {fileID: 3534819523703126496}
   m_Layer: 8
   m_Name: CubeWeapon
   m_TagString: Item
@@ -107,14 +108,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData:
-    name: Sword
-    description: Stabby
-    value: 1
-    amount: 1
-    icon: {fileID: 2800000, guid: e3d3728e8118b9c4fa185c06229fd3d8, type: 3}
-    mesh: {fileID: 8102492120330241449}
-    type: 1
-    damage: 15
+    name: 
+    description: 
+    value: 0
+    amount: 0
+    icon: {fileID: 0}
+    mesh: {fileID: 0}
+    type: 0
+    damage: 0
     armour: 0
     heal: 0
     healMana: 0
+--- !u!114 &3534819523703126496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102492120330241449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d2d3f32000f0104990a64f960225116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

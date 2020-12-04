@@ -13,6 +13,9 @@ public class Inventory : MonoBehaviour
     public List<ItemData> inventory = new List<ItemData>(); //List of inventory = inventory
     [SerializeField] private ItemData selectedItem;
     public ItemData item;
+    public GameObject slotPrefab;
+    public Transform inventorySlotParent;
+
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
     public Chest currentChest;
@@ -46,14 +49,14 @@ public class Inventory : MonoBehaviour
         player = this.gameObject.GetComponent<Player>();
         enumTypesForItems = new string[] { "All", " Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potions", "Scrolls", "Quest" };
 
-        inventory.Add(ItemData.CreateItem(0));
+        /*inventory.Add(ItemData.CreateItem(0));
         inventory.Add(ItemData.CreateItem(1));
         inventory.Add(ItemData.CreateItem(100));
         inventory.Add(ItemData.CreateItem(101));
         inventory.Add(ItemData.CreateItem(102));
         inventory.Add(ItemData.CreateItem(200));
         inventory.Add(ItemData.CreateItem(201));
-        inventory.Add(ItemData.CreateItem(202));
+        inventory.Add(ItemData.CreateItem(202));*/
     }
 
     //For eating apples, using potions etc
@@ -79,14 +82,14 @@ public class Inventory : MonoBehaviour
         #endregion
     }
 
-    public void DisplayItem() //Display in Inventory
+    public void DisplayItem(ItemData item) //Display in Inventory
     {
         //Display the sword information from ItemData
         itemText.text = selectedItem.Name.ToString();
         descriptionText.text = selectedItem.Description.ToString();
         amountText.text = selectedItem.Amount.ToString();
         valueText.text = selectedItem.Value.ToString();
-        icon = selectedItem.Icon;
+        icon = selectedItem.Icon != null ? selectedItem.Icon.texture : null;
         mesh = selectedItem.Mesh;
     }
 
@@ -173,6 +176,24 @@ public class Inventory : MonoBehaviour
             if (!pause.inventory.activeSelf)
             {
                 pause.Paused(pause.inventory);
+
+                foreach (ItemData item in inventory)
+                {
+                    GameObject itemSlot = Instantiate(slotPrefab, inventorySlotParent);
+                    Button itemButton = itemSlot.GetComponent<Button>();
+
+                    itemButton.onClick.AddListener(() => DisplayItem(item));
+                    //itemButton.onClick.AddListener(()=>ThisHasPara(4));
+
+                    SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
+                    Image image = slotImage.image;
+
+                    if (image != null)
+                    {
+                        image.sprite = item.Icon;
+                    }
+                }
+
             }
             else
             {
@@ -181,6 +202,11 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    /* void ThisHasPara(int x)
+    {
+
+    }*/
 
     #region Equipment
     [System.Serializable]
@@ -203,7 +229,7 @@ public class Inventory : MonoBehaviour
                         2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
 
         //Icon
-        GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
+        GUI.Box(new Rect(4.25f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon.texture);
         GUI.Box(new Rect(4.55f * scr.x, 3.5f * scr.y,
                          2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
         GUI.Box(new Rect(4.25f * scr.x, 4 * scr.y,
