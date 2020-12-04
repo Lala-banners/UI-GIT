@@ -9,9 +9,9 @@ public enum ChestStates
 
 public class Chest : MonoBehaviour
 {
-    public List<Item> chestInv = new List<Item>();
-    public List<Item> inventory = new List<Item>();
-    public Item selectedItem;
+    public List<ItemData> chestInv = new List<ItemData>();
+    public List<ItemData> inventory = new List<ItemData>();
+    public ItemData selectedItem;
     public bool showChestInv;
     public Vector2 scr;
     public GameObject chestObj;
@@ -76,7 +76,7 @@ public class Chest : MonoBehaviour
             if (selectedItem != null)
             {
                 GUI.Box(new Rect(8.5f * scr.x, 0.25f * scr.y, 3.5f * scr.x, 7 * scr.y), "");
-                GUI.Box(new Rect(8.75f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon.texture);
+                GUI.Box(new Rect(8.75f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
                 GUI.Box(new Rect(9.05f * scr.x, 3.5f * scr.y, 2.5f * scr.x, 0.5f * scr.y), selectedItem.Name);
                 GUI.Box(new Rect(8.75f * scr.x, 4f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Description + "\nValue: " + selectedItem.Value + "\nAmount: " + selectedItem.Amount);
 

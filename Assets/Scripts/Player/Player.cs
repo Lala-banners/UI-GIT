@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
         set { ChangeProfession(value); }
     }
     public GameObject deathMenu;
-
     public Inventory inventory;
     public GameObject inventoryObject;
     #endregion
@@ -121,8 +120,7 @@ public class Player : MonoBehaviour
         {
             inventory.AddItem(inventory.item); //add to inventory
             print("Item has been picked up");
-            items.gameObject.SetActive(false);
-            //Destroy(items.gameObject);
+            Destroy(items.gameObject);
         }
     }
 

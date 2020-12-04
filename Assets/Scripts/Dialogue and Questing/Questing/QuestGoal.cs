@@ -22,7 +22,7 @@ public abstract class QuestGoal : MonoBehaviour
 
     public Inventory inv;
 
-    Item item;
+    ItemData item;
 
     public abstract bool isCompleted();
 
