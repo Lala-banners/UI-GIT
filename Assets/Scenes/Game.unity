@@ -2075,6 +2075,7 @@ MonoBehaviour:
   name: 
   dialogueText:
   - Hi friend!
+  player: {fileID: 0}
   scr: {x: 0, y: 0}
 --- !u!4 &196776508
 Transform:
@@ -4449,7 +4450,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382869882}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -4530,17 +4531,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dislikeTxt:
-  - HELP DO MY QUEST
+  - I HATE YOU
   - YOU SUCK!
   neutralTxt:
-  - Hi, please do my quest
-  - Thanks!
+  - Hi hero!
+  - How are you?
   likeTxt:
-  - 'OMG I LOVE YOU '
-  - DO MY QUEST
+  - Wow you're awesome hero!
+  - Have a nice day!
   approval: 0
-  response1: Yes
-  response2: No
+  response1: '*High Five*'
+  response2: Go away
   myQuest: {fileID: 1462075878}
   myShop: {fileID: 222853233}
   inventory: {fileID: 368877527}
@@ -6988,6 +6989,7 @@ MonoBehaviour:
   deathMenu: {fileID: 2023676224}
   inventory: {fileID: 368877527}
   inventoryObject: {fileID: 1027149667}
+  showDialogue: 0
 --- !u!114 &535793797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9482,7 +9484,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810157323}
-  m_LocalRotation: {x: 0.34042525, y: 0.000000022880096, z: -0.000000008283737, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.0000000082837355, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15524,7 +15526,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542606463}
-  m_LocalRotation: {x: 0.32326594, y: 0.00000003256508, z: -0.000000011124474, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326594, y: -0.00000003256508, z: 0.000000011124474, w: 0.9463082}
   m_LocalPosition: {x: 710, y: 3.67, z: 509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -15631,7 +15633,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558624430}
-  m_LocalRotation: {x: 0.32326588, y: 0.000000016282542, z: -0.0000000055622356, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326588, y: -0.000000016282542, z: 0.0000000055622356, w: 0.9463082}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19073,7 +19075,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023166076}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -19177,12 +19179,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3caa31306bdb714fab7042c1b20692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dislikeTxt: []
-  neutralTxt: []
-  likeTxt: []
+  dislikeTxt:
+  - HELP DO MY QUEST
+  - YOU SUCK!
+  neutralTxt:
+  - Hi, please do my quest
+  - Thanks!
+  likeTxt:
+  - 'OMG I LOVE YOU '
+  - DO MY QUEST
   approval: 0
-  response1: 
-  response2: 
+  response1: Yes
+  response2: No
   myQuest: {fileID: 1462075878}
   myShop: {fileID: 222853233}
   inventory: {fileID: 368877527}

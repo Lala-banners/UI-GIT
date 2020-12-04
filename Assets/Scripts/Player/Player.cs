@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [Header("Other")]
     public float speed = 12f;
     public float gravity = -9.81f;
-    
+
     [Header("Stamina Regen/Degen Stats")]
     [Tooltip("Amount of Stamina that will be taken")]
     [SerializeField] public float staminaDegen = 10f;
@@ -59,34 +59,39 @@ public class Player : MonoBehaviour
     public GameObject deathMenu;
     public Inventory inventory;
     public GameObject inventoryObject;
+    public bool showDialogue;
     #endregion
+
+    
+
+
+
 
     public void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        
+
+        Ray ray = new Ray(transform.position + transform.forward * 0.5f, transform.forward); //Creates line from player to infinity 
+        RaycastHit hitInfo; //Get back info about what we hit
+
+        //THIS IS HOW TO MAKE A MASK
+        //Method of finding layer with name
+        //Get the layer id
+        int layerMask = LayerMask.NameToLayer("Interactable");
+
+        //Moving binary 1 over to the left, method 1 if dont want to search for the name of layer
+        //Actually turning it into a layer and not a value
+        layerMask = 1 << layerMask;
+
+        //If Ray hits something
+        if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
         {
-            Ray ray = new Ray(transform.position + transform.forward * 0.5f, transform.forward); //Creates line from player to infinity 
-            RaycastHit hitInfo; //Get back info about what we hit
-            //ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-
-            //THIS IS HOW TO MAKE A MASK
-            //Method of finding layer with name
-            //Get the layer id
-            int layerMask = LayerMask.NameToLayer("Interactable");
-
-            //Moving binary 1 over to the left, method 1 if dont want to search for the name of layer
-            //Actually turning it into a layer and not a value
-            layerMask = 1 << layerMask;
-
-            //If Ray hits something
-            if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
+            if (hitInfo.collider.TryGetComponent<DialogueNPC>(out DialogueNPC npc))
             {
-                if (hitInfo.collider.TryGetComponent<DialogueNPC>(out DialogueNPC npc))
-                {
-                    npc.Interact(); //Override NPC because otherwise would run wrong method
-                }
+                npc.Interact(); //Override NPC because otherwise would run wrong method
             }
         }
+
     }
 
     public void SetStamina()
@@ -116,7 +121,7 @@ public class Player : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit) //To pick up item
     {
         InWorldItems items = hit.collider.GetComponent<InWorldItems>(); //if player collides with item
-        if(items != null) //if item exists and is food inventory.item.Type == ItemType.Food
+        if (items != null) //if item exists and is food inventory.item.Type == ItemType.Food
         {
             inventory.AddItem(items.itemData); //add to inventory
             print("Item has been picked up");
@@ -126,7 +131,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Interact();
+        //Interact();
 
         #region Health
         if (Input.GetKeyDown(KeyCode.H)) //HEALTH DECREASE
@@ -135,7 +140,7 @@ public class Player : MonoBehaviour
             playerStats.healthHearts.UpdateHearts(playerStats.CurrentHealth, playerStats.healthHearts.maximumHealth);
             Debug.Log("Player is losing health");
 
-            if (playerStats.CurrentHealth == 0) 
+            if (playerStats.CurrentHealth == 0)
             {
                 deathMenu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
@@ -228,12 +233,12 @@ public class Player : MonoBehaviour
     {
         //if (GUI.Button(new Rect(130, 10, 100, 20), "Level Up"))
         //{
-          //  LevelUp();
+        //  LevelUp();
         //}
 
         //if (GUI.Button(new Rect(130, 40, 100, 20), "Do Damage")) 
         //{
-            //playerStats.DealDamage(25f);
+        //playerStats.DealDamage(25f);
         //}
     }
 

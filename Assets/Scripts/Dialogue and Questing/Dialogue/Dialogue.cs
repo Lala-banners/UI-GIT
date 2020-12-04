@@ -14,6 +14,7 @@ public class Dialogue : MonoBehaviour
     //array for text for our dialogue
     public string[] dialogueText;
 
+    public Player player;
     //public ThirdPersonMovement playerMovement;
     public Vector2 scr;
 
@@ -22,6 +23,16 @@ public class Dialogue : MonoBehaviour
         if(showDialogue)
         {
             //playerMovement.enabled = false;
+        }
+    }
+
+    // OnTriggerEnter is called when the Collider other enters the trigger
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            showDialogue = true;
+            player.Interact();
         }
     }
 
