@@ -26,15 +26,6 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    // OnTriggerEnter is called when the Collider other enters the trigger
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            showDialogue = true;
-            player.Interact();
-        }
-    }
 
     private void OnGUI()
     {

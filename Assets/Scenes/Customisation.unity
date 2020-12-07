@@ -934,14 +934,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 37.95
+  m_fontSizeBase: 26.59
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1398,24 +1398,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 889636843}
+        m_MethodName: AddPoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1578,13 +1567,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 35.6
-  m_fontSizeBase: 36
+  m_fontSizeBase: 26.59
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2389,17 +2378,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 889636843}
+        m_MethodName: DecreasePoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &259521625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,15 +3141,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 889636843}
-        m_MethodName: StrengthPoints
-        m_Mode: 6
+        m_MethodName: AddPoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &407992078
 MonoBehaviour:
@@ -3832,17 +3821,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 889636843}
+        m_MethodName: DecreasePoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &521252092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3963,13 +3952,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 32.45
-  m_fontSizeBase: 36
+  m_fontSizeBase: 26.59
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -5527,24 +5516,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 889636843}
+        m_MethodName: AddPoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5667,24 +5645,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 889636843}
+        m_MethodName: AddPoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5775,18 +5742,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &824731353 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1465626378751294121, guid: 1b43d1bf62b0226419cdd07481f04172,
-    type: 3}
-  m_PrefabInstance: {fileID: 1465626379033894000}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f7a17becf53ac469c2b12506f0c204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &834559011
 GameObject:
   m_ObjectHideFlags: 0
@@ -5869,17 +5824,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 889636843}
+        m_MethodName: DecreasePoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &834559014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6180,7 +6135,7 @@ GameObject:
   - component: {fileID: 889636842}
   - component: {fileID: 889636843}
   m_Layer: 0
-  m_Name: Customisation Manager
+  m_Name: CUSTOMISATION MAN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6212,7 +6167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebb4400a25cdfa49b67bc4d5beb7503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 824731353}
+  player: {fileID: 1288291917}
   _base:
     baseStatName: 
     defaultStat: 0
@@ -6222,47 +6177,54 @@ MonoBehaviour:
   abilityDescription: {fileID: 1628573271}
   professionName: {fileID: 1383685645}
   pointsAmount: {fileID: 1749558563}
+  statPoints: 10
+  addStats:
+  - {fileID: 407992075}
+  - {fileID: 772927993}
+  - {fileID: 1937308715}
+  - {fileID: 762189984}
+  - {fileID: 985246992}
+  - {fileID: 114002300}
+  decreaseStats:
+  - {fileID: 1947603556}
+  - {fileID: 834559011}
+  - {fileID: 521252089}
+  - {fileID: 1071589046}
+  - {fileID: 259521622}
+  - {fileID: 1941117636}
+  statNames:
+  - {fileID: 1974462996}
+  - {fileID: 171633414}
+  - {fileID: 84687696}
+  - {fileID: 1199329694}
+  - {fileID: 546396211}
+  - {fileID: 1826593446}
+  statPointDisplay: {fileID: 1749558563}
   professionInfo:
   - ProfessionName: Paladin
     AbilityName: Fight for Honor
     AbilityDescription: Raises Attack
-    defaultStats:
-    - baseStatName: 
-      defaultStat: 0
-      levelUpStat: 0
-      additionalStat: 0
-    - baseStatName: 
-      defaultStat: 0
-      levelUpStat: 0
-      additionalStat: 0
   - ProfessionName: Bard
     AbilityName: Lullaby
     AbilityDescription: Lowers defence of enemies
-    defaultStats: []
   - ProfessionName: Barbarian
     AbilityName: Rage
     AbilityDescription: Cuts health in half for increased damage
-    defaultStats: []
   - ProfessionName: Druid
     AbilityName: Faith
     AbilityDescription: Raises Mana
-    defaultStats: []
   - ProfessionName: Monk
     AbilityName: True Sight
     AbilityDescription: Raises Stamina
-    defaultStats: []
   - ProfessionName: Ranger
     AbilityName: Long Shot
     AbilityDescription: Raises Defence
-    defaultStats: []
   - ProfessionName: Sorcerer
     AbilityName: Nature Magic
     AbilityDescription: Increases Mana
-    defaultStats: []
   - ProfessionName: Warlock
     AbilityName: Artificial Magic
     AbilityDescription: Decreases Stamina
-    defaultStats: []
   professionDropdown: {fileID: 977502789}
   currentHeight: 0
   TextureLocation: Character/
@@ -6524,14 +6486,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 889636843}
-        m_MethodName: ChooseProfession
-        m_Mode: 0
+        m_MethodName: SetPlayerProfession
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Bard
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &977502790
@@ -6652,24 +6614,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 889636843}
+        m_MethodName: AddPoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7873,17 +7824,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 889636843}
+        m_MethodName: DecreasePoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1071589049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8791,13 +8742,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 27.6
-  m_fontSizeBase: 36
+  m_fontSizeBase: 26.59
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -9483,6 +9434,143 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 104426476e9d6a84ba910bb8bbc57781, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe91d98ae4258b4da47843ea4d0383c, type: 3}
+--- !u!1 &1288291916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: bfe91d98ae4258b4da47843ea4d0383c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1288291915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1288291917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288291916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f7a17becf53ac469c2b12506f0c204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customisationTextureIndex: 
+  speed: 12
+  gravity: -9.81
+  staminaDegen: 10
+  disableStaminaRegenTime: 0
+  staminaRegenCooldown: 1
+  disableManaRegenTime: 0
+  manaRegenCooldown: 5
+  manaDegen: 15
+  manaFill: {fileID: 0}
+  manaSlider: {fileID: 0}
+  manaGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  staminaFill: {fileID: 0}
+  staminaSlider: {fileID: 0}
+  staminaGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  stats:
+    speed: 6
+    crouchSpeed: 3
+    sprintSpeed: 12
+    movementSpeed: 0
+    jumpHeight: 1
+    currentMana: 100
+    maxMana: 100
+    regenMana: 20
+    currentStamina: 100
+    maxStamina: 100
+    regenStamina: 30
+    level: 0
+    defaultStat: 0
+    regenHealth: 5
+    baseStats: []
+    baseStatPoints: 13
+  playerStats:
+    RegenCooldown: 5
+    healthHearts: {fileID: 0}
+    _currentHealth: 100
+  profession:
+    ProfessionName: Profession
+    AbilityName: Ability Name
+    AbilityDescription: Does an action
+  defaultStat: []
+  deathMenu: {fileID: 0}
+  inventory: {fileID: 0}
+  inventoryObject: {fileID: 0}
+  showDialogue: 0
+--- !u!143 &1288291918
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288291916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1294520720
 GameObject:
   m_ObjectHideFlags: 0
@@ -12141,13 +12229,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 26.45
-  m_fontSizeBase: 36
+  m_fontSizeBase: 26.59
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -12525,24 +12613,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 889636843}
+        m_MethodName: AddPoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12665,17 +12742,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889636841}
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 889636843}
+        m_MethodName: DecreasePoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1941117639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12795,8 +12872,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 889636843}
-        m_MethodName: StrengthPoints
-        m_Mode: 6
+        m_MethodName: DecreasePoint
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13153,14 +13230,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 36.9
+  m_fontSizeBase: 26.59
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -14387,72 +14464,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &1465626379033894000
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1465626378751294119, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 248.63991
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 137.21329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -34.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1465626378751294120, guid: 1b43d1bf62b0226419cdd07481f04172,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1b43d1bf62b0226419cdd07481f04172, type: 3}

@@ -62,15 +62,31 @@ public class Player : MonoBehaviour
     public bool showDialogue;
     #endregion
 
-    
+    public void Awake()
+    {
+        //If not Customisation scene then load player data
+        if (SceneManager.GetActiveScene().name != "Customisation")
+        {
+            //load player data
+            PlayerData loadedPlayer = PlayerBinarySave.LoadPlayerData();
+            if (loadedPlayer != null)
+            {
+                stats = loadedPlayer.playerStats;
+                profession = loadedPlayer.profession;
+                customisationTextureIndex = loadedPlayer.customisationTextureIndex;
+            }
+        }
+    }
 
+    private void Start()
+    {
+        defaultStat = new BaseStats[6]; //player has stats now
+    }
 
 
 
     public void Interact()
     {
-        
-
         Ray ray = new Ray(transform.position + transform.forward * 0.5f, transform.forward); //Creates line from player to infinity 
         RaycastHit hitInfo; //Get back info about what we hit
 
@@ -94,27 +110,69 @@ public class Player : MonoBehaviour
 
     }
 
+    /*void InteractB()
+    {
+        if (Input.GetKeyDown(KeyBindScript.keys["Interact"]))
+        {
+            Ray ray;
+            RaycastHit hitInfo;
+
+            ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+
+            float distance = 15f;
+            int layerMask = LayerMask.NameToLayer("Interactable"); //get layer number
+            layerMask = 1 << layerMask; //bit shift to get actual number
+            if (Physics.Raycast(ray, out hitInfo, distance, layerMask))
+            {
+                #region NPC
+                if (hitInfo.collider.TryGetComponent(out GameSystems.NPCs.BaseNPC npc))
+                {
+                    npc.Interact();
+                }
+                #endregion
+                #region Shop or chest
+                if (hitInfo.collider.TryGetComponent(out GUI3.Inventories.Shop inv))
+                {
+                    inv.enabled = true;
+                    //set which shop/chest it is here
+                    inventory.chestShopActive = true;
+                    inventory.chestShopPanel.SetActive(true);
+
+
+                    FindObjectOfType<PauseControl>().ShowInv();
+                }
+                #endregion
+                #region world item
+                if (hitInfo.collider.TryGetComponent(out GUI3.Inventories.ItemHandler _item))
+                {
+                    GetComponent<GUI3.Inventories.Inventory>().AddItem(_item.itemId);
+                    Destroy(_item.gameObject);
+                }
+                #endregion
+            }
+        }
+    }*/
+
+
+
+    // OnTriggerEnter is called when the Collider other enters the trigger
+    private void OnTriggerEnter(Collider other)
+    {
+       
+        int layerMask = LayerMask.NameToLayer("Interactable");
+        layerMask = 1 << layerMask;
+        if (other.gameObject.layer == layerMask)
+        {
+            showDialogue = true;
+            Interact();
+        }
+    }
+
     public void SetStamina()
     {
         staminaSlider.maxValue = stats.maxStamina;
         staminaSlider.value = stats.currentStamina;
         staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
-    }
-
-    public void Awake()
-    {
-        //If not Customisation scene then load player data
-        if (SceneManager.GetActiveScene().name != "Customisation")
-        {
-            //load player data
-            PlayerData loadedPlayer = PlayerBinarySave.LoadPlayerData();
-            if (loadedPlayer != null)
-            {
-                stats = loadedPlayer.playerStats;
-                profession = loadedPlayer.profession;
-                customisationTextureIndex = loadedPlayer.customisationTextureIndex;
-            }
-        }
     }
 
     // OnControllerColliderHit is called when the controller hits a collider while performing a Move
@@ -255,17 +313,7 @@ public class Player : MonoBehaviour
     public void ChangeProfession(ProfessionInfo cProfession)
     {
         profession = cProfession;
-        SetUpProfession();
     }
 
-    public void SetUpProfession()
-    {
-        for (int i = 0; i < stats.baseStats.Length; i++)
-        {
-            if (profession.defaultStats.Length < i) //check if i exists in profession
-            {
-                stats.baseStats[i].defaultStat = profession.defaultStats[i].defaultStat;
-            }
-        }
-    }
+
 }

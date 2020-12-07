@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class QuestNPC : NPC
+public class QuestNPC : DialogueNPC
 {
     [SerializeField] protected QuestManager questManager;
     [SerializeField] protected Quest NPCsQuest;

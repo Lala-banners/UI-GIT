@@ -6,12 +6,9 @@ using System;
 using TMPro;
 
 [System.Serializable]
-
 public class Customisation : MonoBehaviour
 {
     [SerializeField] public Player player;
-    PlayerStats playerStats;
-    public BaseStats _base;
     public static Customisation instance = null;
 
     #region VARIABLES
@@ -20,6 +17,12 @@ public class Customisation : MonoBehaviour
     public Text abilityDescription;
     public Text professionName;
     public TMP_Text pointsAmount;
+
+    [Header("Stats")]
+    public int statPoints = 10;
+    public GameObject[] addStats, decreaseStats;
+    public TMP_Text[] statNames;
+    public TMP_Text statPointDisplay;
 
     [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
     public TMP_Dropdown professionDropdown;
@@ -41,9 +44,36 @@ public class Customisation : MonoBehaviour
     public Renderer characterRenderer;
     #endregion
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     #region FUNCTIONS
     private void Start()
     {
+        string[] tempName = new string[] { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
+
+        //TODO : FIX START IN CUSTOMISATION
+        for (int i = 0; i < tempName.Length; i++)
+        {
+            player.defaultStat[i].baseStatName = tempName[i]; //gives player stats name
+            player.defaultStat[i].additionalStat = 0;
+        }
+
+        UpdateDisplay();
+
+        #region Texture Customisation
         int partCount = 0;
         foreach (string part in Enum.GetNames(typeof(CustomiseParts)))
         {
@@ -93,26 +123,65 @@ public class Customisation : MonoBehaviour
         {
             SetTexture(part, true);
         }
+        #endregion
     }
 
+
+    #region Stats
+    public void UpdateDisplay()
+    {
+        statPointDisplay.text = "Points left: " + statPoints.ToString();
+
+        for (int i = 0; i < player.defaultStat.Length; i++)
+        {
+            statNames[i].text = player.defaultStat[i].baseStatName + ": " + (player.defaultStat[i].finalStat.ToString());
+        }
+    }
+
+    public void UpdateCharName(string charName)
+    {
+        player.name = charName;
+    }
+
+    public void AddPoint(int statIndex)
+    {
+        if (statPoints > 0)
+        {
+            statPoints--;
+            player.defaultStat[statIndex].additionalStat++;
+        }
+        UpdateDisplay();
+    }
+
+    public void DecreasePoint(int statIndex)
+    {
+        if (statPoints < 10 && player.defaultStat[statIndex].additionalStat > 0)
+        {
+            statPoints++;
+            player.defaultStat[statIndex].additionalStat--;
+        }
+        UpdateDisplay();
+    }
+
+    public void ResetPoints()
+    {
+        if (statPoints < 10)
+        {
+            statPoints = 10;
+
+            for (int i = 0; i < player.defaultStat.Length; i++)
+            {
+                player.defaultStat[i].additionalStat = 0;
+            }
+        }
+        UpdateDisplay();
+    }
+    #endregion
+
+    #region Texture Functions
     public void SceneChanger(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
-    }
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     //Function to set a texture 
@@ -186,69 +255,99 @@ public class Customisation : MonoBehaviour
         mats[partIndex].mainTexture = partsTexture[partIndex][currentTexture];
         characterRenderer.materials = mats;
     }
+    #endregion
 
-    public void SetPlayerProfession(string type, bool pointIncrease)
+    public void SetPlayerProfession(string type)
     {
         int professionIndex = 0;
 
         switch (type)
         {
-            case "Strength":
+            case "Paladin":
                 professionIndex = 0;
+                player.defaultStat[0].defaultStat = 16;
+                player.defaultStat[1].defaultStat = 16;
+                player.defaultStat[2].defaultStat = 4;
+                player.defaultStat[3].defaultStat = 10;
+                player.defaultStat[4].defaultStat = 8;
+                player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Dexterity":
+            case "Bard":
                 professionIndex = 1;
+                player.defaultStat[0].defaultStat = 10;
+                player.defaultStat[1].defaultStat = 14;
+                player.defaultStat[2].defaultStat = 10;
+                player.defaultStat[3].defaultStat = 10;
+                player.defaultStat[4].defaultStat = 18;
+                player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Wisdom":
+            case "Barbarian":
                 professionIndex = 2;
+                player.defaultStat[0].defaultStat = 16;
+                player.defaultStat[1].defaultStat = 10;
+                player.defaultStat[2].defaultStat = 11;
+                player.defaultStat[3].defaultStat = 10;
+                player.defaultStat[4].defaultStat = 14;
+                player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Intelligence":
+            case "Druid":
                 professionIndex = 3;
+                player.defaultStat[0].defaultStat = 9;
+                player.defaultStat[1].defaultStat = 10;
+                player.defaultStat[2].defaultStat = 14;
+                player.defaultStat[3].defaultStat = 10;
+                player.defaultStat[4].defaultStat = 12;
+                player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Charisma":
+            case "Monk":
                 professionIndex = 4;
+                player.defaultStat[0].defaultStat = 10;
+                player.defaultStat[1].defaultStat = 10;
+                player.defaultStat[2].defaultStat = 12;
+                player.defaultStat[3].defaultStat = 15;
+                player.defaultStat[4].defaultStat = 10;
+                player.defaultStat[5].defaultStat = 16;
                 break;
 
-            case "Constitution":
+            case "Ranger":
                 professionIndex = 5;
+                player.defaultStat[0].defaultStat = 12;
+                player.defaultStat[1].defaultStat = 10;
+                player.defaultStat[2].defaultStat = 10;
+                player.defaultStat[3].defaultStat = 13;
+                player.defaultStat[4].defaultStat = 14;
+                player.defaultStat[5].defaultStat = 10;
+                break;
+            
+            case "Sorcerer":
+                professionIndex = 6;
+                player.defaultStat[0].defaultStat = 10;
+                player.defaultStat[1].defaultStat = 17;
+                player.defaultStat[2].defaultStat = 10;
+                player.defaultStat[3].defaultStat = 10;
+                player.defaultStat[4].defaultStat = 10;
+                player.defaultStat[5].defaultStat = 10;
+                break; 
+            
+            case "Warlock":
+                professionIndex = 7;
+                player.defaultStat[0].defaultStat = 10;
+                player.defaultStat[1].defaultStat = 10;
+                player.defaultStat[2].defaultStat = 18;
+                player.defaultStat[3].defaultStat = 10;
+                player.defaultStat[4].defaultStat = 10;
+                player.defaultStat[5].defaultStat = 10;
                 break;
 
             default:
                 Debug.LogError("Invalid set profession type");
                 break;
         }
-
-        //int maxStat = player.stats.defaultStat[professionIndex].Count;
-
-        int maxStat = _base.finalStat;
-
-        int curStat = _base.defaultStat;
-
-        if(pointIncrease)
-        {
-            curStat++;
-        }
-        else
-        {
-            curStat--;
-        }
-
-        if (curStat < 0)
-        {
-            curStat = maxStat - 1;
-        }
-        else if (curStat > maxStat - 1)
-        {
-            curStat = 0;
-        }
-
-        pointsAmount.text = _base.baseStatName;
-        //curStat = player.stats.baseStats[professionIndex];
-        //player.stats.baseStatPoints[professionIndex] = curStat;
+        UpdateDisplay();
     }
 
     public void ChooseProfession(int classIndex)
@@ -269,6 +368,7 @@ public class Customisation : MonoBehaviour
         SaveCharacter();
         SceneManager.LoadScene(1); //load game scene
     }
+    
 
     #region Character Customisation
     public void ChangeSkinColour(bool increase)
@@ -327,44 +427,6 @@ public class Customisation : MonoBehaviour
 
             mat.mainTexture = partTextures[UnityEngine.Random.Range(0, partTextures.Count)];
         }
-    }
-    #endregion
-
-    #region Point Pool
-    public void StrengthPoints(bool addPoint)
-    {
-        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution"};
-        SetPlayerProfession(points[0].ToString(), addPoint);
-    }
-
-    public void DexterityPoints(bool addPoint)
-    {
-        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-        SetPlayerProfession(points[1].ToString(), addPoint);
-    }
-
-    public void WisdomPoints(bool addPoint)
-    {
-        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-        SetPlayerProfession(points[2].ToString(), addPoint);
-    }
-
-    public void IntelligencePoints(bool addPoint)
-    {
-        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-        SetPlayerProfession(points[3].ToString(), addPoint);
-    }
-
-    public void CharismaPoints(bool addPoint)
-    {
-        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-        SetPlayerProfession(points[4].ToString(), addPoint);
-    }
-
-    public void ConstitutionPoints(bool addPoint)
-    {
-        string[] points = { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
-        SetPlayerProfession(points[5].ToString(), addPoint);
     }
     #endregion
 

@@ -47,6 +47,8 @@ public class Inventory : MonoBehaviour
 
     //TODO : Lara : Convert all IMGUI to Canvas! (Inventory, shop, money, quests, dialogue etc)
 
+
+
     private void Start()
     {
         enumTypesForItems = new string[] { "All", " Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potions", "Scrolls", "Quest" };
@@ -99,15 +101,14 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public void MoveItem()
+    public void MoveItem() //Move to chest or shop
     {
         //Move from inventory to chest
         selectedItem.Amount--;
         inventory.Remove(selectedItem);
         currentChest.chestInv.Add(selectedItem);
         Destroy(selectedItem.button);
-        print("IT WORKS!");
-      
+        print("Item moved from Inventory");
     }
 
     public void DiscardItem() //THIS WORKS!

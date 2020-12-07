@@ -4,76 +4,37 @@ using UnityEngine.UI;
 
 public class KeyBindScript : MonoBehaviour
 {
-    public static Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
-    //Dictionary is similar to a list
-
-    public Text up, down, left, right, jump;
-
-    private GameObject currentKey;
-    public Color32 changedKey = new Color32(39,171,249,255);//blue
-    public Color32 selectedKey = new Color32(239,116,36,255);//orange
-    
-
-    private void Start()
+    #region Variables
+    public static Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>(); //static dictionary containing keycodes and their reference names
+    public Text forward, backwards, left, right, jump;
+    public GameObject currentKey;
+    public Color selectedKey, changedKey, defaultKey;
+    #endregion
+    void Start()
     {
-        keys.Add("Up", KeyCode.W);
-        keys.Add("Down", KeyCode.S);
-        keys.Add("Left", KeyCode.A);
-        keys.Add("Right", KeyCode.D);
-        keys.Add("Jump", KeyCode.Space);
+        if (!keys.ContainsKey("Forward"))
+        {
+            DefaultKeyBinds(); //set default keys
+        }
 
-        //Can be stored as string -> string KeyCode button = keys["Left"].ToString();
+        LoadKeys();
 
-        up.text = keys["Up"].ToString();
-        down.text = keys["Down"].ToString();
-        left.text = keys["Left"].ToString();
-        right.text = keys["Right"].ToString();
-        jump.text = keys["Jump"].ToString();
+        UpdateKeyBindUI(); //update ui to match keybinds
+
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyBindScript.keys["Up"])) //make character move forward
-        {
-            Debug.Log("Character moves forward");
-        }
-
-        if (Input.GetKeyDown(KeyBindScript.keys["Down"])) //make character move down
-        {
-            Debug.Log("Character moves down");
-        }
-
-        if (Input.GetKeyDown(KeyBindScript.keys["Left"])) //make character move left
-        {
-            Debug.Log("Character moves left");
-        }
-
-        if (Input.GetKeyDown(KeyBindScript.keys["Right"])) //make character move right
-        {
-            Debug.Log("Character moves right");
-        }
-
-        if (Input.GetKeyDown(KeyBindScript.keys["Jump"])) //make character jump
-        {
-            Debug.Log("Character jumps");
-        }
-    }
-
-     
-    #region Method to set up new keys 
-    private void OnGUI()
+    void OnGUI()
     {
         string newKey = "";
         Event e = Event.current;
-        if (currentKey != null) //when currentKey is null -> want to reassign a key
+        if (currentKey != null)
         {
-            if (e.isKey)
+            currentKey.GetComponent<Image>().color = selectedKey; //set button colour to selected
+            if (e.isKey) //if any key is pressed
             {
-                Debug.Log(e.keyCode.ToString());
-                newKey = e.keyCode.ToString();
+                newKey = e.keyCode.ToString(); //get the keycode as string
             }
-
-            //There is an issue getting SHift key, the following will fix this
+            #region shift key patch
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 newKey = "LeftShift";
@@ -82,40 +43,63 @@ public class KeyBindScript : MonoBehaviour
             {
                 newKey = "RightShift";
             }
-            if (newKey != "")//if we have set a key, this is not empty
+            #endregion
+            if (newKey != "") //if new key is not null
             {
-                //we change our dictionary (that means our keybind changes too)
-                keys[currentKey.name] = (KeyCode)System.Enum.Parse(typeof(KeyCode), newKey); //newKey string
-                //change text of our button
-                currentKey.GetComponentInChildren<Text>().text = newKey;
-                currentKey.GetComponent<Image>().color = changedKey;
-                currentKey = null;
-                SaveKeys();
+                keys[currentKey.name] = (KeyCode)System.Enum.Parse(typeof(KeyCode), newKey); //set dictionary reference
+                currentKey.GetComponentInChildren<Text>().text = newKey; //attach the new key text element
+                currentKey.GetComponent<Image>().color = changedKey; //set button colour to changed
+                currentKey = null; //reset current key
             }
         }
     }
-    #endregion
-
-
-    #region Method to change keys to whatever we want
-    public void ChangeKey(GameObject clickKey)
-    {
-        currentKey = clickKey;
-        if(clickKey != null)
-        {
-            currentKey.GetComponent<Image>().color = selectedKey;
-        }
-    }
-    #endregion
-
-    #region To Save keys when we change them
+    #region Functions
     public void SaveKeys()
     {
-        foreach(var key in keys)
+        foreach (var key in keys) //for each key in the keys dictionary
         {
-            PlayerPrefs.SetString(key.Key, key.Value.ToString());
+            PlayerPrefs.SetString(key.Key, key.Value.ToString()); //save the strings of the key tags and values
         }
         PlayerPrefs.Save();
     }
+    public void LoadKeys()
+    {
+        List<string> keyskeys = new List<string>(keys.Keys); //random list to fix the looping dictionary error
+        foreach (string key in keyskeys) //for each key
+        {
+            keys[key] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(key, keys[key].ToString())); //load saved key
+        }
+    }
+    public void DefaultKeyBinds()
+    {
+        //add default keys with code and tag to dictionary keys
+        keys.Add("Forward", KeyCode.W);
+        keys.Add("Backwards", KeyCode.S);
+        keys.Add("Left", KeyCode.A);
+        keys.Add("Right", KeyCode.D);
+        keys.Add("Jump", KeyCode.Space);
+    }
+    public void UpdateKeyBindUI()
+    {
+        //sets ui text to string of keycode tagged
+        forward.text = keys["Forward"].ToString();
+        backwards.text = keys["Backwards"].ToString();
+        left.text = keys["Left"].ToString();
+        right.text = keys["Right"].ToString();
+        jump.text = keys["Jump"].ToString();
+    }
+    public void ChangeKey(GameObject clickedKey)
+    {
+        if (currentKey == null | currentKey == clickedKey)
+        {
+            currentKey = clickedKey;
+        }
+        else
+        {
+            currentKey.GetComponent<Image>().color = defaultKey;
+            currentKey = clickedKey;
+        }
+    }
+
     #endregion
 }

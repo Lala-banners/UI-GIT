@@ -28,7 +28,7 @@ public class PlayerBinarySave : MonoBehaviour //Save and Load to binary file!
     public static PlayerData LoadPlayerData()
     {
         //location to save
-        string path = Application.dataPath + "/player.load";
+        string path = Application.dataPath + "/player.save";
 
         //If there is a file at that path
         if (File.Exists(path))

@@ -8,6 +8,7 @@ public class PauseHandler : MonoBehaviour
     public GameObject keybinds;
     public GameObject HUD;
     public GameObject inventory;
+    public GameObject dialoguePanel;
 
     public void Paused(GameObject panel)
     {
@@ -58,5 +59,15 @@ public class PauseHandler : MonoBehaviour
                 }
             }
         }
+
+        if (DialogueNPC.showDialogue)
+        {
+            dialoguePanel.SetActive(true);
+        }
+        else if(dialoguePanel.activeSelf)
+        {
+            dialoguePanel.SetActive(false);
+        }
+
     }
 }

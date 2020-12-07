@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 /// <summary>
 /// Third person movement
@@ -17,38 +14,74 @@ public class ThirdPersonMovement : MonoBehaviour
     float turnSmoothVelocity;
     [SerializeField] private Vector3 playerVelocity;
     private bool isGrounded;
+    private Vector3 moveDir;
+
+    [System.Serializable]
+    public struct KeyInputs
+    {
+        public float horizontal; //horizontal movement value
+        public float vertical; //vertical movement value
+    }
+    public KeyInputs keyInputs;
 
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();
     }
+
     // Update is called once per frame
     void Update()
     {
+        Direction();
         Jump();
         Movement();
+
+        //Interact();
+
+        float oldGravity = moveDir.y;
+
+        Direction();
+
+        //transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        //moveDir = Quaternion.Euler(0f, targetAngle, 0f) * moveDir; //changing this to up instead of forward makes him jump only
+        moveDir = Quaternion.Euler(0f, cam.eulerAngles.y, 0f) * moveDir;
+
+        float angle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+        float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.eulerAngles = new Vector3(0f, smoothAngle, 0f);
+
+        moveDir.x *= player.speed;
+        moveDir.y = oldGravity;
+        moveDir.z *= player.speed;
+
+        moveDir.y -= gravity * Time.deltaTime;
+
+
+        controller.Move(moveDir * Time.deltaTime);
+
     }
+
     private void Movement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 direction = new Vector3(keyInputs.horizontal, 0f, keyInputs.vertical).normalized;
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg
                                                                         + cam.eulerAngles.y;
+
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,
                                             ref turnSmoothVelocity, turnSmoothTime);
+
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             float movementSpeed = player.stats.speed;
+
             if (player.stats.currentStamina > 0 && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
                 player.stats.currentStamina -= player.staminaDegen * Time.deltaTime;
                 player.SetStamina();
                 player.disableStaminaRegenTime = Time.time;
                 movementSpeed = player.stats.sprintSpeed;
-
             }
             else if (Input.GetKey(KeyCode.C))
             {
@@ -58,19 +91,48 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(moveDir * movementSpeed * Time.deltaTime);
         }
     }
+
+    private void Direction()
+    {
+        float horizontal = 0; //reset movement values
+        float vertical = 0;
+
+        //take key input and check if it matches any of these movement types in the dictionary
+        //if a match is found, increase that direction
+        if (Input.GetKey(KeyBindScript.keys["Forward"]))
+        {
+            vertical++;
+        }
+        if (Input.GetKey(KeyBindScript.keys["Backwards"]))
+        {
+            vertical--;
+        }
+        if (Input.GetKey(KeyBindScript.keys["Right"]))
+        {
+            horizontal++;
+        }
+        if (Input.GetKey(KeyBindScript.keys["Left"]))
+        {
+            horizontal--;
+        }
+
+        moveDir = new Vector3(horizontal, 0f, vertical).normalized; 
+    }
+
     void Jump()
     {
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKey(KeyBindScript.keys["Jump"]) && isGrounded)
         {
             playerVelocity.y += Mathf.Sqrt(player.stats.jumpHeight * -3.0f * gravity);
         }
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
     bool IsGrounded()
     {
         //debug raycast

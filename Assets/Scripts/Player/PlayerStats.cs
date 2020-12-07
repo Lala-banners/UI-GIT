@@ -87,6 +87,8 @@ public class PlayerStats
         }
     }
 
+
+
     //Function for dealing damage to the player
     public void DealDamage(float damage)
     {
