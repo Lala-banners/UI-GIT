@@ -68,7 +68,7 @@ public class Customisation : MonoBehaviour
 
         string[] tempName = new string[] { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
-        //TODO : FIX START IN CUSTOMISATION
+        
         for (int i = 0; i < tempName.Length; i++)
         {
             player.defaultStat[i].baseStatName = tempName[i]; //gives player stats name
@@ -86,7 +86,8 @@ public class Customisation : MonoBehaviour
         {
             if (player.customisation.currentPartsTextureIndex.Length != 0)
             {
-                currentPartsTextureIndex = player.cu;
+                currentPartsTextureIndex = player.customisation.currentPartsTextureIndex;
+                
             }
         }
 
@@ -186,6 +187,8 @@ public class Customisation : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+   
+
     //Function to set a texture 
     /// <summary>
     /// Sets the texture based on the type we ask for, and the direction we are moving
@@ -194,7 +197,7 @@ public class Customisation : MonoBehaviour
     /// <param name="moveRight">If set to true, use the next texture for this item, if false, the previous</param>
     void SetTexture(string type, bool moveRight)
     {
-        int partIndex = 0;
+        int partIndex = 0; //Material index
 
         switch (type)
         {
@@ -259,8 +262,10 @@ public class Customisation : MonoBehaviour
     {
         //These are the materials that the texture will be changed
         Material[] mats = characterRenderer.materials;
-        mats[currentTexture].mainTexture = textures[partIndex][currentPartsTextureIndex[partIndex]]; //
-        characterRenderer.materials[currentTexture] = mats[currentTexture];
+        mats[partIndex].mainTexture = textures[partIndex][currentTexture];
+        characterRenderer.materials = mats;
+        /*mats[currentTexture].mainTexture = textures[partIndex][currentTexture]; //
+        characterRenderer.materials[currentTexture] = mats[currentTexture];*/
     }
     #endregion
 

@@ -6172,29 +6172,6 @@ MonoBehaviour:
   abilityDescription: {fileID: 1628573271}
   professionName: {fileID: 1383685645}
   pointsAmount: {fileID: 1749558563}
-  statPoints: 10
-  addStats:
-  - {fileID: 407992075}
-  - {fileID: 772927993}
-  - {fileID: 1937308715}
-  - {fileID: 762189984}
-  - {fileID: 985246992}
-  - {fileID: 114002300}
-  decreaseStats:
-  - {fileID: 1947603556}
-  - {fileID: 834559011}
-  - {fileID: 521252089}
-  - {fileID: 1071589046}
-  - {fileID: 259521622}
-  - {fileID: 1941117636}
-  statNames:
-  - {fileID: 1974462996}
-  - {fileID: 171633414}
-  - {fileID: 84687696}
-  - {fileID: 1199329694}
-  - {fileID: 546396211}
-  - {fileID: 1826593446}
-  statPointDisplay: {fileID: 1749558563}
   professionInfo:
   - ProfessionName: Paladin
     AbilityName: Fight for Honor
@@ -6221,7 +6198,29 @@ MonoBehaviour:
     AbilityName: Artificial Magic
     AbilityDescription: Decreases Stamina
   professionDropdown: {fileID: 977502789}
-  currentHeight: 0
+  statPoints: 10
+  addStats:
+  - {fileID: 407992075}
+  - {fileID: 772927993}
+  - {fileID: 1937308715}
+  - {fileID: 762189984}
+  - {fileID: 985246992}
+  - {fileID: 114002300}
+  decreaseStats:
+  - {fileID: 1947603556}
+  - {fileID: 834559011}
+  - {fileID: 521252089}
+  - {fileID: 1071589046}
+  - {fileID: 259521622}
+  - {fileID: 1941117636}
+  statNames:
+  - {fileID: 1974462996}
+  - {fileID: 171633414}
+  - {fileID: 84687696}
+  - {fileID: 1199329694}
+  - {fileID: 546396211}
+  - {fileID: 1826593446}
+  statPointDisplay: {fileID: 1749558563}
   TextureLocation: Character/
   LoadScene: 2
   scrollPosition: {x: 0, y: 0}
@@ -6867,6 +6866,28 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 889636843}
+        m_MethodName: SaveCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 889636843}
+        m_MethodName: SaveAndPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 889636843}
         m_MethodName: SceneChanger
         m_Mode: 3
@@ -9447,7 +9468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f7a17becf53ac469c2b12506f0c204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customisationTextureIndex: 
   speed: 12
   gravity: -9.81
   staminaDegen: 10
@@ -9548,6 +9568,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   inventoryObject: {fileID: 0}
   showDialogue: 0
+  customisation: {fileID: 0}
 --- !u!143 &1288291918
 CharacterController:
   m_ObjectHideFlags: 0
