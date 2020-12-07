@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < customisation.currentPartsTextureIndex.Length; i++)
         {
-            customisation.SetMats(i, i); //
+            customisation.SetMats(i, customisation.currentPartsTextureIndex[i]); //
         }
     }
 

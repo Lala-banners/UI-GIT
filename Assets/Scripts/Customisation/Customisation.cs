@@ -263,9 +263,6 @@ public class Customisation : MonoBehaviour
         //These are the materials that the texture will be changed
         Material[] mats = characterRenderer.materials;
         mats[partIndex].mainTexture = textures[partIndex][currentTexture];
-        characterRenderer.materials = mats;
-        /*mats[currentTexture].mainTexture = textures[partIndex][currentTexture]; //
-        characterRenderer.materials[currentTexture] = mats[currentTexture];*/
     }
     #endregion
 
@@ -378,42 +375,42 @@ public class Customisation : MonoBehaviour
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         SetTexture(names[0].ToString(), increase);
-        SaveCharacter();
+        //SaveCharacter();
     }
 
     public void ChangeHairColour(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         SetTexture(names[1].ToString(), increase);
-        SaveCharacter();
+        //SaveCharacter();
     }
 
     public void ChangeMouth(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         SetTexture(names[2].ToString(), increase);
-        SaveCharacter();
+        //SaveCharacter();
     }
 
     public void ChangeEyeColour(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         SetTexture(names[3].ToString(), increase);
-        SaveCharacter();
+        //SaveCharacter();
     }
 
     public void ChangeClothesColour(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         SetTexture(names[4].ToString(), increase);
-        SaveCharacter();
+       // SaveCharacter();
     }
 
     public void ChangeArmourColour(bool increase)
     {
         string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
         SetTexture(names[5].ToString(), increase);
-        SaveCharacter();
+        //SaveCharacter();
     }
 
     public void OnClickRandomize()
