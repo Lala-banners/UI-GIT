@@ -46,25 +46,15 @@ public class Customisation : MonoBehaviour
     public Renderer characterRenderer;
     #endregion
 
-    /*private void Awake()
+    private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }*/
+        StartTexture();
+    }
 
     #region FUNCTIONS
     private void Start()
     {
-        StartTexture();
+        //StartTexture();
 
         string[] tempName = new string[] { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
