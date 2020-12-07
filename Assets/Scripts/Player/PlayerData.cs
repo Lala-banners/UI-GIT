@@ -13,7 +13,7 @@ public class PlayerData
     {
         playerStats = player.stats;
         profession = player.Profession;
-        customisationTextureIndex = player.customisationTextureIndex;
+        customisationTextureIndex = player.customisation.currentPartsTextureIndex;
 
     }
 

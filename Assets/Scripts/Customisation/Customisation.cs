@@ -9,14 +9,16 @@ using TMPro;
 public class Customisation : MonoBehaviour
 {
     [SerializeField] public Player player;
-    public static Customisation instance = null;
+    //public static Customisation instance = null;
 
     #region VARIABLES
-    [Header("Profession")]
+    [Header("Profession Information")]
     public Text abilityName;
     public Text abilityDescription;
     public Text professionName;
     public TMP_Text pointsAmount;
+    [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
+    public TMP_Dropdown professionDropdown;
 
     [Header("Stats")]
     public int statPoints = 10;
@@ -24,27 +26,27 @@ public class Customisation : MonoBehaviour
     public TMP_Text[] statNames;
     public TMP_Text statPointDisplay;
 
-    [SerializeField] ProfessionInfo[] professionInfo; //the defaults for each profession
-    public TMP_Dropdown professionDropdown;
-
-    public int currentHeight;
+    //public int currentHeight;
     [SerializeField]
     private string TextureLocation = "Character/";
     public string LoadScene = "GameScene";
     public enum CustomiseParts { Skin, Hair, Mouth, Eyes, Clothes, Armour };
     public Vector2 scrollPosition = Vector2.zero;
+    
 
     //[Enum.GetNames(typeof(CustomiseParts)).Length]; this part gives us the number of customiseable parts = 6
     //an array of List<texture2d>
     //= 6 Lists
-    public List<Texture2D>[] partsTexture = new List<Texture2D>[Enum.GetNames(typeof(CustomiseParts)).Length];
-    [SerializeField] private int[] currentPartsTextureIndex = new int[Enum.GetNames(typeof(CustomiseParts)).Length];
+    public List<Texture2D>[] textures = new List<Texture2D>[6];
+    //public List<Texture2D>[] partsTexture = new List<Texture2D>[Enum.GetNames(typeof(CustomiseParts)).Length];
+    //[SerializeField] private int[] currentPartsTextureIndex = new int[Enum.GetNames(typeof(CustomiseParts)).Length];
+    public int[] currentPartsTextureIndex = new int[6];
 
     //Renderer for character mesh so we can reference material list within script for changing visuals
     public Renderer characterRenderer;
     #endregion
 
-    private void Awake()
+    /*private void Awake()
     {
         if (instance == null)
         {
@@ -57,11 +59,13 @@ public class Customisation : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-    }
+    }*/
 
     #region FUNCTIONS
     private void Start()
     {
+        StartTexture();
+
         string[] tempName = new string[] { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
         //TODO : FIX START IN CUSTOMISATION
@@ -74,40 +78,15 @@ public class Customisation : MonoBehaviour
         UpdateDisplay();
 
         #region Texture Customisation
-        int partCount = 0;
-        foreach (string part in Enum.GetNames(typeof(CustomiseParts)))
-        {
-
-            Texture2D tempTexture;
-            int textureCount = 0;
-
-            partsTexture[partCount] = new List<Texture2D>();
-
-            do
-            {
-                //Load Textures so they can be set
-                tempTexture = (Texture2D)Resources.Load(TextureLocation + part + "_" + textureCount);
-
-                //If temp texture exists
-                if (tempTexture != null)
-                {
-                    //Add this texture to a collection
-                    partsTexture[partCount].Add(tempTexture);
-                }
-                textureCount++;
-            } while (tempTexture != null);
-            partCount++;
-        }
-
         if (player == null)
         {
             Debug.LogError("player in Customisation is null");
         }
         else
         {
-            if (player.customisationTextureIndex.Length != 0)
+            if (player.customisation.currentPartsTextureIndex.Length != 0)
             {
-                currentPartsTextureIndex = player.customisationTextureIndex;
+                currentPartsTextureIndex = player.cu;
             }
         }
 
@@ -126,11 +105,34 @@ public class Customisation : MonoBehaviour
         #endregion
     }
 
+    void StartTexture()
+    {
+        string[] names = { "Skin", "Hair", "Mouth", "Eyes", "Clothes", "Armour" };
+        for (int i = 0; i < names.Length; i++) //for every texture type
+        {
+            textures[i] = new List<Texture2D>(); //make the list
+
+            int index = 0; //start at index 0
+            Texture2D tempTexture; //create temporary texture
+            do
+            {
+                tempTexture = (Texture2D)Resources.Load("Character/" + names[i] + "_" + index); //locate the texture by path
+
+                if (tempTexture != null) //if that texture exists
+                {
+                    textures[i].Add(tempTexture); //add to list
+                }
+
+                index++;
+
+            } while (tempTexture != null); //go back to "do" while the temp texture is not null
+        }
+    }
 
     #region Stats
     public void UpdateDisplay()
     {
-        statPointDisplay.text = "Points left: " + statPoints.ToString();
+        statPointDisplay.text = "Points left: " + statPoints.ToString(); //
 
         for (int i = 0; i < player.defaultStat.Length; i++)
         {
@@ -225,7 +227,7 @@ public class Customisation : MonoBehaviour
                 break;
         }
 
-        int max = partsTexture[partIndex].Count;
+        int max = textures[partIndex].Count;
 
         //Getting current texture, increase number by 1 and storing that number (moving to next texture)
         int currentTexture = currentPartsTextureIndex[partIndex];
@@ -250,21 +252,23 @@ public class Customisation : MonoBehaviour
         }
         currentPartsTextureIndex[partIndex] = currentTexture;
 
+        SetMats(partIndex, currentTexture);
+    }
+
+    public void SetMats(int partIndex, int currentTexture)
+    {
         //These are the materials that the texture will be changed
         Material[] mats = characterRenderer.materials;
-        mats[partIndex].mainTexture = partsTexture[partIndex][currentTexture];
-        characterRenderer.materials = mats;
+        mats[currentTexture].mainTexture = textures[partIndex][currentPartsTextureIndex[partIndex]]; //
+        characterRenderer.materials[currentTexture] = mats[currentTexture];
     }
     #endregion
 
-    public void SetPlayerProfession(string type)
+    public void SetPlayerProfession(int professionIndex)
     {
-        int professionIndex = 0;
-
-        switch (type)
+        switch (professionIndex)
         {
-            case "Paladin":
-                professionIndex = 0;
+            case 0: 
                 player.defaultStat[0].defaultStat = 16;
                 player.defaultStat[1].defaultStat = 16;
                 player.defaultStat[2].defaultStat = 4;
@@ -273,8 +277,7 @@ public class Customisation : MonoBehaviour
                 player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Bard":
-                professionIndex = 1;
+            case 1:
                 player.defaultStat[0].defaultStat = 10;
                 player.defaultStat[1].defaultStat = 14;
                 player.defaultStat[2].defaultStat = 10;
@@ -283,8 +286,7 @@ public class Customisation : MonoBehaviour
                 player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Barbarian":
-                professionIndex = 2;
+            case 2:
                 player.defaultStat[0].defaultStat = 16;
                 player.defaultStat[1].defaultStat = 10;
                 player.defaultStat[2].defaultStat = 11;
@@ -293,8 +295,7 @@ public class Customisation : MonoBehaviour
                 player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Druid":
-                professionIndex = 3;
+            case 3:
                 player.defaultStat[0].defaultStat = 9;
                 player.defaultStat[1].defaultStat = 10;
                 player.defaultStat[2].defaultStat = 14;
@@ -303,8 +304,7 @@ public class Customisation : MonoBehaviour
                 player.defaultStat[5].defaultStat = 10;
                 break;
 
-            case "Monk":
-                professionIndex = 4;
+            case 4:
                 player.defaultStat[0].defaultStat = 10;
                 player.defaultStat[1].defaultStat = 10;
                 player.defaultStat[2].defaultStat = 12;
@@ -313,8 +313,7 @@ public class Customisation : MonoBehaviour
                 player.defaultStat[5].defaultStat = 16;
                 break;
 
-            case "Ranger":
-                professionIndex = 5;
+            case 5:
                 player.defaultStat[0].defaultStat = 12;
                 player.defaultStat[1].defaultStat = 10;
                 player.defaultStat[2].defaultStat = 10;
@@ -322,19 +321,17 @@ public class Customisation : MonoBehaviour
                 player.defaultStat[4].defaultStat = 14;
                 player.defaultStat[5].defaultStat = 10;
                 break;
-            
-            case "Sorcerer":
-                professionIndex = 6;
+
+            case 6:
                 player.defaultStat[0].defaultStat = 10;
                 player.defaultStat[1].defaultStat = 17;
                 player.defaultStat[2].defaultStat = 10;
                 player.defaultStat[3].defaultStat = 10;
                 player.defaultStat[4].defaultStat = 10;
                 player.defaultStat[5].defaultStat = 10;
-                break; 
-            
-            case "Warlock":
-                professionIndex = 7;
+                break;
+
+            case 7:
                 player.defaultStat[0].defaultStat = 10;
                 player.defaultStat[1].defaultStat = 10;
                 player.defaultStat[2].defaultStat = 18;
@@ -348,9 +345,10 @@ public class Customisation : MonoBehaviour
                 break;
         }
         UpdateDisplay();
+        DisplayProfession(professionIndex);
     }
 
-    public void ChooseProfession(int classIndex)
+    public void DisplayProfession(int classIndex)
     {
         professionName.text = professionInfo[classIndex].ProfessionName;
         abilityDescription.text = professionInfo[classIndex].AbilityDescription;
@@ -359,7 +357,7 @@ public class Customisation : MonoBehaviour
 
     public void SaveCharacter()
     {
-        player.customisationTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
+        player.customisation.currentPartsTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
         PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
     }
 
@@ -423,11 +421,12 @@ public class Customisation : MonoBehaviour
             Material mat = characterRenderer.materials[i];
 
             // Get this parts textures
-            List<Texture2D> partTextures = partsTexture[i];
+            List<Texture2D> partTextures = textures[i];
 
             mat.mainTexture = partTextures[UnityEngine.Random.Range(0, partTextures.Count)];
         }
     }
+    #endregion
     #endregion
 
     #region Commented out OnGUI
@@ -549,5 +548,5 @@ public class Customisation : MonoBehaviour
 
     }*/
     #endregion
-    #endregion
+
 }

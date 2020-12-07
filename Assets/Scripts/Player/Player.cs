@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     /// <summary>
     /// To save the player customisation to load into game scene (2).
     /// </summary>
-    public int[] customisationTextureIndex;
+    //public int[] customisationTextureIndex;
+    
     #endregion
 
     [Header("Other")]
@@ -60,10 +61,14 @@ public class Player : MonoBehaviour
     public Inventory inventory;
     public GameObject inventoryObject;
     public bool showDialogue;
+    public Customisation customisation;
     #endregion
 
     public void Awake()
     {
+        customisation = FindObjectOfType<Customisation>();
+        defaultStat = new BaseStats[6]; //player has stats now
+
         //If not Customisation scene then load player data
         if (SceneManager.GetActiveScene().name != "Customisation")
         {
@@ -73,14 +78,17 @@ public class Player : MonoBehaviour
             {
                 stats = loadedPlayer.playerStats;
                 profession = loadedPlayer.profession;
-                customisationTextureIndex = loadedPlayer.customisationTextureIndex;
+                customisation.currentPartsTextureIndex = loadedPlayer.customisationTextureIndex;
             }
         }
     }
 
     private void Start()
     {
-        defaultStat = new BaseStats[6]; //player has stats now
+        for (int i = 0; i < customisation.currentPartsTextureIndex.Length; i++)
+        {
+            customisation.SetMats(i, i); //
+        }
     }
 
 

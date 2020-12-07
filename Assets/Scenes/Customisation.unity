@@ -6168,11 +6168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1288291917}
-  _base:
-    baseStatName: 
-    defaultStat: 0
-    levelUpStat: 0
-    additionalStat: 0
   abilityName: {fileID: 713068119}
   abilityDescription: {fileID: 1628573271}
   professionName: {fileID: 1383685645}
@@ -6230,7 +6225,7 @@ MonoBehaviour:
   TextureLocation: Character/
   LoadScene: 2
   scrollPosition: {x: 0, y: 0}
-  currentPartsTextureIndex: 000000000000000000000000000000000000000000000000
+  currentPartsTextureIndex: 020000000000000000000000030000000000000000000000
   characterRenderer: {fileID: 684250242}
 --- !u!1 &901522773
 GameObject:
@@ -6487,13 +6482,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 889636843}
         m_MethodName: SetPlayerProfession
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Bard
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &977502790
@@ -13400,7 +13395,18 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636843}
+        m_MethodName: UpdateCharName
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -13418,7 +13424,18 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 889636843}
+        m_MethodName: UpdateCharName
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
