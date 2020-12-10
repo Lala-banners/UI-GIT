@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;//List
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ChestStates
 {
@@ -18,6 +19,9 @@ public class Chest : MonoBehaviour
     //public GameObject invObject;
     public Player playerInv;
 
+    public GameObject chestPrefab;
+    public Transform chestSlotParent;
+
     private void Start()
     {
         Closed();
@@ -34,6 +38,7 @@ public class Chest : MonoBehaviour
         chestObj.SetActive(true);
         playerInv.inventory.ActivateInventory();
         //invObject.SetActive(true);
+        //ChestStuff();
     }
     
     public void Closed()
@@ -60,6 +65,36 @@ public class Chest : MonoBehaviour
     {
         Closed();
         Debug.Log("Chest is closed");
+    }
+
+    public void ChestStuff()
+    {
+        Button[] allChildren = chestSlotParent.GetComponentsInChildren<Button>();
+
+        for (int x = allChildren.Length - 1; x >= 0; x--)
+        {
+            Destroy(allChildren[x].gameObject);
+        }
+
+        foreach (ItemData item in chestInv)
+        {
+            //Chest Button
+            GameObject itemSlot = Instantiate(chestPrefab, chestSlotParent); //Clone item at item slot
+            Button itemButton = itemSlot.GetComponent<Button>();
+
+            selectedItem = item;
+            selectedItem.button = itemButton;
+
+            itemButton.onClick.AddListener(() => playerInv.inventory.DisplayItem(item));
+
+            SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
+            Image image = slotImage.image;
+
+            if (image != null)
+            {
+                image.sprite = item.Icon;
+            }
+        }
     }
 
     private void OnGUI()

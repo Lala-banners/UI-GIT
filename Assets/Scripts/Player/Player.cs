@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
+        
         customisation = FindObjectOfType<Customisation>();
         defaultStat = new BaseStats[6]; //player has stats now
 
@@ -87,7 +88,7 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < customisation.currentPartsTextureIndex.Length; i++)
         {
-            customisation.SetMats(i, customisation.currentPartsTextureIndex[i]); //
+            customisation.SetMats(i, customisation.currentPartsTextureIndex[i]); 
         }
     }
 
@@ -190,6 +191,7 @@ public class Player : MonoBehaviour
         if (items != null) //if item exists and is food inventory.item.Type == ItemType.Food
         {
             inventory.AddItem(items.itemData); //add to inventory
+            inventory.DisplayItem(items.itemData); //display info
             print("Item has been picked up");
             Destroy(items.gameObject);
         }

@@ -15,6 +15,9 @@ public class Inventory : MonoBehaviour
     public ItemData currentItem;
     public GameObject slotPrefab;
     public Transform inventorySlotParent;
+
+    
+
     public Button use, discard, move; //references to use and discard buttons
 
     [SerializeField] private Player player;
@@ -66,12 +69,13 @@ public class Inventory : MonoBehaviour
             }
             selectedItem.Amount--;
             Debug.Log("No more health potions in inventory");
-            
+            #endregion
 
             if (selectedItem.Amount <= 0)
             {
                 inventory.Remove(selectedItem);
                 Destroy(selectedItem.button.gameObject);
+                Destroy(selectedItem.Icon.texture);
                 itemSelectedPanel.SetActive(false);
             }
             else
@@ -79,7 +83,7 @@ public class Inventory : MonoBehaviour
                 DisplayItem(selectedItem);
             }
         }
-        #endregion
+        
     }
 
     public void DisplayItem(ItemData item) //Display in Inventory
@@ -97,18 +101,30 @@ public class Inventory : MonoBehaviour
 
         use.onClick.AddListener(UseItem);
         discard.onClick.AddListener(DiscardItem);
-        move.onClick.AddListener(MoveItem);
+        move.onClick.AddListener(MoveItemToChest);
+        move.onClick.AddListener(MoveItemToShop);
 
     }
 
-    public void MoveItem() //Move to chest or shop
+    public void MoveItemToChest() //Move to chest or shop
     {
         //Move from inventory to chest
         selectedItem.Amount--;
         inventory.Remove(selectedItem);
         currentChest.chestInv.Add(selectedItem);
         Destroy(selectedItem.button);
-        print("Item moved from Inventory");
+        print("Item moved from Inventory to chest");
+    }
+
+    public void MoveItemToShop() //Move to chest or shop
+    {
+        //Move from inventory to shop
+        selectedItem.Amount--;
+        inventory.Remove(selectedItem);
+        currentShop.shopInventory.Add(selectedItem);
+        //currentShop.shopInventory = Instantiate(currentShop.shopPrefab, currentShop.shopSlotParent.position, Quaternion.identity);
+        Destroy(selectedItem.button);
+        print("Item moved from Inventory to shop");
     }
 
     public void DiscardItem() //THIS WORKS!
@@ -116,6 +132,15 @@ public class Inventory : MonoBehaviour
         GameObject droppedItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity); //instantiate item at drop location
         droppedItem.name = selectedItem.Name;
         inventory.Remove(selectedItem); //removes from inventory
+        Destroy(selectedItem.button.gameObject);
+        Destroy(selectedItem.Icon.texture);
+    }
+
+    public void UpdateInvVisuals()
+    {
+        inventory.Remove(selectedItem); //removes from inventory
+        Destroy(selectedItem.button.gameObject);
+        Destroy(selectedItem.Icon.texture);
     }
 
     public void EquipWeapon()

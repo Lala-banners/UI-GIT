@@ -54,7 +54,6 @@ public class Customisation : MonoBehaviour
     #region FUNCTIONS
     private void Start()
     {
-        //StartTexture();
 
         string[] tempName = new string[] { "Strength", "Dexterity", "Wisdom", "Intelligence", "Charisma", "Constitution" };
 
@@ -77,7 +76,6 @@ public class Customisation : MonoBehaviour
             if (player.customisation.currentPartsTextureIndex.Length != 0)
             {
                 currentPartsTextureIndex = player.customisation.currentPartsTextureIndex;
-                
             }
         }
 

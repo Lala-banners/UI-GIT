@@ -14,6 +14,10 @@ public class Shop : MonoBehaviour
     private ItemData selectedItem;
     private Inventory playerInv;
     public GameObject shop;
+
+
+    public GameObject shopPrefab;
+    public Transform shopSlotParent;
     #endregion
 
     #region Display Shop Variables
