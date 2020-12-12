@@ -56,7 +56,7 @@ public class ConsumablesBar : MonoBehaviour
     {
         Button[] allChildren = consumeSlotParent.GetComponentsInChildren<Button>();
 
-        for (int x = allChildren.Length - 6; x >= 0; x--)
+        for (int x = allChildren.Length - 1; x >= 0; x--)
         {
             Destroy(allChildren[x].gameObject);
         }
@@ -77,7 +77,7 @@ public class ConsumablesBar : MonoBehaviour
 
             if(image != null)
             {
-                image.sprite = slot1.image.sprite;
+                image.sprite = item.Icon;
             }
         }
     }
