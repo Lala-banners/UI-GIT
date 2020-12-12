@@ -16,9 +16,7 @@ public class Inventory : MonoBehaviour
     public GameObject slotPrefab;
     public Transform inventorySlotParent;
 
-    
-
-    public Button use, discard, move; //references to use and discard buttons
+    public Button use, discard, move, equip; //references to UI buttons
 
     [SerializeField] private Player player;
     [SerializeField] public bool showInventory = false;
@@ -48,10 +46,6 @@ public class Inventory : MonoBehaviour
     private string sortType = "";
     #endregion
 
-    //TODO : Lara : Convert all IMGUI to Canvas! (Inventory, shop, money, quests, dialogue etc)
-
-
-
     private void Start()
     {
         enumTypesForItems = new string[] { "All", " Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potions", "Scrolls", "Quest" };
@@ -60,6 +54,7 @@ public class Inventory : MonoBehaviour
     //For eating apples, using potions etc
     public void UseItem()
     {
+        //EquipWeapon();
         #region Heal with potion
         if (player.playerStats.CurrentHealth < player.playerStats.healthHearts.maximumHealth)
         {
@@ -99,6 +94,7 @@ public class Inventory : MonoBehaviour
         icon.sprite = selectedItem.Icon != null ? selectedItem.Icon : null;
         mesh = selectedItem.Mesh;
 
+        equip.onClick.AddListener(EquipWeapon);
         use.onClick.AddListener(UseItem);
         discard.onClick.AddListener(DiscardItem);
         move.onClick.AddListener(MoveItemToChest);
@@ -112,6 +108,7 @@ public class Inventory : MonoBehaviour
         selectedItem.Amount--;
         inventory.Remove(selectedItem);
         currentChest.chestInv.Add(selectedItem);
+
         Destroy(selectedItem.button);
         print("Item moved from Inventory to chest");
     }
@@ -143,17 +140,16 @@ public class Inventory : MonoBehaviour
         Destroy(selectedItem.Icon.texture);
     }
 
-    public void EquipWeapon()
+    public void EquipWeapon() //equip works
     {
-        if (equipmentSlots[2].currentItem == null || selectedItem.Name != equipmentSlots[2].item.Name) //If no weapon equipped, then equip selected weapon
+        if (equipmentSlots[2].currentItem == null || selectedItem.Name != equipmentSlots[2].currentItem.name) //If no weapon equipped, then equip selected weapon
         {
-            Destroy(equipmentSlots[2].currentItem);
 
             if (equipmentSlots[2].currentItem != null || selectedItem.Name == equipmentSlots[2].item.Name)
             {
-                //equipmentSlots[2].item.Mesh
-                equipmentSlots[2].currentItem = Instantiate<GameObject>(axePrefab, equipmentSlots[2].equipLocation); ;
-                equipmentSlots[2].item = selectedItem;
+                GameObject curItem = Instantiate(axePrefab, equipmentSlots[2].equipLocation);
+                equipmentSlots[2].currentItem = curItem;
+                curItem.name = selectedItem.Name;
             }
         }
         else //if item equipped is the same as equipped item, then upequip the weapon
@@ -314,6 +310,61 @@ public class Inventory : MonoBehaviour
             /*GameObject droppedItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity); //instantiate item at drop location
             droppedItem.name = selectedItem.Name;
             inventory.Remove(selectedItem); //removes from inventory*/
+        }
+        if (currentChest != null)
+        {
+            if (GUI.Button(new Rect(4.25f * scr.x, 6.75f * scr.y, scr.x, 0.25f * scr.y), "Move Item"))
+            {
+                for (int i = 0; i < equipmentSlots.Length; i++)
+                {
+                    //check slots
+                    if (equipmentSlots[i].currentItem != null && selectedItem.Name == equipmentSlots[i].currentItem.name)
+                    {
+                        //Destroy the one in our equipment
+                        Destroy(equipmentSlots[i].currentItem);
+                    }
+                }
+                //spawn the item
+                currentChest.chestInv.Add(selectedItem);
+                if (selectedItem.Amount > 1)
+                {
+                    selectedItem.Amount--;
+                }
+                else
+                {
+                    inventory.Remove(selectedItem);
+                    selectedItem = null;
+                    return;
+                }
+            }
+        }
+        if (currentShop != null)
+        {
+            if (GUI.Button(new Rect(4.25f * scr.x, 6.75f * scr.y, scr.x, 0.25f * scr.y), "Sell Item"))
+            {
+                for (int i = 0; i < equipmentSlots.Length; i++)
+                {
+                    //check slots
+                    if (equipmentSlots[i].currentItem != null && selectedItem.Name == equipmentSlots[i].currentItem.name)
+                    {
+                        //Destroy the one in our equipment
+                        Destroy(equipmentSlots[i].currentItem);
+                    }
+                }
+                //spawn the item
+                money += selectedItem.Value;
+                currentShop.shopInventory.Add(selectedItem);
+                if (selectedItem.Amount > 1)
+                {
+                    selectedItem.Amount--;
+                }
+                else
+                {
+                    inventory.Remove(selectedItem);
+                    selectedItem = null;
+                    return;
+                }
+            }
         }
     }
 

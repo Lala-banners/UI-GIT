@@ -25,8 +25,8 @@ public class Chest : MonoBehaviour
     private void Start()
     {
         Closed();
-        //chestInv.Add(ItemData.CreateItem(Random.Range(0, 2)));
-        //chestInv.Add(ItemData.CreateItem(Random.Range(100, 102)));
+        chestInv.Add(ItemData.CreateItem(Random.Range(0, 2)));
+        chestInv.Add(ItemData.CreateItem(Random.Range(100, 102)));
     }
 
     public ChestStates states;
@@ -40,10 +40,10 @@ public class Chest : MonoBehaviour
         //invObject.SetActive(true);
         //ChestStuff();
     }
-    
+
     public void Closed()
     {
-        states = ChestStates.closed; 
+        states = ChestStates.closed;
         //showChestInv = false;
         chestObj.SetActive(false);
         playerInv.inventory.ActivateInventory();
@@ -52,8 +52,8 @@ public class Chest : MonoBehaviour
 
     // OnTriggerEnter is called when the Collider other enters the trigger
     private void OnTriggerEnter(Collider other) //Make chest open when player triggers chest
-    {   
-        if(other.gameObject.tag == "Player")
+    {
+        if (other.gameObject.tag == "Player")
         {
             Open();
             Debug.Log("Chest has been opened");
@@ -87,8 +87,8 @@ public class Chest : MonoBehaviour
 
             itemButton.onClick.AddListener(() => playerInv.inventory.DisplayItem(item));
 
-            SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
-            Image image = slotImage.image;
+            ChestSlot chestSlot = itemSlot.GetComponent<ChestSlot>();
+            Image image = chestSlot.image;
 
             if (image != null)
             {
@@ -121,7 +121,7 @@ public class Chest : MonoBehaviour
                 if (GUI.Button(new Rect(10.5f * scr.x, 6.75f * scr.y, scr.x, 0.25f * scr.y), "Take Item"))
                 {
                     //add to player
-                    //inventory.Add(ItemData.CreateItem(selectedItem.ID));
+                    inventory.Add(ItemData.CreateItem(selectedItem.ID));
 
                     //remove from chest
                     chestInv.Remove(selectedItem);

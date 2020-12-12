@@ -119,50 +119,6 @@ public class Player : MonoBehaviour
 
     }
 
-    /*void InteractB()
-    {
-        if (Input.GetKeyDown(KeyBindScript.keys["Interact"]))
-        {
-            Ray ray;
-            RaycastHit hitInfo;
-
-            ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-
-            float distance = 15f;
-            int layerMask = LayerMask.NameToLayer("Interactable"); //get layer number
-            layerMask = 1 << layerMask; //bit shift to get actual number
-            if (Physics.Raycast(ray, out hitInfo, distance, layerMask))
-            {
-                #region NPC
-                if (hitInfo.collider.TryGetComponent(out GameSystems.NPCs.BaseNPC npc))
-                {
-                    npc.Interact();
-                }
-                #endregion
-                #region Shop or chest
-                if (hitInfo.collider.TryGetComponent(out GUI3.Inventories.Shop inv))
-                {
-                    inv.enabled = true;
-                    //set which shop/chest it is here
-                    inventory.chestShopActive = true;
-                    inventory.chestShopPanel.SetActive(true);
-
-
-                    FindObjectOfType<PauseControl>().ShowInv();
-                }
-                #endregion
-                #region world item
-                if (hitInfo.collider.TryGetComponent(out GUI3.Inventories.ItemHandler _item))
-                {
-                    GetComponent<GUI3.Inventories.Inventory>().AddItem(_item.itemId);
-                    Destroy(_item.gameObject);
-                }
-                #endregion
-            }
-        }
-    }*/
-
-
 
     // OnTriggerEnter is called when the Collider other enters the trigger
     private void OnTriggerEnter(Collider other)
@@ -184,6 +140,7 @@ public class Player : MonoBehaviour
         staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
     }
 
+    public ConsumablesBar consumables;
     // OnControllerColliderHit is called when the controller hits a collider while performing a Move
     private void OnControllerColliderHit(ControllerColliderHit hit) //To pick up item
     {
@@ -192,6 +149,8 @@ public class Player : MonoBehaviour
         {
             inventory.AddItem(items.itemData); //add to inventory
             inventory.DisplayItem(items.itemData); //display info
+            consumables.AddConsumables(items.itemData); //add to consumables bar
+            consumables.DisplayConsumableItem(items.itemData);
             print("Item has been picked up");
             Destroy(items.gameObject);
         }
@@ -199,7 +158,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //Interact();
 
         #region Health
         if (Input.GetKeyDown(KeyCode.H)) //HEALTH DECREASE
