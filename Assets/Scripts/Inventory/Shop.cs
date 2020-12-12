@@ -135,6 +135,8 @@ public class Shop : MonoBehaviour
             for (int i = 0; i < amount; i++)
             {
                 playerInv.AddItem(selectedItem);
+                playerInv.money--;
+                playerInv.money.ToString();
             }
         }
     }
