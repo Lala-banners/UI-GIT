@@ -117,10 +117,10 @@ public class Inventory : MonoBehaviour
     {
         //Move from inventory to shop
         selectedItem.Amount--;
+        money--;
         inventory.Remove(selectedItem);
-        currentShop.shopInventory.Add(selectedItem);
-        //currentShop.shopInventory = Instantiate(currentShop.shopPrefab, currentShop.shopSlotParent.position, Quaternion.identity);
-        Destroy(selectedItem.button);
+        currentShop.shopInventory.Add(ItemData.CreateItem(selectedItem.ID));
+        ActivateInventory();
         print("Item moved from Inventory to shop");
     }
 
@@ -166,26 +166,20 @@ public class Inventory : MonoBehaviour
             pause.Paused(pause.inventory);
 
             Button[] allChildren = inventorySlotParent.GetComponentsInChildren<Button>();
-
             for (int x = allChildren.Length - 1; x >= 0; x--)
             {
                 Destroy(allChildren[x].gameObject);
             }
-
             foreach (ItemData item in inventory)
             {
                 //Inventory Button
                 GameObject itemSlot = Instantiate(slotPrefab, inventorySlotParent); //Clone item at item slot
                 Button itemButton = itemSlot.GetComponent<Button>();
-
                 selectedItem = item;
                 selectedItem.button = itemButton;
-
                 itemButton.onClick.AddListener(() => DisplayItem(item));
-
                 SlotImage slotImage = itemSlot.GetComponent<SlotImage>();
                 Image image = slotImage.image;
-
                 if (image != null)
                 {
                     image.sprite = item.Icon;

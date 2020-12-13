@@ -85,10 +85,8 @@ public class Shop : MonoBehaviour
     public void Open()
     {
         states = ShopStates.open;
-        //showChestInv = true;
         playerInv.ActivateInventory();
         shop.SetActive(true);
-        DisplayShopInventory(selectedItem);
 
 
         #region Logic
