@@ -5,8 +5,8 @@ using UnityEngine;
 public class Approval : MonoBehaviour
 {
     #region Approval Variables
-    public string[] dislikeTxt, neutralTxt, likeTxt;
-    public int approval;
+    public string[] dislikeText, neutralText, likeText;
+    public int approvalRate;
     public string response1, response2; //response of player (yes or no)
     public QuestManager myQuest;
     public Shop myShop;
@@ -23,18 +23,19 @@ public class Approval : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogueText = neutralTxt;
+        dialogueText = neutralText;
         myQuest = GetComponent<QuestManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         
     }
 
     // OnGUI is called for rendering and handling GUI events
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if (showDialogue)
         {
@@ -44,17 +45,17 @@ public class Approval : MonoBehaviour
 
             //the dialogue box takes up the whole bottom 3rd of the screen and displays the NPC's name and current dialogue line
             GUI.Box(new Rect(0, 6 * scr.y, Screen.width, 3 * scr.y), name + " : " + dialogueText[currentLineIndex]);
-            if (approval <= -1)
+            if (approvalRate <= -1)
             {
-                dialogueText = dislikeTxt;
+                dialogueText = dislikeText;
             }
-            if (approval == 0)
+            if (approvalRate == 0)
             {
-                dialogueText = neutralTxt;
+                dialogueText = neutralText;
             }
-            if (approval >= 1)
+            if (approvalRate >= 1)
             {
-                dialogueText = likeTxt;
+                dialogueText = likeText;
             }
             //if not at the end of the dialogue or not at the options index
             if (!(currentLineIndex >= dialogueText.Length - 1 || currentLineIndex == optionIndex))
@@ -74,9 +75,9 @@ public class Approval : MonoBehaviour
                 {
                     //move forward in our dialouge array
                     currentLineIndex++;
-                    if (approval < 1)
+                    if (approvalRate < 1)
                     {
-                        approval++;
+                        approvalRate++;
                         myQuest.OpenQuestWindow();
                     }
                 }
@@ -85,9 +86,9 @@ public class Approval : MonoBehaviour
                 {
                     //skip to end of dlg;
                     currentLineIndex = dialogueText.Length - 1;
-                    if (approval > -1)
+                    if (approvalRate > -1)
                     {
-                        approval--;
+                        approvalRate--;
                     }
                 }
             }
@@ -115,7 +116,7 @@ public class Approval : MonoBehaviour
                 showDialogue = false;
             }
         }
-    }
+    }*/
 
 
 }

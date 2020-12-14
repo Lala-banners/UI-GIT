@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class QuestNPC : DialogueNPC
 {
     [SerializeField] protected QuestManager questManager;
     [SerializeField] protected Quest NPCsQuest;
     public string[] completeText; //complete quest dialogue
+    public TMP_Text questText, qNPCName;
+    protected int _dialogueIndex;
+    public Button[] _dialogueButtons;
+    public GameObject _dialogueTextBox;
 
     public void Start()
     {

@@ -15,19 +15,19 @@ public class Dialogue : MonoBehaviour
     public string[] dialogueText;
 
     public Player player;
-    //public ThirdPersonMovement playerMovement;
+    public ThirdPersonMovement playerMovement;
     public Vector2 scr;
 
     public void ShowDialogue()
     {
         if(showDialogue)
         {
-            //playerMovement.enabled = false;
+            playerMovement.enabled = false;
         }
     }
 
 
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if(showDialogue)
         {
@@ -53,10 +53,10 @@ public class Dialogue : MonoBehaviour
                     {
                         showDialogue = false;
                         currentLineIndex = 0;
-                        //playerMovement.enabled = true;
+                        playerMovement.enabled = true;
                     }
                 }
             }
         }
-    }
+    }*/
 }

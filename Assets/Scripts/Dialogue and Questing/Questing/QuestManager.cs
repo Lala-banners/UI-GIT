@@ -3,45 +3,42 @@ using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
-    public Quest quest;
+    public Quest curQuest;
     public Player player;
     public Inventory inv;
     public GameObject questWindow;
     public TMP_Text titleText, descriptionText, experienceText, goldText;
-
-    Dialogue dialogue;
+    public Dialogue dialogue;
 
     public void OpenQuestWindow()
     {
         questWindow.SetActive(true);
-        titleText.text = quest.title;
-        descriptionText.text = quest.description;
-        experienceText.text = quest.experienceReward.ToString();
-        goldText.text = quest.goldReward.ToString();
+        titleText.text = curQuest.title;
+        descriptionText.text = curQuest.description;
+        experienceText.text = curQuest.experienceReward.ToString();
+        goldText.text = curQuest.goldReward.ToString();
     }
 
     public void AcceptQuest(Quest acceptedQuest)
     {
-        quest = acceptedQuest;
+        curQuest = acceptedQuest;
         questWindow.SetActive(false);
-        quest.goal.questState = QuestState.Active;
+        curQuest.goal.questState = QuestState.Active;
     }
 
     public void DeclineQuest()
     {
-        //dialogue.dialogueText[2] = di
+        
     }
 
     public void ClaimQuest()
     {
-        if(quest.goal.questState == QuestState.Completed && quest.goal.isCompleted() == true)
+        if(curQuest.goal.questState == QuestState.Completed && curQuest.goal.isCompleted() == true)
         {
             //Add money
-            inv.money += quest.goldReward;
+            inv.money += curQuest.goldReward;
 
-            //Add experience
-
-            quest.goal.questState = QuestState.Claimed;
+            curQuest.goal.questState = QuestState.Claimed;
             Debug.Log("Quest Claimed");
         }
     }

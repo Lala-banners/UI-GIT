@@ -492,9 +492,9 @@ Transform:
   m_Children:
   - {fileID: 637735771}
   - {fileID: 1077793615}
-  - {fileID: 196776508}
-  - {fileID: 222853234}
   - {fileID: 1462075877}
+  - {fileID: 710298514}
+  - {fileID: 436217422}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2286,57 +2286,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &196776506
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 196776508}
-  - component: {fileID: 196776507}
-  m_Layer: 0
-  m_Name: Dialogue Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &196776507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196776506}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46dc49f11233c3c4d96b4a9d77a2a299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showDialogue: 0
-  currentLineIndex: 0
-  optionIndex: 0
-  name: 
-  dialogueText:
-  - Hi friend!
-  player: {fileID: 0}
-  scr: {x: 0, y: 0}
---- !u!4 &196776508
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196776506}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 713.8484, y: -1.1466292, z: 511.6234}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 17096492}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203662659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,36 +2912,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &222853232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 222853234}
-  m_Layer: 0
-  m_Name: Shop Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &222853234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222853232}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 709.98895, y: 0.068399675, z: 511.90485}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 17096492}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &263016617
 GameObject:
   m_ObjectHideFlags: 0
@@ -4866,7 +4785,6 @@ GameObject:
   - component: {fileID: 382869884}
   - component: {fileID: 382869883}
   - component: {fileID: 382869888}
-  - component: {fileID: 382869889}
   - component: {fileID: 382869887}
   m_Layer: 8
   m_Name: Dialogue NPC
@@ -4958,25 +4876,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382869882}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3caa31306bdb714fab7042c1b20692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dislikeTxt:
-  - I HATE YOU
-  - YOU SUCK!
-  neutralTxt:
-  - Hi hero!
-  - How are you?
-  likeTxt:
-  - Wow you're awesome hero!
-  - Have a nice day!
-  approval: 0
+  dislikeText:
+  - Oh... It's you again.
+  - What do you want?
+  - Go bother someone else!
+  neutralText:
+  - Oh hi! How's the weather treating you?
+  - I hope you are having a nice day.
+  - See ya.
+  likeText:
+  - Oh wow! It's you!
+  - How is your day going so far? I hope its been splendid!
+  - Bye bye, now!
+  approvalRate: 0
   response1: '*High Five*'
-  response2: Go away
+  response2: Away with you, peasant!
   myQuest: {fileID: 1462075878}
-  myShop: {fileID: 0}
+  myShop: {fileID: 1713584260}
   inventory: {fileID: 368877527}
   showDialogue: 0
   currentLineIndex: 0
@@ -4996,37 +4917,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: Jake
-  dialogue: {fileID: 196776507}
-  textDisplay: {fileID: 712690419}
-  nameDisplay: {fileID: 2092443134}
   dialogueText:
   - Hi
   - The weather is nice
   - Bye
+  dialogue: {fileID: 710298515}
+  approval: {fileID: 382869887}
+  textDisplay: {fileID: 712690419}
+  nameDisplay: {fileID: 2092443134}
   dialogueButtons:
   - {fileID: 799996947}
   - {fileID: 105891577}
   - {fileID: 360940485}
   - {fileID: 879854254}
---- !u!114 &382869889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 382869882}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcaf9431333c7c241919c4fbc0888be3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showDlg: 0
-  currentLineIndex: 0
-  optionIndex: 0
-  scr: {x: 0, y: 0}
-  player: {fileID: 535793796}
-  name: 
-  dialogueText: []
+  dialogueTextBox: {fileID: 60181691}
 --- !u!4 &394723941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4748898696422280, guid: f84072c624d54cc4ebdf4b5b74ae095d,
@@ -5736,6 +5640,70 @@ Transform:
   m_Father: {fileID: 1341428736}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &436217421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 436217422}
+  - component: {fileID: 436217423}
+  m_Layer: 0
+  m_Name: Gather Goal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &436217422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436217421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 17096492}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &436217423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436217421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99e6feb29d59bc479edc9d3518caab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questState: 0
+  goalType: 0
+  itemId: 0
+  requiredAmount: 4
+  currentAmount: 0
+  isReached: 0
+  inv: {fileID: 368877527}
+  item:
+    name: Apples
+    description: Delicious apples.
+    value: 5
+    amount: 0
+    icon: {fileID: 21300000, guid: b4432c2c36b050a42ad12111dce8921c, type: 3}
+    mesh: {fileID: 1962106346}
+    button: {fileID: 0}
+    type: 0
+    damage: 0
+    armour: 0
+    heal: 10
+    healMana: 0
+  itemName: Apple
 --- !u!1 &445299314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7762724536342527972, guid: 7d48defa37b741a43866bfa33ec60536,
@@ -7757,7 +7725,7 @@ MonoBehaviour:
   inventoryObject: {fileID: 1027149667}
   showDialogue: 0
   customisation: {fileID: 0}
-  consumables: {fileID: 1211092137}
+  dialogueMaster: {fileID: 723350610}
 --- !u!114 &535793797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9154,6 +9122,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700286971}
   m_CullTransparentMesh: 0
+--- !u!1 &710298513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710298514}
+  - component: {fileID: 710298515}
+  m_Layer: 0
+  m_Name: Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710298514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710298513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 17096492}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710298515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710298513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dc49f11233c3c4d96b4a9d77a2a299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDialogue: 0
+  currentLineIndex: 0
+  optionIndex: 0
+  name: 
+  dialogueText: []
+  player: {fileID: 535793796}
+  playerMovement: {fileID: 535793797}
+  scr: {x: 0, y: 0}
 --- !u!1 &712690417
 GameObject:
   m_ObjectHideFlags: 0
@@ -9505,9 +9524,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 723350605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b7e1f3c0a56e643a17226b75ea9e33, type: 3}
+  m_Script: {fileID: 11500000, guid: 01d74b7022183cd448e8f0190d380914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 60181691}
+  dialogueText: {fileID: 712690419}
+  currentDialogue:
+  - Hello traveller.
+  - Have fun
+  - Bye
+  dialogueIndex: 0
+  characterNPCName: Jake
+  questButton: {fileID: 799996947}
+  buttonText: {fileID: 103731359}
+  currentQuest: {fileID: 1462075878}
 --- !u!1001 &729619662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10755,7 +10785,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810157323}
-  m_LocalRotation: {x: 0.34042525, y: 0.000000022880096, z: -0.000000008283737, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.0000000082837355, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14293,18 +14323,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2291180343074115571}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1211092137 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2291180344283857754, guid: 8a18a920293ba624e951ef73d592818e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2291180343074115571}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f0eff95b71fdde4ebde8a19335305b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1225256829
 GameObject:
   m_ObjectHideFlags: 0
@@ -16699,7 +16717,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 17096492}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1462075878
 MonoBehaviour:
@@ -16713,13 +16731,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5eb44ffba504aa44b0ba1ba4116292a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest:
-    title: Gather 5 Apples
-    description: I want to make an apple pie
-    experienceReward: 2
-    goldReward: 2
+  curQuest:
+    title: 
+    description: 
+    questGiver: {fileID: 2023166082}
+    goal: {fileID: 436217423}
+    type: 0
+    experienceReward: 0
+    goldReward: 0
     requiredLevel: 0
-    goal: {fileID: 0}
   player: {fileID: 535793796}
   inv: {fileID: 368877527}
   questWindow: {fileID: 326624123}
@@ -16727,6 +16747,7 @@ MonoBehaviour:
   descriptionText: {fileID: 1160265111}
   experienceText: {fileID: 67407817}
   goldText: {fileID: 494567583}
+  dialogue: {fileID: 710298515}
 --- !u!1 &1467097310
 GameObject:
   m_ObjectHideFlags: 0
@@ -17564,7 +17585,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542606463}
-  m_LocalRotation: {x: 0.32326594, y: -0.00000003256508, z: 0.000000011124474, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326594, y: 0.00000003256508, z: -0.000000011124474, w: 0.9463082}
   m_LocalPosition: {x: 710, y: 3.67, z: 509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -17671,7 +17692,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558624430}
-  m_LocalRotation: {x: 0.32326588, y: -0.000000016282542, z: 0.0000000055622356, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326588, y: 0.000000016282542, z: -0.0000000055622356, w: 0.9463082}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -20325,6 +20346,12 @@ MonoBehaviour:
   m_Spacing: {x: 55.11, y: 32.7}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &1962106346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7034174986119903883, guid: ef88bdf5c95be9b42904aa09eccb45d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7034174987207080495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1963979908
 GameObject:
   m_ObjectHideFlags: 0
@@ -20906,7 +20933,6 @@ GameObject:
   - component: {fileID: 2023166078}
   - component: {fileID: 2023166082}
   - component: {fileID: 2023166083}
-  - component: {fileID: 2023166077}
   m_Layer: 8
   m_Name: Quest NPC
   m_TagString: Untagged
@@ -20914,25 +20940,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2023166077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023166076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcaf9431333c7c241919c4fbc0888be3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showDlg: 0
-  currentLineIndex: 0
-  optionIndex: 0
-  scr: {x: 0, y: 0}
-  player: {fileID: 0}
-  name: 
-  dialogueText: []
 --- !u!136 &2023166078
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21022,21 +21029,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: Jessy
-  dialogue: {fileID: 196776507}
-  textDisplay: {fileID: 0}
-  nameDisplay: {fileID: 0}
-  dialogueText: []
-  dialogueButtons: []
-  questManager: {fileID: 0}
+  dialogueText:
+  - Hi, please do my quest!
+  - I need two potions!
+  dialogue: {fileID: 710298515}
+  approval: {fileID: 2023166083}
+  textDisplay: {fileID: 712690419}
+  nameDisplay: {fileID: 2092443134}
+  dialogueButtons:
+  - {fileID: 799996947}
+  - {fileID: 105891577}
+  - {fileID: 360940485}
+  - {fileID: 879854254}
+  dialogueTextBox: {fileID: 712690417}
+  questManager: {fileID: 1462075878}
   NPCsQuest:
-    title: Get 5 Scrolls
-    description: I want 5 scrolls
+    title: Potion Hunt
+    description: Jessy wants two potions
+    questGiver: {fileID: 2023166082}
+    goal: {fileID: 436217423}
+    type: 0
     experienceReward: 0
     goldReward: 0
     requiredLevel: 0
-    goal: {fileID: 0}
   completeText:
   - Thanks! Quest Complete!
+  questText: {fileID: 0}
+  qNPCName: {fileID: 0}
+  _dialogueButtons: []
+  _dialogueTextBox: {fileID: 0}
 --- !u!114 &2023166083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21049,20 +21070,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3caa31306bdb714fab7042c1b20692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dislikeTxt:
-  - HELP DO MY QUEST
-  - YOU SUCK!
-  neutralTxt:
-  - Hi, please do my quest
-  - Thanks!
-  likeTxt:
-  - 'OMG I LOVE YOU '
-  - DO MY QUEST
-  approval: 0
-  response1: Yes
-  response2: No
+  dislikeText:
+  - Oh... It's you again.
+  - What do you want?
+  - Go bother someone else!
+  neutralText:
+  - Oh hi! How's the weather treating you?
+  - I hope you are having a nice day.
+  - See ya.
+  likeText:
+  - Oh wow! It's you!
+  - How is your day going so far? I hope its been splendid!
+  - Bye bye, now!
+  approvalRate: 0
+  response1: '*High Five*'
+  response2: Away with you, peasant!
   myQuest: {fileID: 1462075878}
-  myShop: {fileID: 0}
+  myShop: {fileID: 1713584260}
   inventory: {fileID: 368877527}
   showDialogue: 0
   currentLineIndex: 0
@@ -22367,6 +22391,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 8935732896870119817, guid: 4237f2bde1851da4193b89773f99a4b4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4237f2bde1851da4193b89773f99a4b4, type: 3}
 --- !u!1001 &1956869620881061883
@@ -22574,6 +22603,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Consumables Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291180344283857750, guid: 8a18a920293ba624e951ef73d592818e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2291180344283857754, guid: 8a18a920293ba624e951ef73d592818e,
         type: 3}

@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     #region Inventory Variables
     [Header("Inventory References")]
     public List<ItemData> inventory = new List<ItemData>(); //List of inventory
-    [SerializeField] private ItemData selectedItem;
+    public ItemData selectedItem;
     public ItemData currentItem;
     public GameObject slotPrefab;
     public Transform inventorySlotParent;

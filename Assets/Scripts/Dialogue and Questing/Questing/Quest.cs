@@ -6,6 +6,9 @@ public class Quest
     [Header("Quest Requirements")]
     public string title;
     public string description;
+    public QuestNPC questGiver;
+    public QuestGoal goal;
+    public GoalType type;
 
     [Header("Rewards")] 
     public int experienceReward;
@@ -13,8 +16,6 @@ public class Quest
 
     [Header("Player")]
     public int requiredLevel;
-
-    public QuestGoal goal; //if wanted multiple goals, make array []
 
 
 }

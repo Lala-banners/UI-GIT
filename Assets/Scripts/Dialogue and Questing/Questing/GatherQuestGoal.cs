@@ -7,8 +7,6 @@ public class GatherQuestGoal : QuestGoal
     //Requirements for Gather goal type
     private Inventory playerInv;
     public string itemName;
-    public int requiredAmount;
-    //public int currentAmount;
 
     private void Start()
     {
@@ -30,26 +28,41 @@ public class GatherQuestGoal : QuestGoal
         return true;
     }
 
+    public void ItemCollected(int id)
+    {
+        if (goalType == GoalType.Gather && id == itemId)
+        {
+            currentAmount++;
+            if (currentAmount >= requiredAmount) //Added from Quest
+            {
+                isReached = true;
+                questState = QuestState.Completed;
+                Debug.Log("QUEST COMPLETE");
+            }
+        }
+    }
+
     //Each quest will have different way of being completed
     public override bool isCompleted()
     {
-        if(CheckPlayerInv() == false)
+        if (CheckPlayerInv() == false)
         {
             return false;
         }
 
-        //ItemData item = playerInv.FindItem(itemName);
-
-       /* if(item == null)
+        if (item == null)
         {
             return false;
         }
 
-        if(item.Amount >= requiredAmount)
+        currentAmount = item.Amount;
+        if (item.Amount >= requiredAmount) //if amount is greater or equal to required amount then quest is completed
         {
+            ItemCollected(itemId);
+            print("Quest has been completed");
             return true;
         }
-       */
+
         return false;
     }
 }

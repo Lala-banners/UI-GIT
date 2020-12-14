@@ -7,25 +7,28 @@ public class OptionDialogue : MonoBehaviour
     #region Variables
     [Header("References")]
     //boolean to toggle if we can see a characters dialogue box
-    public bool showDlg;
+    public bool showDialogue;
     //index for our current line of dialogue and an index for a set question marker of the dialogue 
     public int currentLineIndex, optionIndex;
     public Vector2 scr;
     public Player player;
-    //mouselook script reference for the maincamera
     [Header("NPC Name and Dialogue")]
     //name of this specific NPC
-    public new string name;
+    public string npcName;
     //array for text for our dialogue
     public string[] dialogueText;
     #endregion
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
-    private void OnGUI()
+
+
+
+    /*private void OnGUI()
     {
-        if (showDlg)
+        if (showDialogue)
         {
             //set up our ratio messurements for 16:9
             scr.x = Screen.width / 16;
@@ -66,7 +69,7 @@ public class OptionDialogue : MonoBehaviour
                 if (GUI.Button(new Rect(15 * scr.x, 8.5f * scr.y, scr.x, scr.y * 0.5f), "Bye"))
                 {
                     //close the dialogue box
-                    showDlg = false;
+                    showDialogue = false;
                     //set index back to 0 
                     currentLineIndex = 0;
 
@@ -77,5 +80,5 @@ public class OptionDialogue : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }

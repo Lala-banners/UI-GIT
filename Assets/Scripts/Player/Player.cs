@@ -11,13 +11,6 @@ using System;
 public class Player : MonoBehaviour
 {
     #region Variables
-    /// <summary>
-    /// To save the player customisation to load into game scene (2).
-    /// </summary>
-    //public int[] customisationTextureIndex;
-    
-    #endregion
-
     [Header("Other")]
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -46,6 +39,7 @@ public class Player : MonoBehaviour
     public Image staminaFill; // Image to apply the colors to.
     public Slider staminaSlider;
     public Gradient staminaGradient;
+    #endregion
 
     #region References to other scripts
     public PlayerStats.Stats stats; //Stats class inside PlayerStats
@@ -62,11 +56,11 @@ public class Player : MonoBehaviour
     public GameObject inventoryObject;
     public bool showDialogue;
     public Customisation customisation;
+    public CanvasDialogueMaster dialogueMaster;
     #endregion
 
     public void Awake()
     {
-        
         customisation = FindObjectOfType<Customisation>();
         defaultStat = new BaseStats[6]; //player has stats now
 
@@ -88,11 +82,9 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < customisation.currentPartsTextureIndex.Length; i++)
         {
-            customisation.SetMats(i, customisation.currentPartsTextureIndex[i]); 
+            customisation.SetMats(i, customisation.currentPartsTextureIndex[i]);
         }
     }
-
-
 
     public void Interact()
     {
@@ -111,25 +103,77 @@ public class Player : MonoBehaviour
         //If Ray hits something
         if (Physics.Raycast(ray, out hitInfo, 10f, layerMask))
         {
-            if (hitInfo.collider.TryGetComponent<DialogueNPC>(out DialogueNPC npc))
+            if (hitInfo.collider.TryGetComponent(out DialogueNPC npc))
             {
-                npc.Interact(); //Override NPC because otherwise would run wrong method
+                //npc.Interact(); //Override NPC because otherwise would run wrong method
+
+                npc = hitInfo.collider.GetComponent<DialogueNPC>();
+                dialogueMaster.characterNPCName = npc.npcName;
+                dialogueMaster.currentDialogue = npc.dialogueText;
+                dialogueMaster.SetUp();
+                dialogueMaster.dialoguePanel.SetActive(true);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                //GetComponent<ThirdPersonMovement>().enabled = false;
+
+                #region HardCode Dialogue
+                //Debug that we hit a NPC    
+                Debug.Log("Talk to the NPC");
+
+                //THIS ONE HERE IS FOR DIALOGUE
+                if (hitInfo.collider.GetComponent<DialogueNPC>())
+                {
+                    npc = hitInfo.collider.GetComponent<DialogueNPC>();
+                    dialogueMaster.characterNPCName = npc.npcName;
+                    dialogueMaster.currentDialogue = npc.dialogueText;
+                    dialogueMaster.SetUp();
+                    dialogueMaster.dialoguePanel.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+
+               /* //Not being used anymore
+                if (hitInfo.collider.GetComponent<OptionDialogue>())
+                {
+                    hitInfo.collider.GetComponent<OptionDialogue>();
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    //GetComponent<ThirdPersonMovement>().enabled = false;
+                }*/
+
+                //THIS ONE HERE IS FOR Approval Dialogue
+                if (hitInfo.collider.GetComponent<Approval>())
+                {
+                    hitInfo.collider.GetComponent<Approval>();
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+
+                if (hitInfo.collider.TryGetComponent(out QuestNPC qNPC))
+                {
+                    //Connect UI Text elements to the code
+                    print("Talking to Quest NPC - Jessy");
+                    dialogueMaster.characterNPCName = qNPC.nameDisplay.text;
+                    dialogueMaster.currentDialogue = qNPC.dialogueText;
+
+
+                    //qNPC = hitInfo.collider.GetComponent<QuestNPC>();
+
+                }
+                #endregion
             }
         }
-
     }
-
 
     // OnTriggerEnter is called when the Collider other enters the trigger
     private void OnTriggerEnter(Collider other)
     {
-       
         int layerMask = LayerMask.NameToLayer("Interactable");
         layerMask = 1 << layerMask;
         if (other.gameObject.layer == layerMask)
         {
-            showDialogue = true;
-            Interact();
+            dialogueMaster.dialoguePanel.SetActive(true);
         }
     }
 
@@ -140,7 +184,7 @@ public class Player : MonoBehaviour
         staminaFill.color = staminaGradient.Evaluate(staminaSlider.normalizedValue);
     }
 
-    public ConsumablesBar consumables;
+    //public ConsumablesBar consumables;
     // OnControllerColliderHit is called when the controller hits a collider while performing a Move
     private void OnControllerColliderHit(ControllerColliderHit hit) //To pick up item
     {
@@ -149,8 +193,8 @@ public class Player : MonoBehaviour
         {
             inventory.AddItem(items.itemData); //add to inventory
             inventory.DisplayItem(items.itemData); //display info
-            consumables.AddConsumables(items.itemData); //add to consumables bar
-            consumables.DisplayConsumableItem(items.itemData);
+                                                   //consumables.AddConsumables(items.itemData); //add to consumables bar
+                                                   //consumables.DisplayConsumableItem(items.itemData);
             print("Item has been picked up");
             Destroy(items.gameObject);
         }
@@ -158,6 +202,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        #region Interaction
+        Interact();
+        #endregion
+
 
         #region Health
         if (Input.GetKeyDown(KeyCode.H)) //HEALTH DECREASE
@@ -178,7 +226,7 @@ public class Player : MonoBehaviour
 
         #region Mana
         UseMana(25f); //MANA DECREASE WHEN PRESS M
-        //Mana Regen
+                      //Mana Regen
         if (Time.time > disableManaRegenTime + manaRegenCooldown)
         {
             if (stats.currentMana < stats.maxMana)

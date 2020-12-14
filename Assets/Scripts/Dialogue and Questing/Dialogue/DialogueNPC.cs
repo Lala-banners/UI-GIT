@@ -5,14 +5,14 @@ using TMPro;
 public class DialogueNPC : NPCBase
 {
     public TMP_Text textDisplay, nameDisplay;
-    [SerializeField] protected string[] dialogueText;
     protected int dialogueIndex;
     public Button[] dialogueButtons;
+    public GameObject dialogueTextBox;
 
     public override void Interact()
     {
+        dialogueTextBox.SetActive(true);
         nameDisplay.text = npcName;
-        showDialogue = true;
         textDisplay.text = dialogueText[dialogueIndex];
     }
 
@@ -32,5 +32,15 @@ public class DialogueNPC : NPCBase
         dialogueIndex = 0;
         showDialogue = false;
         textDisplay.text = dialogueText[dialogueIndex];
+    }
+
+    public void NegativeResponse()
+    {
+        approval.approvalRate--;
+    }
+
+    public void PositiveResponse()
+    {
+        approval.approvalRate++;
     }
 }
