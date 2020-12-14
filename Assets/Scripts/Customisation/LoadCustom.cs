@@ -10,7 +10,7 @@ public class LoadCustom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Load();
     }
 
     // Update is called once per frame
@@ -21,8 +21,16 @@ public class LoadCustom : MonoBehaviour
 
     private void Load()
     {
+
         player.name = PlayerPrefs.GetString("CharacterName");
         player.gameObject.name = player.name;
+
+        SetTexture("Skin", PlayerPrefs.GetInt("SkinIndex"));
+        SetTexture("Hair", PlayerPrefs.GetInt("HairIndex"));
+        SetTexture("Mouth", PlayerPrefs.GetInt("MouthIndex"));
+        SetTexture("Eyes", PlayerPrefs.GetInt("EyesIndex"));
+        SetTexture("Clothes", PlayerPrefs.GetInt("ClothesIndex"));
+        SetTexture("Armour", PlayerPrefs.GetInt("ArmourIndex"));
     }
 
     void SetTexture(string type, int index)

@@ -65,7 +65,7 @@ public class Customisation : MonoBehaviour
         }
 
         UpdateDisplay();
-
+        //LoadCharacter();
         #region Texture Customisation
         if (player == null)
         {
@@ -347,8 +347,26 @@ public class Customisation : MonoBehaviour
 
     public void SaveCharacter()
     {
-        player.customisation.currentPartsTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
-        PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
+        PlayerPrefs.SetInt("Skin", currentPartsTextureIndex[0]);
+        PlayerPrefs.SetInt("Hair", currentPartsTextureIndex[1]);
+        PlayerPrefs.SetInt("Eyes", currentPartsTextureIndex[2]);
+        PlayerPrefs.SetInt("Mouth", currentPartsTextureIndex[3]);
+        PlayerPrefs.SetInt("Clothes", currentPartsTextureIndex[4]);
+        PlayerPrefs.SetInt("Armour", currentPartsTextureIndex[5]);
+        //player.customisation.currentPartsTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
+
+        PlayerPrefs.Save();
+        //PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
+    }
+
+    public void LoadCharacter()
+    {
+        currentPartsTextureIndex[0] = PlayerPrefs.GetInt("Skin");
+        currentPartsTextureIndex[1] = PlayerPrefs.GetInt("Hair");
+        currentPartsTextureIndex[2] = PlayerPrefs.GetInt("Eyes");
+        currentPartsTextureIndex[3] = PlayerPrefs.GetInt("Mouth");
+        currentPartsTextureIndex[4] = PlayerPrefs.GetInt("Clothes");
+        currentPartsTextureIndex[5] = PlayerPrefs.GetInt("Armour");
     }
 
     public void SaveAndPlay() //For save and play button

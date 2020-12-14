@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        customisation = FindObjectOfType<Customisation>();
+        //customisation = FindObjectOfType<Customisation>();
         defaultStat = new BaseStats[6]; //player has stats now
 
         //If not Customisation scene then load player data

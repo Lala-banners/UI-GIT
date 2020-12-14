@@ -14,7 +14,6 @@ public class PlayerData
         playerStats = player.stats;
         profession = player.Profession;
         customisationTextureIndex = player.customisation.currentPartsTextureIndex;
-
     }
 
 }
