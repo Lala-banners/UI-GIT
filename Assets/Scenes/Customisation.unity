@@ -6224,7 +6224,7 @@ MonoBehaviour:
   TextureLocation: Character/
   LoadScene: 2
   scrollPosition: {x: 0, y: 0}
-  currentPartsTextureIndex: 020000000000000000000000030000000000000000000000
+  currentPartsTextureIndex: 000000000000000000000000000000000000000000000000
   characterRenderer: {fileID: 684250242}
 --- !u!1 &901522773
 GameObject:
@@ -6879,28 +6879,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 889636843}
         m_MethodName: SaveAndPlay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636843}
-        m_MethodName: SceneChanger
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 889636843}
-        m_MethodName: LoadCharacter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

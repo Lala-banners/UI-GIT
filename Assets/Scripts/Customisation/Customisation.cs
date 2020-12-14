@@ -73,7 +73,7 @@ public class Customisation : MonoBehaviour
         }
         else
         {
-            if (player.customisation.currentPartsTextureIndex.Length != 0)
+            if (currentPartsTextureIndex.Length != 0)
             {
                 currentPartsTextureIndex = player.customisation.currentPartsTextureIndex;
             }
@@ -105,7 +105,7 @@ public class Customisation : MonoBehaviour
             Texture2D tempTexture; //create temporary texture
             do
             {
-                tempTexture = (Texture2D)Resources.Load("Character/" + names[i] + "_" + index); //locate the texture by path
+                tempTexture = (Texture2D)Resources.Load(TextureLocation + names[i] + "_" + index); //locate the texture by path
 
                 if (tempTexture != null) //if that texture exists
                 {
@@ -355,7 +355,7 @@ public class Customisation : MonoBehaviour
         PlayerPrefs.SetInt("Armour", currentPartsTextureIndex[5]);
         //player.customisation.currentPartsTextureIndex = currentPartsTextureIndex; //storing array of index in Player and saving it
 
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
         //PlayerBinarySave.SavePlayerData(player); //When save button is pressed will save
     }
 

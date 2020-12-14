@@ -40,8 +40,7 @@ public class PlayerBinarySave : MonoBehaviour //Save and Load to binary file!
             FileStream stream = new FileStream(path, FileMode.Open);
 
             //deserialize back to a usable variable
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            //PlayerData data = (PlayerData)formatter.Deserialize(stream); //as Player
+            PlayerData data = (PlayerData)formatter.Deserialize(stream);
 
             //close the file
             stream.Close();

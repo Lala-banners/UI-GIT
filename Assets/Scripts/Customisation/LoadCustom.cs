@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadCustom : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class LoadCustom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Load();
+        //Load();
     }
 
     // Update is called once per frame
@@ -24,13 +25,14 @@ public class LoadCustom : MonoBehaviour
 
         player.name = PlayerPrefs.GetString("CharacterName");
         player.gameObject.name = player.name;
+        //SceneManager.LoadScene(1);
 
-        SetTexture("Skin", PlayerPrefs.GetInt("SkinIndex"));
-        SetTexture("Hair", PlayerPrefs.GetInt("HairIndex"));
-        SetTexture("Mouth", PlayerPrefs.GetInt("MouthIndex"));
-        SetTexture("Eyes", PlayerPrefs.GetInt("EyesIndex"));
-        SetTexture("Clothes", PlayerPrefs.GetInt("ClothesIndex"));
-        SetTexture("Armour", PlayerPrefs.GetInt("ArmourIndex"));
+        SetTexture("Skin", PlayerPrefs.GetInt("currentPartsTextureIndex[0]"));
+        SetTexture("Hair", PlayerPrefs.GetInt("currentPartsTextureIndex[1]"));
+        SetTexture("Mouth", PlayerPrefs.GetInt("currentPartsTextureIndex[2]"));
+        SetTexture("Eyes", PlayerPrefs.GetInt("currentPartsTextureIndex[3]"));
+        SetTexture("Clothes", PlayerPrefs.GetInt("currentPartsTextureIndex[4]"));
+        SetTexture("Armour", PlayerPrefs.GetInt("currentPartsTextureIndex[5]"));
     }
 
     void SetTexture(string type, int index)
@@ -40,28 +42,28 @@ public class LoadCustom : MonoBehaviour
         switch (type)
         {
             case "Skin":
-                texture = Resources.Load("Character/Skin_" + index) as Texture2D;
-                matIndex = 1;
-                break;
-            case "Eyes":
-                texture = Resources.Load("Character/Eyes_" + index) as Texture2D;
-                matIndex = 2;
-                break;
-            case "Mouth":
-                texture = Resources.Load("Character/Mouth_" + index) as Texture2D;
-                matIndex = 3;
+                texture = Resources.Load("Character/" + index) as Texture2D;
+                matIndex = 0;
                 break;
             case "Hair":
                 texture = Resources.Load("Character/Hair_" + index) as Texture2D;
-                matIndex = 4;
+                matIndex = 1;
+                break;
+            case "Mouth":
+                texture = Resources.Load("Character/Mouth_" + index) as Texture2D;
+                matIndex = 2;
+                break;
+            case "Eyes":
+                texture = Resources.Load("Character/Eyes_" + index) as Texture2D;
+                matIndex = 3;
                 break;
             case "Clothes":
                 texture = Resources.Load("Character/Clothes_" + index) as Texture2D;
-                matIndex = 5;
+                matIndex = 4;
                 break;
             case "Armour":
                 texture = Resources.Load("Character/Armour_" + index) as Texture2D;
-                matIndex = 6;
+                matIndex = 5;
                 break;
         }
         Material[] mats = characterMesh.materials;

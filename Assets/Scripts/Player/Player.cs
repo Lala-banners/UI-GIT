@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         //customisation = FindObjectOfType<Customisation>();
         defaultStat = new BaseStats[6]; //player has stats now
 
-        //If not Customisation scene then load player data
+        /*//If not Customisation scene then load player data
         if (SceneManager.GetActiveScene().name != "Customisation")
         {
             //load player data
@@ -75,15 +75,29 @@ public class Player : MonoBehaviour
                 profession = loadedPlayer.profession;
                 customisation.currentPartsTextureIndex = loadedPlayer.customisationTextureIndex;
             }
-        }
+        }*/
     }
 
     private void Start()
     {
+        Load();
+        Save();
+        Load();
+
         for (int i = 0; i < customisation.currentPartsTextureIndex.Length; i++)
         {
             customisation.SetMats(i, customisation.currentPartsTextureIndex[i]);
         }
+    }
+
+    public void Save()
+    {
+        PlayerBinarySave.SavePlayerData(this);
+    }
+
+    public void Load()
+    {
+        PlayerData data = PlayerBinarySave.LoadPlayerData();
     }
 
     public void Interact()
