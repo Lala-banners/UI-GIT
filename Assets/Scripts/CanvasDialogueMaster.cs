@@ -29,8 +29,9 @@ public class CanvasDialogueMaster : MonoBehaviour
 
     public void SetUp()
     {
+        dialoguePanel.SetActive(true);
         dialogueText.text = characterNPCName + ": " + currentDialogue[dialogueIndex];
-        buttonText.text = "Next";
+        buttonText.text = "Accept";
 
         if (currentQuest.curQuest.goal.questState == QuestState.Completed || currentQuest.curQuest.goal.questState == QuestState.Available)
         {
@@ -49,7 +50,7 @@ public class CanvasDialogueMaster : MonoBehaviour
             dialogueIndex++;
             if (dialogueIndex >= currentDialogue.Length - 1)
             {
-                buttonText.text = "Bye.";
+                buttonText.text = "Decline";
             }
         }
         else
@@ -59,7 +60,7 @@ public class CanvasDialogueMaster : MonoBehaviour
             //playerMovement.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            dialoguePanel.SetActive(false);
+            //dialoguePanel.SetActive(false);
         }
         dialogueText.text = characterNPCName + ": " + currentDialogue[dialogueIndex];
     }
