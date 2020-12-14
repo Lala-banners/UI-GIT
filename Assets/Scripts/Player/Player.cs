@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     public bool showDialogue;
     public Customisation customisation;
     public CanvasDialogueMaster dialogueMaster;
+    public QuestManager questManager;
     #endregion
 
     public void Awake()
@@ -120,7 +121,7 @@ public class Player : MonoBehaviour
             if (hitInfo.collider.TryGetComponent(out DialogueNPC npc))
             {
                 //npc.Interact(); //Override NPC because otherwise would run wrong method
-
+                questManager.OpenQuestWindow();
                 npc = hitInfo.collider.GetComponent<DialogueNPC>();
                 dialogueMaster.characterNPCName = npc.npcName;
                 dialogueMaster.currentDialogue = npc.dialogueText;
@@ -170,7 +171,7 @@ public class Player : MonoBehaviour
                     print("Talking to Quest NPC - Jessy");
                     dialogueMaster.characterNPCName = qNPC.nameDisplay.text;
                     dialogueMaster.currentDialogue = qNPC.dialogueText;
-
+                    dialogueMaster.questWindow.SetActive(true);
 
                     //qNPC = hitInfo.collider.GetComponent<QuestNPC>();
 

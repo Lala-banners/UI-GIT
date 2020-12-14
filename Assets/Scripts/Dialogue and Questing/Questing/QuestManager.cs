@@ -15,20 +15,15 @@ public class QuestManager : MonoBehaviour
         questWindow.SetActive(true);
         titleText.text = curQuest.title;
         descriptionText.text = curQuest.description;
-        experienceText.text = curQuest.experienceReward.ToString();
-        goldText.text = curQuest.goldReward.ToString();
+        experienceText.text = "Exp Reward: " + curQuest.experienceReward.ToString();
+        goldText.text = "Gold Reward: " + curQuest.goldReward.ToString();
     }
 
     public void AcceptQuest(Quest acceptedQuest)
     {
-        curQuest = acceptedQuest;
-        questWindow.SetActive(false);
         curQuest.goal.questState = QuestState.Active;
-    }
-
-    public void DeclineQuest()
-    {
-        
+        //questWindow.SetActive(false);
+        curQuest = acceptedQuest;
     }
 
     public void ClaimQuest()
@@ -37,7 +32,6 @@ public class QuestManager : MonoBehaviour
         {
             //Add money
             inv.money += curQuest.goldReward;
-
             curQuest.goal.questState = QuestState.Claimed;
             Debug.Log("Quest Claimed");
         }

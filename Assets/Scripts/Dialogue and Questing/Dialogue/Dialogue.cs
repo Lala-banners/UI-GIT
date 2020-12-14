@@ -2,7 +2,6 @@
 
 public class Dialogue : MonoBehaviour
 {
-    //TODO : Lara : Dialogue -> talk to NPC, approval system based on dialogue choice (dislike, neutral, like), GUI & UI.
     [Header("References")]
     public bool showDialogue;
     public int currentLineIndex, optionIndex; //index for current line of dialogue

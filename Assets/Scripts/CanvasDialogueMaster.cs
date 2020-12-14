@@ -9,6 +9,7 @@ public class CanvasDialogueMaster : MonoBehaviour
     public TMP_Text dialogueText;
     public string[] currentDialogue;
     public int dialogueIndex;
+    
 
     [Header("NPC and Player")]
     public string characterNPCName;
@@ -18,6 +19,8 @@ public class CanvasDialogueMaster : MonoBehaviour
     public Button questButton; //Accept quest button
     public TMP_Text buttonText;
     public QuestManager currentQuest;
+    public GameObject questWindow;
+
 
     private void Start()
     {

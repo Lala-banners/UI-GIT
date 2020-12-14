@@ -23,10 +23,29 @@ public abstract class QuestGoal : MonoBehaviour
     public int currentAmount;
     public bool isReached;
 
+
+
+    [Header("Player")]
+    public int requiredLevel;
+
     public Inventory inv;
 
     public ItemData item;
 
     public abstract bool isCompleted();
-    
+
+    public void ItemCollected(int id)
+    {
+        if (goalType == GoalType.Gather && id == itemId)
+        {
+            currentAmount++;
+            if (currentAmount >= requiredAmount) //Added from Quest
+            {
+                isReached = true;
+                questState = QuestState.Completed;
+                Debug.Log("QUEST COMPLETE");
+            }
+        }
+    }
+
 }

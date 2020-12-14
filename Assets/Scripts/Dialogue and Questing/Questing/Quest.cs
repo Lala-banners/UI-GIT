@@ -8,14 +8,10 @@ public class Quest
     public string description;
     public QuestNPC questGiver;
     public QuestGoal goal;
-    public GoalType type;
 
-    [Header("Rewards")] 
+
+    [Header("Rewards")]
     public int experienceReward;
     public int goldReward;
-
-    [Header("Player")]
-    public int requiredLevel;
-
 
 }

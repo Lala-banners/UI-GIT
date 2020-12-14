@@ -631,8 +631,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1693,12 +1693,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 382869882}
-        m_MethodName: 
+      - m_Target: {fileID: 382869888}
+        m_MethodName: NegativeResponse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5454,8 +5454,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6135,6 +6135,7 @@ MonoBehaviour:
   requiredAmount: 4
   currentAmount: 0
   isReached: 0
+  requiredLevel: 0
   inv: {fileID: 368877527}
   item:
     name: Apples
@@ -6381,8 +6382,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8241,6 +8242,7 @@ MonoBehaviour:
   showDialogue: 0
   customisation: {fileID: 277709204}
   dialogueMaster: {fileID: 723350610}
+  questManager: {fileID: 1462075878}
 --- !u!114 &535793797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10024,6 +10026,7 @@ MonoBehaviour:
   questButton: {fileID: 799996947}
   buttonText: {fileID: 103731359}
   currentQuest: {fileID: 1462075878}
+  questWindow: {fileID: 1111773714}
 --- !u!1001 &729619662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11075,7 +11078,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782602518}
-  m_LocalRotation: {x: 0.3060453, y: 0.000000023165901, z: -0.0000000074471513, w: 0.952017}
+  m_LocalRotation: {x: 0.3060453, y: -0.000000023165901, z: 0.0000000074471513, w: 0.952017}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11183,12 +11186,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 382869882}
-        m_MethodName: 
+      - m_Target: {fileID: 382869888}
+        m_MethodName: PositiveResponse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11296,7 +11299,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810157323}
-  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.0000000082837355, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: 0.000000022880096, z: -0.000000008283737, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17416,14 +17419,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curQuest:
-    title: 
-    description: 
+    title: Potion Hunt
+    description: Jessy wants potions.
     questGiver: {fileID: 2023166082}
     goal: {fileID: 436217423}
-    type: 0
-    experienceReward: 0
-    goldReward: 0
-    requiredLevel: 0
+    experienceReward: 1
+    goldReward: 1
   player: {fileID: 535793796}
   inv: {fileID: 368877527}
   questWindow: {fileID: 326624123}
@@ -18338,7 +18339,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542606463}
-  m_LocalRotation: {x: 0.32326594, y: 0.00000003256508, z: -0.000000011124474, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326594, y: -0.00000003256508, z: 0.000000011124474, w: 0.9463082}
   m_LocalPosition: {x: 710, y: 3.67, z: 509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -18445,7 +18446,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558624430}
-  m_LocalRotation: {x: 0.32326588, y: 0.000000016282542, z: -0.0000000055622356, w: 0.9463082}
+  m_LocalRotation: {x: 0.32326588, y: -0.000000016282542, z: 0.0000000055622356, w: 0.9463082}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -21657,16 +21658,18 @@ MonoBehaviour:
     description: Jessy wants two potions
     questGiver: {fileID: 2023166082}
     goal: {fileID: 436217423}
-    type: 0
     experienceReward: 0
     goldReward: 0
-    requiredLevel: 0
   completeText:
   - Thanks! Quest Complete!
-  questText: {fileID: 0}
-  qNPCName: {fileID: 0}
-  _dialogueButtons: []
-  _dialogueTextBox: {fileID: 0}
+  questText: {fileID: 1160265111}
+  qNPCName: {fileID: 2092443134}
+  _dialogueButtons:
+  - {fileID: 799996947}
+  - {fileID: 105891577}
+  - {fileID: 360940485}
+  - {fileID: 879854254}
+  _dialogueTextBox: {fileID: 60181691}
 --- !u!114 &2023166083
 MonoBehaviour:
   m_ObjectHideFlags: 0
